@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { instagram, sources } from '../data/site';
+const entries = (await getCollection('archive', ({data}) => !data.draft)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf());
+const works = entries.filter(e => e.data.kind === 'work');
+const writings = entries.filter(e => e.data.kind === 'writing');
+const conversations = entries.filter(e => e.data.kind === 'conversation');
+---
+<Layout>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="eyebrow hero-meta"><span>Artist · Researcher · Cultural practitioner</span><span>West Bengal, India</span></div>
+    <h1 id="hero-title">Labani<br/><span>Jangi<span class="period">.</span></span></h1>
+    <div class="hero-bottom"><p>Art, lived experience<br/>and the language of resistance.</p><a class="round-link" href="#practice" aria-label="Explore Labani’s practice">↓</a><span class="vertical-note" aria-hidden="true">A space for art & thought</span></div>
+  </section>
+  <section id="practice" class="practice section">
+    <div class="wrap split"><div><span class="eyebrow">01 / Practice</span><h2>From life.<br/>Towards<br/><em>resistance.</em></h2></div>
+      <div class="practice-copy"><span class="asterisk" aria-hidden="true">✳</span><p class="large-copy">Labani’s practice brings art into conversation with lived experience, identity and solidarity.</p><p>Her work engages with the lives and expression of minority communities, drawing on cultural traditions including Bengal’s Jari Gaan.</p><a class="text-link" href={sources[2].url}>Read about her practice at MAP ↗</a></div>
+    </div>
+  </section>
+  {works.length > 0 && <section class="wrap section" id="works"><span class="eyebrow">Works</span><h2>Selected work</h2><div class="work-grid">{works.map(entry => <a class="work-card" href={`/archive/${entry.id}/`}>{entry.data.image && <img src={entry.data.image} alt={entry.data.imageAlt} loading="lazy" />}<h3>{entry.data.title}</h3><p>{entry.data.series || entry.data.medium}</p></a>)}</div></section>}
+  <section id="archive" class="wrap section archive">
+    <div class="section-heading"><div><span class="eyebrow">02 / Reading & conversations</span><h2>In the public eye<span class="period">.</span></h2></div><p>Profiles, interviews<br/>and conversations.</p></div>
+    <div class="source-list">{sources.map((source, i) => <a class="source-row" href={source.url}><span class="row-number">0{i+1}</span><div><span class="eyebrow">{source.publisher}</span><h3>{source.title}</h3></div><span class="source-type">{source.type}</span><span class="arrow" aria-hidden="true">↗</span></a>)}</div>
+    {conversations.map(entry => <a class="archive-note" href={`/archive/${entry.id}/`}><span class="eyebrow">From the archive</span><span>{entry.data.title} — programme notes</span><span aria-hidden="true">→</span></a>)}
+  </section>
+  {writings.length > 0 && <section class="wrap section"><span class="eyebrow">Writings</span><h2>Words & reflections</h2>{writings.map(entry => <a class="source-row" href={`/archive/${entry.id}/`}><h3>{entry.data.title}</h3><span aria-hidden="true">→</span></a>)}</section>}
+  <section id="about" class="about section"><div class="wrap split"><div><span class="eyebrow">03 / About Labani</span><h2>An artist.<br/>A researcher.<br/>A cultural<br/><em>practitioner.</em></h2></div><div class="about-copy"><p class="large-copy">Rooted in Nadia,<br/>West Bengal.</p><p>Labani Jangi is an artist, research scholar and cultural practitioner. Her practice explores resistance and identity through the world around her.</p><p>MAP’s 2025 profile notes her involvement with Panjeri Artists’ Union, JINN and Khandera Art Space, and recognises her as a recipient of the T.M. Krishna–PARI prize.</p><a class="text-link" href={sources[2].url}>Artist profile · MAP, 2025 ↗</a></div></div></section>
+  <section id="contact" class="wrap contact section"><span class="eyebrow">04 / Keep in touch</span><div class="contact-line"><h2>Continue the<br/><em>conversation.</em></h2><a class="contact-button" href={instagram}>Find Labani on Instagram <span aria-hidden="true">↗</span></a></div></section>
+</Layout>

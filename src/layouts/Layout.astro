@@ -1,0 +1,29 @@
+---
+import '../styles/global.css';
+import { instagram } from '../data/site';
+interface Props { title?: string; description?: string; }
+const { title = 'Labani Jangi — Artist & cultural practitioner', description = 'The work and practice of Labani Jangi, artist, researcher and cultural practitioner from Nadia, West Bengal.' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width" />
+    <title>{title}</title><meta name="description" content={description} />
+    <link rel="canonical" href={canonical} /><link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} /><meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} /><meta property="og:type" content="website" />
+    <meta name="theme-color" content="#f4efe5" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="wordmark" href="/" aria-label="Labani Jangi, home">lj<span>.</span></a>
+      <nav aria-label="Main navigation">
+        <a href="/#practice">Practice</a><a href="/#archive">Archive</a><a href="/#about">About</a><a href="/#contact">Contact <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="wrap footer"><a href="/" class="footer-name">Labani Jangi</a><span>Nadia, West Bengal</span><a href={instagram}>Instagram ↗</a><a href="#main">Back to top ↑</a></footer>
+  </body>
+</html>
