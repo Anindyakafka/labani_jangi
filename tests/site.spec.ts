@@ -5,6 +5,8 @@ test('home, navigation and published archive work without layout overflow', asyn
   await page.goto('/');
   await expect(page).toHaveTitle(/Labani Jangi/);
   await expect(page.locator('h1')).toContainText('Labani');
+  await expect(page.locator('.bengal-map .district')).toHaveCount(23);
+  await expect(page.locator('.bengal-map .district-home')).toHaveAttribute('data-district-id', 'nadia');
   await page.screenshot({ path: testInfo.outputPath('home.png'), fullPage: true });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.getByRole('navigation').getByRole('link', {name:'About'}).click();

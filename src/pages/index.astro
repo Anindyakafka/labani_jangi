@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import WestBengalMap from '../components/WestBengalMap.astro';
 import { getCollection } from 'astro:content';
 import { instagram, sources } from '../data/site';
 const entries = (await getCollection('archive', ({data}) => !data.draft)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -13,6 +14,7 @@ const conversations = entries.filter(e => e.data.kind === 'conversation');
     <h1 id="hero-title">Labani<br/><span>Jangi<span class="period">.</span></span></h1>
     <div class="hero-bottom"><p>My art, lived experience<br/>and the language of resistance.</p><a class="round-link" href="#practice" aria-label="Explore my practice">↓</a><span class="vertical-note" aria-hidden="true">My space for art & thought</span></div>
   </section>
+  <WestBengalMap />
   <section id="practice" class="practice section">
     <div class="wrap split"><div><span class="eyebrow">01 / Practice</span><h2>From life.<br/>Towards<br/><em>resistance.</em></h2></div>
       <div class="practice-copy"><span class="asterisk" aria-hidden="true">✳</span><p class="large-copy">My practice brings art into conversation with lived experience, identity and solidarity.</p><p>My work engages with the lives and expression of minority communities, drawing on cultural traditions including Bengal’s Jari Gaan.</p><a class="text-link" href={sources[2].url}>Read about my practice at MAP ↗</a></div>

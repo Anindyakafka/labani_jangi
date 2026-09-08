@@ -57,6 +57,14 @@ Remain on Netlify Free and avoid paid upgrades/add-ons. Free hosting has usage l
 
 References: https://docs.astro.build/en/guides/deploy/netlify/ and https://www.netlify.com/pricing/.
 
-## Content still needed
+## West Bengal map
+
+`src/components/WestBengalMap.astro` renders 23 separate SVG district paths, with Nadia highlighted. `data-district-id` provides stable local names for future statistics and interaction; source IDs are retained. No runtime map library, external tile requests, API key or statistics are included. Native SVG titles provide district names; custom hover/touch/keyboard behaviour is deferred.
+
+Geometry is from geoBoundaries IND ADM2, boundary ID `IND-ADM2-76128533`, representing 2021, provided by Pathways Data Pvt. Ltd. / lgdirectory.gov.in under **Open Database License 1.0**. Map derivatives in `public/maps/west-bengal.geojson` and `src/data/west-bengal.json` retain that license, separate from the repository code license. The page includes attribution, a license link and downloadable derivative geometry. Source: https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2_simplified.geojson . Metadata: https://www.geoboundaries.org/api/current/gbOpen/IND/ADM2/ . License: https://opendatacommons.org/licenses/odbl/1-0/ .
+
+To regenerate, download the pinned source URL above as `map-source.tmp.json`, run `python scripts/prepare-map.py`, then remove the temporary source. The script selects West Bengal districts, preserves source IDs, normalises display spellings (including source `Barddhaman` to `Purba Bardhaman`), and projects coordinates to a local equirectangular SVG at latitude 24.5°. Before joining statistics, verify boundary vintages and district names against the statistical dataset; this is not a claim of current administrative boundaries.
+
+## Content still needed before launch
 
 Review biography with Labani and supply approved artwork files, captions, credits and writings. Contact currently links to her supplied Instagram account. No fabricated artwork, contact details, translations or campaign features are included.
