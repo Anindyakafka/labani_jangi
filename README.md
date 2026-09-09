@@ -1,6 +1,6 @@
 # Labani Jangi
 
-A static Astro website for https://labanijangi.com, prepared for Netlify. Content lives in the repository. No CMS subscription, API keys, database, functions, analytics or paid media services are required.
+A static Astro website for https://labanijangi.com, prepared for Netlify. Content lives in the repository. No CMS subscription, API keys, database, functions or paid media services are required.
 
 ## Development
 
@@ -68,3 +68,13 @@ To regenerate, download the pinned source URL above as `map-source.tmp.json`, ru
 ## Content still needed before launch
 
 Review biography with Labani and supply approved artwork files, captions, credits and writings. Contact currently links to her supplied Instagram account. No fabricated artwork, contact details, translations or campaign features are included.
+
+## Analytics
+
+Umami Cloud tracking is configured in `src/layouts/Layout.astro` for website ID `c0819d04-f244-4caf-8922-e89e57123ae6`. This identifier is public, not an API credential. The tracker records only on `labanijangi.com` and `www.labanijangi.com`, respects Do Not Track, and excludes URL fragments. Localhost and deploy-preview visits are excluded. No session recording, user identifiers, custom personal-data properties or paid features are enabled by this implementation.
+
+Page views cover home and archive traffic. Event attributes record Instagram clicks, publication clicks, archive opens by content kind, and video/source link clicks. A video-link click is not a video play; a page visit is not proof someone read the content. Map interactions and reading-depth metrics are not implemented yet. Events count toward the Umami account's free usage quota.
+
+On Netlify, `/studio-insights-7c39/` redirects to the Umami account dashboard, where login is required. This is a convenience shortcut, not authentication or a secret stored securely; its path is visible in repository configuration. It is absent from navigation and sitemap. Keep Umami public sharing disabled. There is no custom dashboard or API secret in the website.
+
+After deploying, visit the production domain with tracking permitted in your browser, click a publication/Instagram link, and confirm page views and events in Umami. Local tests mock the external script and do not verify ingestion into the private account. No historical traffic can be recovered by this installation. Stay on Hobby and check the account's quota and retention settings.

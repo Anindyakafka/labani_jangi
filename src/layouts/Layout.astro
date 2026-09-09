@@ -14,6 +14,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} /><meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} /><meta property="og:type" content="website" />
     <meta name="theme-color" content="#fafafa" />
+    <script is:inline defer src="https://cloud.umami.is/script.js"
+      data-website-id="c0819d04-f244-4caf-8922-e89e57123ae6"
+      data-domains="labanijangi.com,www.labanijangi.com"
+      data-exclude-hash="true" data-do-not-track="true"></script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -24,6 +28,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       </nav>
     </header>
     <main id="main"><slot /></main>
-    <footer class="wrap footer"><a href="/" class="footer-name">Labani Jangi</a><span>Nadia, West Bengal</span><a href={instagram}>Instagram ↗</a><a href="#main">Back to top ↑</a></footer>
+    <footer class="wrap footer"><a href="/" class="footer-name">Labani Jangi</a><span>Nadia, West Bengal</span><a href={instagram} data-umami-event="instagram-click">Instagram ↗</a><a href="#main">Back to top ↑</a></footer>
   </body>
 </html>

@@ -5,6 +5,19 @@ publish = "dist"
 [build.environment]
 NODE_VERSION = "24"
 
+# Convenience shortcut only; Umami account login protects the analytics.
+[[redirects]]
+from = "/studio-insights-7c39/*"
+to = "https://cloud.umami.is/"
+status = 302
+force = true
+
+[[redirects]]
+from = "/studio-insights-7c39"
+to = "https://cloud.umami.is/"
+status = 302
+force = true
+
 [[headers]]
 for = "/*"
 [headers.values]
