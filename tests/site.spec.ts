@@ -3,6 +3,25 @@ test.beforeEach(async ({ page }) => {
   // Keep browser checks offline from the real analytics service.
   await page.route('https://cloud.umami.is/script.js', route => route.fulfill({ contentType: 'application/javascript', body: '' }));
 });
+test('dark mode follows system then preserves explicit choice across languages', async ({ page }, testInfo) => {
+  await page.emulateMedia({colorScheme:'dark'});
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
+  const toggle = page.getByRole('button', {name:'Dark mode'});
+  await expect(toggle).toHaveAttribute('aria-pressed','true');
+  await toggle.click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+  await toggle.focus();
+  await page.keyboard.press('Enter');
+  await page.locator('[data-language-switch]').click();
+  await expect(page.getByRole('button',{name:'ডার্ক মোড'})).toHaveAttribute('aria-pressed','true');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({path:testInfo.outputPath('dark-bangla.png'),fullPage:true});
+  await page.locator('.archive-note').click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
+});
 test('Bangla switch translates pages and preserves locale and section', async ({ page }, testInfo) => {
   await page.goto('/#about');
   await page.locator('[data-language-switch]').click();

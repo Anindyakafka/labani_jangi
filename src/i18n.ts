@@ -1,5 +1,6 @@
 export type Locale = 'en' | 'bn';
 export const translations = {
+  'Dark mode': 'ডার্ক মোড',
   'Labani': 'লাবণী', 'Jangi': 'জঙ্গী', 'Labani Jangi': 'লাবণী জঙ্গী',
   'Labani Jangi — Artist & cultural practitioner': 'লাবণী জঙ্গী — শিল্পী ও সংস্কৃতিকর্মী',
   'I’m Labani Jangi, an artist, researcher and cultural practitioner from Nadia, West Bengal. Explore my work and practice.': 'আমি লাবণী জঙ্গী, পশ্চিমবঙ্গের নদিয়ার একজন শিল্পী, গবেষক ও সংস্কৃতিকর্মী। আমার কাজ ও শিল্পচর্চার সঙ্গে পরিচিত হোন।',

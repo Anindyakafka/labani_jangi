@@ -42,6 +42,8 @@ Write the entry beneath the frontmatter. Replace example values before setting `
 
 ## English and Bangla
 
+The header also includes a translated dark-mode toggle. It follows the system colour preference until a visitor chooses a theme, then remembers that choice in local storage across pages and languages. The theme is applied before page rendering to avoid a light flash. Tracking is not involved in saving the preference. If storage is unavailable, the toggle still works for the current page.
+
 The header language switch works on every page, linking to the same page in the other language and preserving section anchors when JavaScript is available. English routes remain unchanged; Bangla routes begin `/bn/`. Language stays consistent through internal navigation, refreshes and shared links because it is encoded in the URL. We do not override explicit URLs with automatic browser-language redirects.
 
 `src/i18n.ts` is the typed translation dictionary for interface text, descriptions, accessibility labels and district names. Shared components render both languages, with localized dates/digits, `lang`, canonical and alternate-language metadata. Noto Serif Bengali is bundled locally under its open font license. No translation API or remote font service is used. Publication labels are translated for navigation; the linked external articles remain in the publishers' original languages. The Umami dashboard is an external service, so this toggle does not control its interface.

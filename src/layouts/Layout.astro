@@ -26,6 +26,39 @@ const alternate = locale === 'en' ? banglaPath : basePath;
     <link rel="alternate" hreflang="x-default" href={new URL(basePath, Astro.site)} />
     <meta property="og:locale" content={locale === 'bn' ? 'bn_IN' : 'en_IN'} />
     <meta name="theme-color" content="#fafafa" />
+    <script is:inline>
+      (() => {
+        const system = window.matchMedia('(prefers-color-scheme: dark)');
+        let preference;
+        try { preference = localStorage.getItem('labani-theme'); } catch {}
+        const apply = (dark) => {
+          document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#181515' : '#fafafa');
+          document.querySelector('[data-theme-toggle]')?.setAttribute('aria-pressed', String(dark));
+        };
+        apply(preference === 'dark' || (preference !== 'light' && system.matches));
+        document.addEventListener('DOMContentLoaded', () => {
+          const button = document.querySelector('[data-theme-toggle]');
+          if (!button) return;
+          button.hidden = false;
+          apply(document.documentElement.dataset.theme === 'dark');
+          button.addEventListener('click', () => {
+            preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+            try { localStorage.setItem('labani-theme', preference); } catch {}
+            apply(preference === 'dark');
+          });
+        });
+        system.addEventListener('change', () => {
+          if (preference !== 'light' && preference !== 'dark') apply(system.matches);
+        });
+        window.addEventListener('storage', (event) => {
+          if (event.key === 'labani-theme' || event.key === null) {
+            preference = event.newValue;
+            apply(preference === 'dark' || (preference !== 'light' && system.matches));
+          }
+        });
+      })();
+    </script>
     <script is:inline defer src="https://cloud.umami.is/script.js"
       data-website-id="c0819d04-f244-4caf-8922-e89e57123ae6"
       data-domains="labanijangi.com,www.labanijangi.com"
@@ -39,6 +72,7 @@ const alternate = locale === 'en' ? banglaPath : basePath;
         <a href={localPath('/#practice', locale)}>{t('Practice')}</a><a href={localPath('/#archive', locale)}>{t('Archive')}</a><a href={localPath('/#about', locale)}>{t('About')}</a><a href={localPath('/#contact', locale)}>{t('Contact')} <span aria-hidden="true">↗</span></a>
       </nav>
       <a class="language-toggle" href={alternate} lang={locale === 'en' ? 'bn' : 'en'} hreflang={locale === 'en' ? 'bn' : 'en'} aria-label={locale === 'en' ? 'বাংলায় পড়ুন' : 'Read in English'} data-language-switch>{locale === 'en' ? 'বাংলা' : 'English'}</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" hidden><span aria-hidden="true">◐</span> {t('Dark mode')}</button>
     </header>
     <main id="main"><slot /></main>
     <footer class="wrap footer"><a href={localPath('/', locale)} class="footer-name">{t('Labani Jangi')}</a><span>{t('Nadia, West Bengal')}</span><a href={instagram} data-umami-event="instagram-click">{t('Instagram')} ↗</a><a href="#main">{t('Back to top')} ↑</a></footer>

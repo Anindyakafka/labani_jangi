@@ -39,3 +39,15 @@ html:lang(bn) .prose{line-height:2}
   html:lang(bn) .contact h2{font-size:34px}
   html:lang(bn) .footer-name{font-size:20px}
 }
+/* Dark mode keeps red accents and textured panels with readable light ink. */
+:root{color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#181515;--ink:#f5eded;--red:#ef8585;--muted:#dabbbb;--line:rgba(239,133,133,.3)}
+:root[data-theme="dark"] .practice,:root[data-theme="dark"] .about{background:#651919;color:#fafafa}
+:root[data-theme="dark"] body::before{mix-blend-mode:soft-light;opacity:.12}
+:root[data-theme="dark"] .practice ::selection,:root[data-theme="dark"] .about ::selection{background:#fafafa;color:#651919}
+.theme-toggle{font:inherit;font-size:12px;color:inherit;background:transparent;border:1px solid currentColor;border-radius:2px;padding:10px 12px;margin-left:12px;cursor:pointer;white-space:nowrap;min-height:40px}
+.theme-toggle[hidden]{display:none}
+.theme-toggle:hover,.theme-toggle[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.theme-toggle:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+@media(max-width:760px){.theme-toggle{margin-left:0;font-size:11px;padding:9px}.language-toggle{padding:9px}}
+@media print{:root[data-theme="dark"]{color-scheme:light;--paper:#fafafa;--ink:#a31616;--red:#a31616;--muted:#881212;--line:rgba(163,22,22,.25)}.theme-toggle,.language-toggle{display:none}}
