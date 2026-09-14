@@ -1,0 +1,46 @@
+export type Locale = 'en' | 'bn';
+export const translations = {
+  'Labani': 'লাবণী', 'Jangi': 'জঙ্গী', 'Labani Jangi': 'লাবণী জঙ্গী',
+  'Labani Jangi — Artist & cultural practitioner': 'লাবণী জঙ্গী — শিল্পী ও সংস্কৃতিকর্মী',
+  'I’m Labani Jangi, an artist, researcher and cultural practitioner from Nadia, West Bengal. Explore my work and practice.': 'আমি লাবণী জঙ্গী, পশ্চিমবঙ্গের নদিয়ার একজন শিল্পী, গবেষক ও সংস্কৃতিকর্মী। আমার কাজ ও শিল্পচর্চার সঙ্গে পরিচিত হোন।',
+  'Skip to content': 'মূল বিষয়বস্তুতে যান', 'Main navigation': 'প্রধান মেনু', 'Labani Jangi, home': 'লাবণী জঙ্গী, প্রথম পাতা',
+  'Practice': 'শিল্পচর্চা', 'Archive': 'সংগ্রহশালা', 'About': 'আমার কথা', 'Contact': 'যোগাযোগ',
+  'Nadia, West Bengal': 'নদিয়া, পশ্চিমবঙ্গ', 'Instagram': 'ইনস্টাগ্রাম', 'Back to top': 'পাতার শুরুতে ফিরুন',
+  'Artist · Researcher · Cultural practitioner': 'শিল্পী · গবেষক · সংস্কৃতিকর্মী', 'West Bengal, India': 'পশ্চিমবঙ্গ, ভারত',
+  'My art, lived experience': 'আমার শিল্প, জীবনাভিজ্ঞতা', 'and the language of resistance.': 'আর প্রতিরোধের ভাষা।',
+  'Explore my practice': 'আমার শিল্পচর্চার সঙ্গে পরিচিত হোন', 'My space for art & thought': 'আমার শিল্প ও ভাবনার পরিসর',
+  '01 / Practice': '০১ / শিল্পচর্চা', 'From life.': 'জীবন থেকে।', 'Towards': 'প্রতিরোধের', 'resistance.': 'দিকে।',
+  'My practice brings art into conversation with lived experience, identity and solidarity.': 'আমার শিল্পচর্চায় জীবনাভিজ্ঞতা, পরিচয় ও সংহতির সঙ্গে শিল্পের কথোপকথন চলে।',
+  'My work engages with the lives and expression of minority communities, drawing on cultural traditions including Bengal’s Jari Gaan.': 'বাংলার জারি গানের মতো সাংস্কৃতিক ঐতিহ্য থেকে প্রেরণা নিয়ে আমার কাজ সংখ্যালঘু সম্প্রদায়ের জীবন ও আত্মপ্রকাশের কথা তুলে ধরে।',
+  'Read about my practice at MAP': 'ম্যাপ-এর পাতায় আমার শিল্পচর্চা সম্পর্কে পড়ুন',
+  'Works': 'শিল্পকর্ম', 'Selected work': 'নির্বাচিত কাজ', '02 / Reading & conversations': '০২ / লেখা ও কথোপকথন',
+  'In the public eye': 'সংবাদে ও আলোচনায়', 'Profiles, interviews': 'পরিচিতি, সাক্ষাৎকার', 'and conversations.': 'ও কথোপকথন।',
+  'From the archive': 'সংগ্রহশালা থেকে', 'programme notes': 'অনুষ্ঠান প্রসঙ্গে', 'Writings': 'লেখালেখি', 'Words & reflections': 'কথা ও ভাবনা',
+  '03 / About me': '০৩ / আমার কথা', 'An artist.': 'একজন শিল্পী।', 'A researcher.': 'একজন গবেষক।', 'A cultural': 'একজন', 'practitioner.': 'সংস্কৃতিকর্মী।',
+  'My roots are in Nadia,': 'আমার শিকড় নদিয়ায়,', 'West Bengal.': 'পশ্চিমবঙ্গে।',
+  'I’m Labani Jangi, an artist, research scholar and cultural practitioner. My practice explores resistance and identity through the world around me.': 'আমি লাবণী জঙ্গী, একজন শিল্পী, গবেষক ও সংস্কৃতিকর্মী। আমার চারপাশের জগতের মধ্য দিয়ে আমার শিল্পচর্চায় প্রতিরোধ ও পরিচয়ের প্রশ্নগুলি উঠে আসে।',
+  'My involvement with Panjeri Artists’ Union, JINN and Khandera Art Space is documented in MAP’s 2025 profile. I am also a recipient of the T.M. Krishna–PARI prize.': 'পাঞ্জেরী আর্টিস্টস ইউনিয়ন, জিন এবং খান্ডেরা আর্ট স্পেসের সঙ্গে আমার যুক্ত থাকার কথা ম্যাপ-এর ২০২৫ সালের শিল্পী-পরিচিতিতে রয়েছে। আমি টি. এম. কৃষ্ণ–পারি পুরস্কারও পেয়েছি।',
+  'My artist profile · MAP, 2025': 'আমার শিল্পী-পরিচিতি · ম্যাপ, ২০২৫', '04 / Keep in touch': '০৪ / যোগাযোগ রাখুন',
+  'Let’s continue the': 'চলতে থাকুক', 'conversation.': 'আমাদের কথোপকথন।', 'Find me on Instagram': 'ইনস্টাগ্রামে আমার সঙ্গে যুক্ত হন',
+  'My roots / West Bengal': 'আমার শিকড় / পশ্চিমবঙ্গ', 'Nadi': 'নদী', 'aar': 'আর', 'Nadia.': 'নদিয়া।', 'Nadia, West Bengal.': 'নদিয়া, পশ্চিমবঙ্গ।',
+  'My life and practice are rooted here.': 'আমার জীবন ও শিল্পচর্চার শিকড় এখানেই।', 'Nadia · My home district': 'নদিয়া · আমার নিজের জেলা',
+  'West Bengal, with Nadia highlighted': 'পশ্চিমবঙ্গের মানচিত্রে নদিয়া চিহ্নিত',
+  'A map showing 23 district shapes from the geoBoundaries 2021 dataset. Nadia, my home district, is highlighted in red.': 'জিওবাউন্ডারিজ-এর ২০২১ সালের তথ্যভান্ডার অনুযায়ী ২৩টি জেলার মানচিত্র। আমার নিজের জেলা নদিয়া লাল রঙে চিহ্নিত।',
+  'District boundaries · 2021 dataset': 'জেলার সীমানা · ২০২১ সালের তথ্যভান্ডার', 'Map data': 'মানচিত্রের তথ্য',
+  'geoBoundaries': 'জিওবাউন্ডারিজ', 'Pathways Data': 'পাথওয়েজ ডেটা', 'ODbL 1.0': 'ওডিবিএল ১.০',
+  'Labani Jangi’s strokes of resistance': 'লাবণী জঙ্গীর তুলিতে প্রতিরোধ', 'People’s Archive of Rural India': 'পিপলস আর্কাইভ অফ রুরাল ইন্ডিয়া',
+  'Profile': 'পরিচিতি', 'In conversation with Labani Jangi': 'লাবণী জঙ্গীর সঙ্গে কথোপকথন', 'Frontline': 'ফ্রন্টলাইন', 'Interview': 'সাক্ষাৎকার',
+  'A Language for Resistance': 'প্রতিরোধের ভাষা', 'Museum of Art & Photography': 'মিউজিয়াম অফ আর্ট অ্যান্ড ফটোগ্রাফি', 'Artist talk · 2025': 'শিল্পীর সঙ্গে আলাপ · ২০২৫',
+  'Back to the archive': 'সংগ্রহশালায় ফিরুন', 'work': 'শিল্পকর্ম', 'writing': 'লেখা', 'conversation': 'কথোপকথন',
+  'Watch the video': 'ভিডিওটি দেখুন', 'Source:': 'সূত্র:', 'Original publication': 'মূল প্রকাশনা',
+  'Page not found — Labani Jangi': 'পাতাটি পাওয়া যায়নি — লাবণী জঙ্গী', '404 / Page not found': '৪০৪ / পাতাটি পাওয়া যায়নি',
+  'Another': 'ফিরে যাওয়ার', 'way back.': 'অন্য পথ।', 'This page could not be found.': 'এই পাতাটি খুঁজে পাওয়া যায়নি।', 'Return to the home page': 'প্রথম পাতায় ফিরুন',
+} as const;
+export type TranslationKey = keyof typeof translations;
+export function translator(locale: Locale) {
+  return (key: TranslationKey) => locale === 'bn' ? translations[key] : key;
+}
+export function localPath(path: string, locale: Locale) { return locale === 'bn' ? `/bn${path}` : path; }
+export const districtNames: Record<string, string> = {
+  'alipurduar':'আলিপুরদুয়ার','bankura':'বাঁকুড়া','birbhum':'বীরভূম','cooch-behar':'কোচবিহার','dakshin-dinajpur':'দক্ষিণ দিনাজপুর','darjeeling':'দার্জিলিং','hooghly':'হুগলি','howrah':'হাওড়া','jalpaiguri':'জলপাইগুড়ি','jhargram':'ঝাড়গ্রাম','kalimpong':'কালিম্পং','kolkata':'কলকাতা','malda':'মালদা','murshidabad':'মুর্শিদাবাদ','nadia':'নদিয়া','north-24-parganas':'উত্তর ২৪ পরগনা','paschim-bardhaman':'পশ্চিম বর্ধমান','paschim-medinipur':'পশ্চিম মেদিনীপুর','purba-bardhaman':'পূর্ব বর্ধমান','purba-medinipur':'পূর্ব মেদিনীপুর','purulia':'পুরুলিয়া','south-24-parganas':'দক্ষিণ ২৪ পরগনা','uttar-dinajpur':'উত্তর দিনাজপুর',
+};

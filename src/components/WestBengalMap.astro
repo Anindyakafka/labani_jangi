@@ -1,21 +1,28 @@
 ---
+import { translator, districtNames, type Locale } from '../i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = translator(locale);
 import districts from '../data/west-bengal.json';
+for (const district of districts) {
+  if (!districtNames[district.id]) throw new Error(`Missing Bangla district name: ${district.id}`);
+}
 ---
 <section class="roots-map wrap" aria-labelledby="roots-title">
   <div class="roots-copy">
-    <span class="eyebrow">My roots / West Bengal</span>
-    <h2 id="roots-title">Nadi<br/>aar <em>Nadia.</em></h2>
-    <p class="large-copy">Nadia, West Bengal.</p>
-    <p>My life and practice are rooted here.</p>
-    <div class="map-key"><span aria-hidden="true"></span> Nadia · My home district</div>
+    <span class="eyebrow">{t('My roots / West Bengal')}</span>
+    <h2 id="roots-title">{t('Nadi')}<br/>{t('aar')} <em>{t('Nadia.')}</em></h2>
+    <p class="large-copy">{t('Nadia, West Bengal.')}</p>
+    <p>{t('My life and practice are rooted here.')}</p>
+    <div class="map-key"><span aria-hidden="true"></span> {t('Nadia · My home district')}</div>
   </div>
   <figure class="bengal-figure">
     <svg class="bengal-map" viewBox="0 0 440 570" role="img" aria-labelledby="bengal-title bengal-description">
-      <title id="bengal-title">West Bengal, with Nadia highlighted</title>
-      <desc id="bengal-description">A map showing 23 district shapes from the geoBoundaries 2021 dataset. Nadia, my home district, is highlighted in red.</desc>
-      {districts.map(district => <path d={district.path} data-district-id={district.id} data-source-id={district.sourceId} class:list={['district', {'district-home': district.id === 'nadia'}]} fill-rule="evenodd"><title>{district.name}</title></path>)}
+      <title id="bengal-title">{t('West Bengal, with Nadia highlighted')}</title>
+      <desc id="bengal-description">{t('A map showing 23 district shapes from the geoBoundaries 2021 dataset. Nadia, my home district, is highlighted in red.')}</desc>
+      {districts.map(district => <path d={district.path} data-district-id={district.id} data-source-id={district.sourceId} class:list={['district', {'district-home': district.id === 'nadia'}]} fill-rule="evenodd"><title>{locale === 'bn' ? districtNames[district.id] : district.name}</title></path>)}
     </svg>
-    <figcaption>District boundaries · 2021 dataset<br/><a href="https://www.geoboundaries.org/">geoBoundaries</a> / Pathways Data · <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a> · <a href="/maps/west-bengal.geojson" download>Map data ↓</a></figcaption>
+    <figcaption>{t('District boundaries · 2021 dataset')}<br/><a href="https://www.geoboundaries.org/">{t('geoBoundaries')}</a> / {t('Pathways Data')} · <a href="https://opendatacommons.org/licenses/odbl/1-0/">{t('ODbL 1.0')}</a> · <a href="/maps/west-bengal.geojson" download>{t('Map data')} ↓</a></figcaption>
   </figure>
 </section>
 <style>

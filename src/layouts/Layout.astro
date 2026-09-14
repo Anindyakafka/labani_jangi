@@ -1,18 +1,30 @@
 ---
+import { translator, localPath, type Locale } from '../i18n';
 import '../styles/global.css';
+import '@fontsource/noto-serif-bengali/bengali-400.css';
 import { instagram } from '../data/site';
-interface Props { title?: string; description?: string; }
-const { title = 'Labani Jangi — Artist & cultural practitioner', description = 'I’m Labani Jangi, an artist, researcher and cultural practitioner from Nadia, West Bengal. Explore my work and practice.' } = Astro.props;
+interface Props { locale?: Locale; title?: string; description?: string; }
+const { locale = 'en' } = Astro.props;
+const t = translator(locale);
+const { title = t('Labani Jangi — Artist & cultural practitioner'), description = t('I’m Labani Jangi, an artist, researcher and cultural practitioner from Nadia, West Bengal. Explore my work and practice.') } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const is404 = Astro.url.pathname.includes('404');
+const basePath = is404 ? '/404.html' : Astro.url.pathname.replace(/^\/bn(?=\/|$)/, '') || '/';
+const banglaPath = is404 ? '/bn/404/' : localPath(basePath, 'bn');
+const alternate = locale === 'en' ? banglaPath : basePath;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" /><meta name="viewport" content="width=device-width" />
     <title>{title}</title><meta name="description" content={description} />
     <link rel="canonical" href={canonical} /><link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:title" content={title} /><meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} /><meta property="og:type" content="website" />
+    <link rel="alternate" hreflang="en" href={new URL(basePath, Astro.site)} />
+    <link rel="alternate" hreflang="bn" href={new URL(banglaPath, Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(basePath, Astro.site)} />
+    <meta property="og:locale" content={locale === 'bn' ? 'bn_IN' : 'en_IN'} />
     <meta name="theme-color" content="#fafafa" />
     <script is:inline defer src="https://cloud.umami.is/script.js"
       data-website-id="c0819d04-f244-4caf-8922-e89e57123ae6"
@@ -20,14 +32,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       data-exclude-hash="true" data-do-not-track="true"></script>
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip" href="#main">{t('Skip to content')}</a>
     <header class="site-header wrap">
-      <a class="wordmark" href="/" aria-label="Labani Jangi, home">lj<span>.</span></a>
-      <nav aria-label="Main navigation">
-        <a href="/#practice">Practice</a><a href="/#archive">Archive</a><a href="/#about">About</a><a href="/#contact">Contact <span aria-hidden="true">↗</span></a>
+      <a class="wordmark" href={localPath('/', locale)} aria-label={t('Labani Jangi, home')}>{locale === 'bn' ? 'লজ' : 'lj'}<span>.</span></a>
+      <nav aria-label={t('Main navigation')}>
+        <a href={localPath('/#practice', locale)}>{t('Practice')}</a><a href={localPath('/#archive', locale)}>{t('Archive')}</a><a href={localPath('/#about', locale)}>{t('About')}</a><a href={localPath('/#contact', locale)}>{t('Contact')} <span aria-hidden="true">↗</span></a>
       </nav>
+      <a class="language-toggle" href={alternate} lang={locale === 'en' ? 'bn' : 'en'} hreflang={locale === 'en' ? 'bn' : 'en'} aria-label={locale === 'en' ? 'বাংলায় পড়ুন' : 'Read in English'} data-language-switch>{locale === 'en' ? 'বাংলা' : 'English'}</a>
     </header>
     <main id="main"><slot /></main>
-    <footer class="wrap footer"><a href="/" class="footer-name">Labani Jangi</a><span>Nadia, West Bengal</span><a href={instagram} data-umami-event="instagram-click">Instagram ↗</a><a href="#main">Back to top ↑</a></footer>
+    <footer class="wrap footer"><a href={localPath('/', locale)} class="footer-name">{t('Labani Jangi')}</a><span>{t('Nadia, West Bengal')}</span><a href={instagram} data-umami-event="instagram-click">{t('Instagram')} ↗</a><a href="#main">{t('Back to top')} ↑</a></footer>
+  <script>
+      document.querySelector<HTMLAnchorElement>('[data-language-switch]')?.addEventListener('click', function () {
+        const target = new URL(this.href);
+        target.hash = location.hash;
+        this.href = target.href;
+      });
+    </script>
   </body>
 </html>

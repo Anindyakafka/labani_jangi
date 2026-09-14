@@ -18,6 +18,12 @@ to = "https://cloud.umami.is/"
 status = 302
 force = true
 
+# Serve a translated missing-page response for unknown Bangla URLs.
+[[redirects]]
+from = "/bn/*"
+to = "/bn/404/index.html"
+status = 404
+
 [[headers]]
 for = "/*"
 [headers.values]

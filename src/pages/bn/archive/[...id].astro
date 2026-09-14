@@ -1,0 +1,9 @@
+---
+import ArchivePage from '../../../components/ArchivePage.astro';
+import { publishedArchive } from '../../../lib/archive';
+export async function getStaticPaths() {
+  return (await publishedArchive('bn')).map(entry => ({params: {id:entry.data.translationKey}, props:{entry}}));
+}
+const { entry } = Astro.props;
+---
+<ArchivePage entry={entry} />

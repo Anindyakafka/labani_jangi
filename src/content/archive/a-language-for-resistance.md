@@ -1,6 +1,7 @@
 ---
 title: A Language for Resistance
 kind: conversation
+translationKey: a-language-for-resistance
 date: 2025-03-02
 description: My artist conversation with Soumyadeep Dasgupta at the Museum of Art & Photography, Bengaluru.
 draft: false

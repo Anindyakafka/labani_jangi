@@ -10,7 +10,8 @@ Browser checks: after building, run `npx playwright test`. The configuration use
 
 ## Editing content
 
-- Homepage and biography: `src/pages/index.astro`
+- Shared homepage layout: `src/components/HomePage.astro`
+- English/Bangla interface copy and biography: `src/i18n.ts`
 - Reading links: `src/data/site.ts`
 - Archive: Markdown files in `src/content/archive/`
 - Styling: `src/styles/global.css`
@@ -28,6 +29,7 @@ date: 2025-01-01
 description: An approved description of the work.
 draft: true
 language: en
+translationKey: actual-artwork-title
 series: Actual series name
 medium: Actual medium
 image: /media/actual-artwork.webp
@@ -36,7 +38,15 @@ credit: Actual artist and photographer credit.
 ---
 ```
 
-Write the entry beneath the frontmatter. Replace example values before setting `draft: false`. Drafts are excluded from pages and sitemap. `kind` accepts `work`, `writing`, or `conversation`; `language` accepts `en` or `bn`. Bangla entries are supported; navigation is currently English. Image entries require alt text and credit. Optional `source` and `sourceName` add attribution. An optional `video` URL creates a watch link to an already published video, with no automatic embeds or new hosting service.
+Write the entry beneath the frontmatter. Replace example values before setting `draft: false`. Drafts are excluded from pages and sitemap. `kind` accepts `work`, `writing`, or `conversation`; `language` accepts `en` or `bn`. Publish English and Bangla files with the same `translationKey`; the build rejects missing or duplicate language partners. Image entries require translated alt text and credit. Optional `source` and `sourceName` add attribution. An optional `video` URL creates a watch link to an already published video, with no automatic embeds or new hosting service.
+
+## English and Bangla
+
+The header language switch works on every page, linking to the same page in the other language and preserving section anchors when JavaScript is available. English routes remain unchanged; Bangla routes begin `/bn/`. Language stays consistent through internal navigation, refreshes and shared links because it is encoded in the URL. We do not override explicit URLs with automatic browser-language redirects.
+
+`src/i18n.ts` is the typed translation dictionary for interface text, descriptions, accessibility labels and district names. Shared components render both languages, with localized dates/digits, `lang`, canonical and alternate-language metadata. Noto Serif Bengali is bundled locally under its open font license. No translation API or remote font service is used. Publication labels are translated for navigation; the linked external articles remain in the publishers' original languages. The Umami dashboard is an external service, so this toggle does not control its interface.
+
+The existing archive translation is `src/content/archive/bn/a-language-for-resistance.md`. For new content, translate the body and all displayed frontmatter fields, use the same translation key and shared media references, and publish both language versions together. `AGENTS.md` records these requirements for future development. Run the bilingual browser checks after changes; they cover the switch, matching archive pages, Bangla map titles, numeral formatting, mobile overflow and missing-page navigation.
 
 Keep high-resolution originals backed up separately. Use web-sized WebP/AVIF exports, ideally below 500 KB when quality permits, preserving proportions and colour. Do not commit large original videos. Builds do not fetch external content.
 

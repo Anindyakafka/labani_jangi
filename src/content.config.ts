@@ -7,6 +7,7 @@ const archive = defineCollection({
     title: z.string(), kind: z.enum(['work', 'writing', 'conversation']),
     date: z.coerce.date(), description: z.string(), draft: z.boolean().default(true),
     language: z.enum(['en', 'bn']).default('en'),
+    translationKey: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
     series: z.string().optional(), medium: z.string().optional(),
     image: z.string().optional(), imageAlt: z.string().optional(), credit: z.string().optional(),
     video: z.url().optional(), source: z.url().optional(), sourceName: z.string().optional(),

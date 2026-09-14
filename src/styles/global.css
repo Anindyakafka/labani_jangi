@@ -14,3 +14,28 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .practice,.about{position:relative;isolation:isolate}
 .practice::before,.about::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('/dust.svg') repeat;opacity:.15;mix-blend-mode:soft-light}
 @media print, (forced-colors:active){body::before,.practice::before,.about::before{display:none}}
+
+/* Both languages share layouts; Bangla needs room for conjuncts and vowel marks. */
+.site-header nav{margin-left:auto;margin-right:28px}
+.language-toggle{border:1px solid currentColor;border-radius:2px;padding:9px 13px;font-size:13px;white-space:nowrap;font-family:'Noto Serif Bengali',Georgia,serif}
+.language-toggle:hover{background:var(--red);color:var(--paper);text-decoration:none}
+html:lang(bn){font-family:'Noto Serif Bengali',serif;--serif:'Noto Serif Bengali',serif}
+html:lang(bn) h1,html:lang(bn) h2,html:lang(bn) h3{letter-spacing:0;line-height:1.4}
+html:lang(bn) .hero h1{font-size:clamp(90px,14vw,190px);line-height:1.3;margin-top:35px}
+html:lang(bn) .eyebrow,html:lang(bn) .vertical-note{letter-spacing:0;text-transform:none;font-size:12px}
+html:lang(bn) .wordmark{letter-spacing:0;font-size:32px}
+html:lang(bn) .large-copy{letter-spacing:0;line-height:1.75}
+html:lang(bn) .contact-line{gap:35px}
+html:lang(bn) .contact h2{font-size:clamp(35px,4.4vw,62px)}
+html:lang(bn) .source-row h3{font-size:26px}
+html:lang(bn) .prose{line-height:2}
+@media(max-width:760px){
+  .site-header{height:auto;min-height:100px;flex-wrap:wrap;padding-block:12px;gap:10px}
+  .site-header nav{order:3;width:100%;margin:0;justify-content:space-between;gap:10px}
+  .language-toggle{margin-left:auto}
+  html:lang(bn) .hero h1{font-size:clamp(70px,19vw,135px)}
+  html:lang(bn) h2{font-size:40px}
+  html:lang(bn) .source-row h3{font-size:22px}
+  html:lang(bn) .contact h2{font-size:34px}
+  html:lang(bn) .footer-name{font-size:20px}
+}
