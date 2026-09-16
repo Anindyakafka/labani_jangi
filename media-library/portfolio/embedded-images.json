@@ -1,0 +1,1049 @@
+[
+  {
+    "page": 2,
+    "path": "media-library/portfolio/extracted/slide-02-image-01.jpg",
+    "sha256": "b0fea5d4d8898c114373d53fd24850e556be5a4d6771bbd7e5cf10ca3007f353",
+    "width": 1432,
+    "height": 2048,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 3,
+    "path": "media-library/portfolio/extracted/slide-03-image-01.jpg",
+    "sha256": "65dfdb9f3771a1adb3f97738a3bfdce30185b7f6139a0d599e1cad6b97529630",
+    "width": 1638,
+    "height": 2048,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 5,
+    "path": "media-library/portfolio/extracted/slide-05-image-01.jpg",
+    "sha256": "df4565c70f5714f7b41e8db6f1b9a531718cd6edc5a5ac98caab589bb4497e01",
+    "width": 733,
+    "height": 1120,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 6,
+    "path": "media-library/portfolio/extracted/slide-06-image-01.jpg",
+    "sha256": "5eb88c11f6ea53e342f6e487f198f4d51089355a3ef1b292bba31e6f268b49e7",
+    "width": 1080,
+    "height": 768,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 7,
+    "path": "media-library/portfolio/extracted/slide-07-image-01.jpg",
+    "sha256": "6a525aae78ffc1b7693b0793aeaaa702bde5d3b2c0c5a4bf8d7ce3f5483f4257",
+    "width": 3509,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 8,
+    "path": "media-library/portfolio/extracted/slide-08-image-01.jpg",
+    "sha256": "8c33b2601beb1223b548b83ceba0b85173a6a7c1649fa0165ced6571c2327872",
+    "width": 1080,
+    "height": 745,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 8,
+    "path": "media-library/portfolio/extracted/slide-08-image-02.jpg",
+    "sha256": "d9f52c3515d5f34ea0745740a3907dd20b9f09ea4b3fac7e1112a00c830cf971",
+    "width": 1080,
+    "height": 741,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 9,
+    "path": "media-library/portfolio/extracted/slide-09-image-01.jpg",
+    "sha256": "aa00dee2e49ca3ea15f47c3a3df052d117c6ff8d0c0d36abaca11847ca24bd75",
+    "width": 1080,
+    "height": 754,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 10,
+    "path": "media-library/portfolio/extracted/slide-10-image-01.jpg",
+    "sha256": "b9af717e8fc87768ebc8588444c101cd6e0848b740a6d41298fe4f4862e41ca2",
+    "width": 1280,
+    "height": 992,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 11,
+    "path": "media-library/curated/political/img-0013.jpg",
+    "sha256": "5799ffd6060ec0b11563cfd2828df00434e7f9dcf6f40ae18ad12880402c3a91",
+    "width": 1400,
+    "height": 949,
+    "matching_standalone_ids": [
+      "img-0013"
+    ],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 12,
+    "path": "media-library/portfolio/extracted/slide-12-image-01.jpg",
+    "sha256": "3141f24a580b76633cef0ef977a4213efd4557a2b6aa02a94271e176f1b9b418",
+    "width": 1280,
+    "height": 958,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 12,
+    "path": "media-library/portfolio/extracted/slide-12-image-02.jpg",
+    "sha256": "f755dde73afe5477a02d84f402ae5586543836bf9f39c9ab65894721ea0b2abb",
+    "width": 1280,
+    "height": 830,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 12,
+    "path": "media-library/portfolio/extracted/slide-12-image-03.jpg",
+    "sha256": "429387fc71d6486cc829f8d27d8a962a7aaf437efd6d2bde87475ce739a964b7",
+    "width": 1280,
+    "height": 845,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 12,
+    "path": "media-library/portfolio/extracted/slide-12-image-04.jpg",
+    "sha256": "1a2f236cf72d45ba9933ea938657fadb17f035ab6dbccdba389f54ed99886615",
+    "width": 1280,
+    "height": 874,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 13,
+    "path": "media-library/portfolio/extracted/slide-13-image-01.jpg",
+    "sha256": "b319c7676df8c8cee71f583ddf5088d8ee5a1ca3e2c6366d031212b52a7975ab",
+    "width": 1280,
+    "height": 856,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 14,
+    "path": "media-library/portfolio/extracted/slide-14-image-01.jpg",
+    "sha256": "ea008e8001de65982d56cb7d803133f450d6006a58ee9799d025ac7dfcca3d1e",
+    "width": 1280,
+    "height": 839,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 15,
+    "path": "media-library/portfolio/extracted/slide-15-image-01.jpg",
+    "sha256": "38b2903e266813cde35156e91a427a3b6fb72f997817a58874c5e9084f9877d7",
+    "width": 3725,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 15,
+    "path": "media-library/portfolio/extracted/slide-15-image-02.jpg",
+    "sha256": "d82b62bc0f0e20de67dc8396ad6941ee4ead1179e3ea326b1933fe1df8990ba5",
+    "width": 1400,
+    "height": 948,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 16,
+    "path": "media-library/portfolio/extracted/slide-16-image-01.jpg",
+    "sha256": "9d6b63e15fb3db9271edf729266c37675718a87b0b9bb31523a29180d884f7a9",
+    "width": 1280,
+    "height": 865,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 17,
+    "path": "media-library/portfolio/extracted/slide-17-image-01.jpg",
+    "sha256": "cf996889e3d53228c58b70e449386ff3d5c59af6a5cd4f7dbe8fdc4f02299b73",
+    "width": 1400,
+    "height": 971,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 18,
+    "path": "media-library/portfolio/extracted/slide-18-image-01.jpg",
+    "sha256": "a52eba4493c9b512fc05253f9a3b22f7514285dcb0ed88da0e090444fbd81724",
+    "width": 1400,
+    "height": 905,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 19,
+    "path": "media-library/portfolio/extracted/slide-19-image-01.jpg",
+    "sha256": "a583f1f39559d13f47111e012a698a82416ad835a4da7477a2da66919381b77a",
+    "width": 1280,
+    "height": 778,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 20,
+    "path": "media-library/portfolio/extracted/slide-20-image-01.jpg",
+    "sha256": "a01fd92aadff181ab96253c79cec68e05908e80fd04644dc1682717c2f5bf0b8",
+    "width": 1400,
+    "height": 972,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 20,
+    "path": "media-library/portfolio/extracted/slide-20-image-02.jpg",
+    "sha256": "d7710f86b98dce06e899bc8be5a6d571a08f5bd3a25c25f12bf52caa5e52b423",
+    "width": 879,
+    "height": 1284,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 21,
+    "path": "media-library/portfolio/extracted/slide-21-image-01.jpg",
+    "sha256": "03bd5f0eaaba57eab3bbb1d404d2f7759ae74a547dccd249f5cbffb7f84af570",
+    "width": 3321,
+    "height": 2474,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 22,
+    "path": "media-library/portfolio/extracted/slide-22-image-01.jpg",
+    "sha256": "c8b5612ca34a9f3633b6ba4b8c62fde96f490919330c99c315cfb9c54c12d37a",
+    "width": 3639,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 23,
+    "path": "media-library/portfolio/extracted/slide-23-image-01.jpg",
+    "sha256": "c66aeb6ad1c1be1260f96d68417be55c2a0293764698947c4f30a54c5981ae3e",
+    "width": 1400,
+    "height": 1061,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 23,
+    "path": "media-library/portfolio/extracted/slide-23-image-02.jpg",
+    "sha256": "e8463e88d7836c0a0935c7c32b4103aba21e2ec5a63b07652a5260729649940e",
+    "width": 1400,
+    "height": 1023,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 23,
+    "path": "media-library/portfolio/extracted/slide-23-image-03.jpg",
+    "sha256": "e95a8ce3a93bee302f458f2674b0991d8269f465cf117dc33f0156838238dd7f",
+    "width": 1400,
+    "height": 936,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 24,
+    "path": "media-library/portfolio/extracted/slide-24-image-01.jpg",
+    "sha256": "ade2526eed9dfc78aad415cdece2c6bbc9b57283af09c2cba86b9e2e9b0b4b89",
+    "width": 3600,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 24,
+    "path": "media-library/portfolio/extracted/slide-24-image-02.jpg",
+    "sha256": "b11b4c8fb6c440058a239065f480c7f54e78cc151135d33460d3e15df2ca23a3",
+    "width": 4400,
+    "height": 2439,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 25,
+    "path": "media-library/curated/political/img-0003.jpg",
+    "sha256": "a4fc6f0fc3dac07ad3423e600aca04b792014e182553a4728924f255fa3313a9",
+    "width": 1400,
+    "height": 871,
+    "matching_standalone_ids": [
+      "img-0003"
+    ],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 25,
+    "path": "media-library/portfolio/extracted/slide-25-image-02.jpg",
+    "sha256": "ad7daad575c7311a0869fa6b499ef7c7fe68636defaa33b57823dbfc9d9b22f0",
+    "width": 1400,
+    "height": 1026,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 26,
+    "path": "media-library/portfolio/extracted/slide-26-image-01.jpg",
+    "sha256": "8aa0d27e5789c400bd4649cbbd4a5e22d102a95c96420f93048cad587ca75496",
+    "width": 1400,
+    "height": 875,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 27,
+    "path": "media-library/portfolio/extracted/slide-27-image-01.jpg",
+    "sha256": "efdf281f324b299c45b45c921a69e59565e44aea11209007719ca90f7340f83a",
+    "width": 1400,
+    "height": 825,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 29,
+    "path": "media-library/portfolio/extracted/slide-29-image-01.jpg",
+    "sha256": "4f0ceb9ecb4c643f8dbc75b55928b67edac9b4f73a888ca2b5f9047d807752d2",
+    "width": 1400,
+    "height": 989,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 29,
+    "path": "media-library/portfolio/extracted/slide-29-image-02.jpg",
+    "sha256": "d048234c2f5a7b8210852bbdf77f6b999f4371a97ab3e7a4b4ef56fbb551ad02",
+    "width": 3411,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 29,
+    "path": "media-library/portfolio/extracted/slide-29-image-03.jpg",
+    "sha256": "dfc6deaccedf94ffdad2e8000a1350edccb3e175524520ca4ee688e997046bfb",
+    "width": 4050,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 29,
+    "path": "media-library/portfolio/extracted/slide-29-image-04.jpg",
+    "sha256": "b7cb19a09ef5190a546063cf9c9f7b2f5a4e56657b749de3f41b5ad6e6f95725",
+    "width": 1400,
+    "height": 976,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 30,
+    "path": "media-library/portfolio/extracted/slide-30-image-01.jpg",
+    "sha256": "3ad9ec9fa01f212a6d2735b7fba27169a3b6ea5b003d626b2c156a34ad714f88",
+    "width": 1400,
+    "height": 1020,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 31,
+    "path": "media-library/portfolio/extracted/slide-31-image-01.jpg",
+    "sha256": "3c89fbaa725fde935f3f060fe5cc5328f1cc1f296be6e0ec01f5852eaff1e215",
+    "width": 1280,
+    "height": 848,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 32,
+    "path": "media-library/portfolio/extracted/slide-32-image-01.jpg",
+    "sha256": "14b008c73ac5635a47932888440d7b2b3f86993d2b23d95ee12fa25c98860245",
+    "width": 450,
+    "height": 605,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 32,
+    "path": "media-library/portfolio/extracted/slide-32-image-02.jpg",
+    "sha256": "c90f3331f99288921c7fd354a8294dbe39901cd12ec28e47fc8526502dd362d4",
+    "width": 1400,
+    "height": 950,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 32,
+    "path": "media-library/portfolio/extracted/slide-32-image-03.jpg",
+    "sha256": "9f913a2c46c4a94fb586651d79642fb9f9fbbd2abecc59a220817350156a9782",
+    "width": 1400,
+    "height": 956,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 33,
+    "path": "media-library/portfolio/extracted/slide-33-image-01.jpg",
+    "sha256": "01a9d1560b160f1ccc9d8ffb5a732d342cadb08110a3af12744848a8f0ff2722",
+    "width": 754,
+    "height": 500,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 33,
+    "path": "media-library/portfolio/extracted/slide-33-image-02.jpg",
+    "sha256": "d417426206b3f6fe46653443aa2c03ed50fe0516d02baf7744c05cf144e7c0f6",
+    "width": 1280,
+    "height": 743,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 34,
+    "path": "media-library/portfolio/extracted/slide-34-image-01.jpg",
+    "sha256": "f718df902a08951d62924fd4fc0e954fd4f9da92c526b2ddda9120f35ec803f1",
+    "width": 1400,
+    "height": 956,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 34,
+    "path": "media-library/portfolio/extracted/slide-34-image-02.jpg",
+    "sha256": "f4952f3ceafa42fd4861d08d9e43e3eb2c364bba2b16eb5efbeccd579f3a07df",
+    "width": 3737,
+    "height": 2476,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 35,
+    "path": "media-library/portfolio/extracted/slide-35-image-01.jpg",
+    "sha256": "d9ae371f7ca4dc064e1a04ee2fa16c43451dabe810f8456f908dfe1c512fe69d",
+    "width": 3590,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 36,
+    "path": "media-library/portfolio/extracted/slide-36-image-01.jpg",
+    "sha256": "fa8bcc3d6fbf4185ff5c8858baf41b69d78728e978739313267cfafe21bd2166",
+    "width": 3282,
+    "height": 2155,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 36,
+    "path": "media-library/portfolio/extracted/slide-36-image-02.jpg",
+    "sha256": "297fc2cfd00ffd2878e99814944ea29cbde601022e99e1d82f84cdf16fade44e",
+    "width": 4140,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 37,
+    "path": "media-library/curated/political/img-0017.jpg",
+    "sha256": "6fe16ed02a76240b99654e567df3bc0165cf9eafad370f1c26f6897e36cc1158",
+    "width": 1400,
+    "height": 961,
+    "matching_standalone_ids": [
+      "img-0017"
+    ],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 38,
+    "path": "media-library/portfolio/extracted/slide-38-image-01.jpg",
+    "sha256": "c3f3ef899ed93a727a1506a287f56e7a5c70812ce33d70823754f909d1dce9ab",
+    "width": 1400,
+    "height": 945,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 39,
+    "path": "media-library/portfolio/extracted/slide-39-image-01.jpg",
+    "sha256": "b5d6b36517a246bdb5a5f0cada00d00b695d5ba0b70c2021ad6702382af3e2ff",
+    "width": 3577,
+    "height": 2477,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 39,
+    "path": "media-library/portfolio/extracted/slide-39-image-02.jpg",
+    "sha256": "aac998cb9880e8374db48435c62ceda321a6023b571bd5d64f1fcfdcd06a3c94",
+    "width": 3618,
+    "height": 2474,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 39,
+    "path": "media-library/portfolio/extracted/slide-39-image-03.jpg",
+    "sha256": "01be3ec27116811ac2f631161a6a112ede898df8d92e0546ab80b5da1781b28b",
+    "width": 3626,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 40,
+    "path": "media-library/portfolio/extracted/slide-40-image-01.jpg",
+    "sha256": "ad580cad0d2ffc09b9194a7e4131b092521581c8928f8d3a5914740bd249b435",
+    "width": 3709,
+    "height": 2475,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 41,
+    "path": "media-library/portfolio/extracted/slide-41-image-01.jpg",
+    "sha256": "a53320b7b6b93b251bc27787b0e0b9b6f652e46a1c6815e767c99643b88f7fa7",
+    "width": 4402,
+    "height": 1951,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 42,
+    "path": "media-library/portfolio/extracted/slide-42-image-01.jpg",
+    "sha256": "4ce5423ba01af3e0e1eb9a573aa96ba779bd388f09c2a6e354a6ffb62de43f50",
+    "width": 1400,
+    "height": 1046,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 42,
+    "path": "media-library/portfolio/extracted/slide-42-image-02.jpg",
+    "sha256": "de3fb8cea46cc88e99f64a3f9e5840f07d210eb9e19dcbdf6e5d0759d7a25a0b",
+    "width": 1400,
+    "height": 1011,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 42,
+    "path": "media-library/portfolio/extracted/slide-42-image-03.jpg",
+    "sha256": "f4fcb7a6a27b8b9dbe67272d64f5266c691a1cf4a001305806c6ed4643f45ef0",
+    "width": 1400,
+    "height": 1015,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 42,
+    "path": "media-library/portfolio/extracted/slide-42-image-04.jpg",
+    "sha256": "333093bdbb7ef3b628f176be59b1356ef184cdcf3b8a0c3f29109894cad9e8cc",
+    "width": 1400,
+    "height": 1021,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 43,
+    "path": "media-library/portfolio/extracted/slide-43-image-01.jpg",
+    "sha256": "ecb94fa307a3b23caebe80678a895b3b7e5618db14b2e7822d7c14fa39835d4e",
+    "width": 1400,
+    "height": 782,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 44,
+    "path": "media-library/portfolio/extracted/slide-44-image-01.jpg",
+    "sha256": "41a66e02b64639d3dfc51e4dc6bb4410a4ca84f35d639905ebadcede896f4d4a",
+    "width": 1400,
+    "height": 735,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 45,
+    "path": "media-library/portfolio/extracted/slide-45-image-01.jpg",
+    "sha256": "db109fc7d23fa980c7d45fae27c24a3e112d706b2c695bbd658b936b0988bbbb",
+    "width": 1185,
+    "height": 1600,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 46,
+    "path": "media-library/portfolio/extracted/slide-46-image-01.jpg",
+    "sha256": "dd9c9801abefb26b58c78ca81a620c3e1ef7f7e3d6a79148e184171a7136878d",
+    "width": 1165,
+    "height": 1599,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 47,
+    "path": "media-library/portfolio/extracted/slide-47-image-01.jpg",
+    "sha256": "e94cbaf8f32090d4c828bf619e8aef69b57a5cab1cc917f0668cfee5d43aa3b9",
+    "width": 1600,
+    "height": 1080,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 48,
+    "path": "media-library/portfolio/extracted/slide-48-image-01.jpg",
+    "sha256": "804fd319461d067359b6f717332593b41e519e2ec7e5a43510e7486bb8fcc95d",
+    "width": 1080,
+    "height": 401,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 49,
+    "path": "media-library/portfolio/extracted/slide-49-image-01.jpg",
+    "sha256": "185c880f3eaf46b7243330dbce4f148ed30e7863dbaa293a6d64c6f4648178cc",
+    "width": 1080,
+    "height": 503,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 49,
+    "path": "media-library/portfolio/extracted/slide-49-image-02.jpg",
+    "sha256": "27fdaad712ff57e614e6a2d08eb424cb3c8db0370a6923278b6886436dd20246",
+    "width": 1080,
+    "height": 500,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 49,
+    "path": "media-library/portfolio/extracted/slide-49-image-03.jpg",
+    "sha256": "f2b6c6da639263027e12870fdad83ace92f09603c1aaa6f0e7ae11422eb3ca05",
+    "width": 1080,
+    "height": 485,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 49,
+    "path": "media-library/portfolio/extracted/slide-49-image-04.jpg",
+    "sha256": "745220fe250dd082d5025a60d9fa2074ef2ebf337fea708fa94f98e6516bb313",
+    "width": 1080,
+    "height": 492,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 50,
+    "path": "media-library/portfolio/extracted/slide-50-image-01.jpg",
+    "sha256": "95c3306a9913c4ceb3cefdc6b4d7322f83a5c07dc09eb735fe4ea90a2fba7c19",
+    "width": 1080,
+    "height": 854,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 51,
+    "path": "media-library/portfolio/extracted/slide-51-image-01.jpg",
+    "sha256": "9e29fc865d8b41010e7997d668c37ab9bee2b232e64cba0c2ea0b91dec887b7f",
+    "width": 1080,
+    "height": 731,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 52,
+    "path": "media-library/portfolio/extracted/slide-52-image-01.jpg",
+    "sha256": "de14aa6317c13a13aa789d9c3365f1f43a371b913c564b5e4d847e0c094ccdb9",
+    "width": 1367,
+    "height": 1600,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 52,
+    "path": "media-library/portfolio/extracted/slide-52-image-02.jpg",
+    "sha256": "dc79b945373603c970902b5edf03032134c4356f3cc64508595c44e42961e846",
+    "width": 720,
+    "height": 764,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 53,
+    "path": "media-library/curated/others/img-0148.jpg",
+    "sha256": "21c53e44ad4ab746c6974f7ad7fc76511bb2578f3e945c9844481c204ac63dd8",
+    "width": 1600,
+    "height": 1200,
+    "matching_standalone_ids": [
+      "img-0148"
+    ],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 54,
+    "path": "media-library/curated/others/img-0149.jpg",
+    "sha256": "365eb6770df0d14bd6cbd0e71b7a4f5079feecfa370faffeaade4119909a7b03",
+    "width": 1200,
+    "height": 1600,
+    "matching_standalone_ids": [
+      "img-0149"
+    ],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 54,
+    "path": "media-library/portfolio/extracted/slide-54-image-02.jpg",
+    "sha256": "190813f4439cb512f763ce983db01eb9f6c1c2ce131708fe986284acfa243d0d",
+    "width": 1600,
+    "height": 1395,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 55,
+    "path": "media-library/portfolio/extracted/slide-55-image-01.jpg",
+    "sha256": "0fef7e76fdbef5d6ac942ebc7a106cf3526af64629eea82746db5e643194aabe",
+    "width": 2048,
+    "height": 1472,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 55,
+    "path": "media-library/portfolio/extracted/slide-55-image-02.jpg",
+    "sha256": "4c66d4eac76faf36cbecfda30b67526b604b8f37c4f517e2b0b7616dd2a20857",
+    "width": 2048,
+    "height": 1462,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 55,
+    "path": "media-library/portfolio/extracted/slide-55-image-03.jpg",
+    "sha256": "d0722948f91e119b83f487ba9267610edbabd59a89b1479f05f8b76cd796ed0d",
+    "width": 2048,
+    "height": 1461,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 55,
+    "path": "media-library/portfolio/extracted/slide-55-image-04.jpg",
+    "sha256": "6dc7111cd88dc26405d1614850b4d92f98eb7359cad7ab19eec82545d14d4e38",
+    "width": 2048,
+    "height": 1477,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 55,
+    "path": "media-library/portfolio/extracted/slide-55-image-05.jpg",
+    "sha256": "244eb1645d4d749c4f8cd6716dba096609701d6ab651f43c34c0471c00dc9a80",
+    "width": 2048,
+    "height": 1467,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 55,
+    "path": "media-library/portfolio/extracted/slide-55-image-06.jpg",
+    "sha256": "27e5d306117d4f73e30ddb7cb737f0c7da9f60dc244bade834a6577690d23551",
+    "width": 2048,
+    "height": 1455,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 56,
+    "path": "media-library/portfolio/extracted/slide-56-image-01.jpg",
+    "sha256": "5f5e39529833ad265ae6deb33c2ce535477ab5a00e3466f3ad814d0dcc1a62f0",
+    "width": 2048,
+    "height": 1444,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 56,
+    "path": "media-library/portfolio/extracted/slide-56-image-02.jpg",
+    "sha256": "837cc49977fe1e91757bab9c8bf28e99ca79b9764fa173708aa277504875c4a0",
+    "width": 2048,
+    "height": 1444,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 56,
+    "path": "media-library/portfolio/extracted/slide-56-image-03.jpg",
+    "sha256": "521682139789d5cafa4170d7e67be680a039e0a5d4948ecaa9f1d7f3c548cb96",
+    "width": 2048,
+    "height": 1483,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 56,
+    "path": "media-library/portfolio/extracted/slide-56-image-04.jpg",
+    "sha256": "9e6e43d86d6ce10dfb35d9ff2ed27b11feb72c65c04edd589695f279c36709e7",
+    "width": 2048,
+    "height": 1468,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 56,
+    "path": "media-library/portfolio/extracted/slide-56-image-05.jpg",
+    "sha256": "29d493b4914c51d6fafd91a3370700c89c365ee233779847597411000804228b",
+    "width": 2048,
+    "height": 1430,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 57,
+    "path": "media-library/portfolio/extracted/slide-57-image-01.jpg",
+    "sha256": "88987bae932e2c0df29b0b95d9ab9c9e8db6bcd3cb0370b3a1df1cdc7caba477",
+    "width": 853,
+    "height": 1280,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 58,
+    "path": "media-library/portfolio/extracted/slide-58-image-01.jpg",
+    "sha256": "a6c3572f18cb9fc9fa334630a5b341cda6c5e567c10b80a499c40ba8f4dd2b9d",
+    "width": 300,
+    "height": 439,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 58,
+    "path": "media-library/portfolio/extracted/slide-58-image-02.jpg",
+    "sha256": "43d07e04fd67ae741534bf52dbf34ffa5a69d259c6965ac3000a507249492fd8",
+    "width": 421,
+    "height": 642,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 58,
+    "path": "media-library/portfolio/extracted/slide-58-image-03.jpg",
+    "sha256": "2770bf7a8b6c86598b4b684e902680603fe57c461391ce3eb95afbf2965a997b",
+    "width": 1071,
+    "height": 1656,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 59,
+    "path": "media-library/portfolio/extracted/slide-59-image-01.jpg",
+    "sha256": "bb59f273a1a670e6a2966def2878cb92ce90fbb518e4415335b8d253a5fc18d7",
+    "width": 1080,
+    "height": 1719,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 59,
+    "path": "media-library/portfolio/extracted/slide-59-image-02.jpg",
+    "sha256": "067a83f0d04e056d75f43296391c42e2f7cc5a401c2275b8549266e6f9aef80e",
+    "width": 617,
+    "height": 960,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 59,
+    "path": "media-library/portfolio/extracted/slide-59-image-03.jpg",
+    "sha256": "ddebf3fb28799fafd8d5845ed00a7959a618651bd2f60279edbb5f474fde5261",
+    "width": 558,
+    "height": 818,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 59,
+    "path": "media-library/portfolio/extracted/slide-59-image-04.jpg",
+    "sha256": "8f5a65fa60f889ee87450f15aa75c992474b4ff1342cfc70d5fdd9c236d23aa1",
+    "width": 1071,
+    "height": 1386,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 60,
+    "path": "media-library/portfolio/extracted/slide-60-image-01.jpg",
+    "sha256": "094bbdd69c4d8b834c3af571ee50e0d45eb2ee56e3012d34d7ed0f5f5354b1b5",
+    "width": 1080,
+    "height": 790,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 61,
+    "path": "media-library/portfolio/extracted/slide-61-image-01.jpg",
+    "sha256": "a4d990f85d4d76cee353179ccf567a1c663a1032365325461afed47625c7d843",
+    "width": 1000,
+    "height": 635,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 63,
+    "path": "media-library/portfolio/extracted/slide-63-image-01.jpg",
+    "sha256": "359d46d7ab1c6a69126806b11fe97665a8888118e2e20a28782da3b48eff78f1",
+    "width": 763,
+    "height": 1196,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 64,
+    "path": "media-library/portfolio/extracted/slide-64-image-01.jpg",
+    "sha256": "e9e195165cb1e26790fa7b51fd0f0a039b58e8a3783b52d90f9b50daac3b06ab",
+    "width": 720,
+    "height": 1600,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 64,
+    "path": "media-library/portfolio/extracted/slide-64-image-02.jpg",
+    "sha256": "f9ec25b7f1d90d46d2b89db96669b50a585c8ac9f5ffd7cceb1324b44184eb6a",
+    "width": 720,
+    "height": 1600,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 64,
+    "path": "media-library/portfolio/extracted/slide-64-image-03.jpg",
+    "sha256": "a8b033d456a8c6b9e01ed5cfa45ab74a13c443aefc11b16305fecdd997bc367e",
+    "width": 720,
+    "height": 1600,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 64,
+    "path": "media-library/portfolio/extracted/slide-64-image-04.jpg",
+    "sha256": "1b84428e12ebe51f1b79496f9cea3bf446b842e2affd332dd46dd8d4d9b948fa",
+    "width": 786,
+    "height": 1600,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 65,
+    "path": "media-library/curated/others/img-0147.jpg",
+    "sha256": "73164c777645e9edf66c4ba0b0b264948cc2779edb5e076161101a72efa133e3",
+    "width": 1280,
+    "height": 960,
+    "matching_standalone_ids": [
+      "img-0147"
+    ],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 65,
+    "path": "media-library/portfolio/extracted/slide-65-image-02.jpg",
+    "sha256": "6afba1bb4a2601e0a9478b90cddb0f2351702720baee37fcd0e3adbec553e0ae",
+    "width": 1280,
+    "height": 960,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 66,
+    "path": "media-library/portfolio/extracted/slide-66-image-01.jpg",
+    "sha256": "708b0c0da81d86ffa17b02428acee2b3233a2c0c7ca6e40ef4ce00ddfb8c6626",
+    "width": 668,
+    "height": 658,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 66,
+    "path": "media-library/portfolio/extracted/slide-66-image-02.jpg",
+    "sha256": "8031fee1ea892a89b27a131ae0f12ea849aac3d88466c59138b09d3557e3276e",
+    "width": 1280,
+    "height": 720,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 68,
+    "path": "media-library/portfolio/extracted/slide-68-image-01.jpg",
+    "sha256": "c44eb7e5472453cd7441de18d15038424cbb48f7bfda29e283c4b9d532054a59",
+    "width": 4160,
+    "height": 2773,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 69,
+    "path": "media-library/portfolio/extracted/slide-69-image-01.jpg",
+    "sha256": "9ab57cc86cb1f5c940ef2609b665f47d43f4c7b522857f1a9d877ed3dd9ddd49",
+    "width": 445,
+    "height": 516,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 70,
+    "path": "media-library/portfolio/extracted/slide-70-image-01.jpg",
+    "sha256": "f7e0a7f9ce71e83e344390b1cce6021cc36abcdf568b3ede5e34c24d176f7acc",
+    "width": 4096,
+    "height": 3072,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 70,
+    "path": "media-library/portfolio/extracted/slide-70-image-02.jpg",
+    "sha256": "6a2e11dc3f4cd682d8151a08286770c1441020dde72f9189e315f9ddb0e14ef7",
+    "width": 514,
+    "height": 427,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 71,
+    "path": "media-library/portfolio/extracted/slide-71-image-01.jpg",
+    "sha256": "72dfac72fba89f3cb494e926151e1cf6730d1496b1cdaf4b26663ac1675b809e",
+    "width": 1160,
+    "height": 653,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  },
+  {
+    "page": 72,
+    "path": "media-library/portfolio/extracted/slide-72-image-01.jpg",
+    "sha256": "f4e5458132b4f4698a54d2e43b8920dec1f7ddcfaccd0727b95fd769dd1ac0ca",
+    "width": 1080,
+    "height": 791,
+    "matching_standalone_ids": [],
+    "review": "Visually reviewed in portfolio page context; composite images are not split or assigned individual authorship."
+  }
+]

@@ -1,0 +1,366 @@
+{
+  "pages": 72,
+  "method": "Supplied PDF versus PowerPoint-generated PDF, normalized text and rendered pixels at half scale",
+  "results": [
+    {
+      "page": 1,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 2,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 3,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 4,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 5,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 6,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 7,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 8,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 9,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 10,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 11,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 12,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 13,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 14,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 15,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 16,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 17,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 18,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 19,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 20,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 21,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 22,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": false
+    },
+    {
+      "page": 23,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 24,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 25,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 26,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 27,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 28,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 29,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 30,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 31,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 32,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 33,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 34,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 35,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 36,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 37,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 38,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 39,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 40,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 41,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 42,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 43,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 44,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 45,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 46,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 47,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 48,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 49,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 50,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 51,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 52,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 53,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 54,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 55,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 56,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 57,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 58,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 59,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 60,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 61,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 62,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 63,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 64,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 65,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 66,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 67,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 68,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 69,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 70,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 71,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    },
+    {
+      "page": 72,
+      "normalized_text_equal": true,
+      "render_equal_at_half_scale": true
+    }
+  ]
+}

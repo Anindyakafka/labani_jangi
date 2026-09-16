@@ -7,9 +7,3 @@ dist/
 !.env.example
 test-results/
 playwright-report/
-.media-tools/
-.media-review/
-media-library/originals/
-media-library/curated/
-media-library/portfolio/source/
-media-library/portfolio/extracted/

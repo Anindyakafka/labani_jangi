@@ -10,6 +10,8 @@ Browser checks: after building, run `npx playwright test`. The configuration use
 
 ## Editing content
 
+The reviewed `labani_di` collection is now organised in [`media-library/`](media-library/README.md), with Political, Palestine and Others indexes, preserved originals, lossless screenshot crops and a [portfolio review](media-library/portfolio/REVIEW.md). This is an unpublished source archive; only selected web exports belong in `public/media/`.
+
 - Shared homepage layout: `src/components/HomePage.astro`
 - English/Bangla interface copy and biography: `src/i18n.ts`
 - Reading links: `src/data/site.ts`

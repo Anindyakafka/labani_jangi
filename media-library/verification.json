@@ -1,0 +1,26 @@
+{
+  "source_files": 693,
+  "source_images": 691,
+  "distinct_images": 549,
+  "exact_duplicate_copies": 142,
+  "categories": {
+    "political": 321,
+    "others": 202,
+    "palestine": 26
+  },
+  "lossless_crops": 32,
+  "portfolio_pages": 72,
+  "embedded_images": 115,
+  "original_bytes_verified": true,
+  "curated_bytes_or_crop_pixels_verified": true,
+  "pdf_text_matching_pages": 72,
+  "pdf_render_matching_pages": 71,
+  "original_source_file_records": 693,
+  "retained_unique_source_images": 549,
+  "original_duplicate_files_removed": 142,
+  "redundant_uncropped_curated_source_copies_removed": 517,
+  "total_exact_duplicate_files_removed": 665,
+  "duplicate_bytes_removed": 1797913011,
+  "retained_portfolio_embedded_files": 109,
+  "source_manifest_semantics": "All 693 original source records resolve to retained byte-identical canonical files; duplicate paths are historical aliases."
+}
