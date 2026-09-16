@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WorkGallery from './WorkGallery.astro';
+import { translator, type Locale } from '../i18n';
+const { locale } = Astro.props as { locale: Locale };
+const t = translator(locale);
+---
+<Layout locale={locale} title={t('Selected work — Labani Jangi')} description={t('A selected visual collection spanning rural life, Palestine, publication and exhibition work.')}>
+  <section class="wrap page-hero"><span class="eyebrow">{t('Selected work')}</span><h1>{t('Images in conversation.')}</h1><p class="large-copy">{t('This is a growing selection from my archive. Titles describe the images for navigation; they are not a complete catalogue of the work.')}</p></section>
+  <section class="wrap section collection-section"><span class="eyebrow">{t('Rural life, labour and protest')}</span><WorkGallery locale={locale} section="rural" /></section>
+  <section class="wrap section collection-section"><span class="eyebrow">{t('Palestine')}</span><p class="intro-copy">{t('These works sit with grief, solidarity and the ongoing struggle for Palestinian life and freedom.')}</p><WorkGallery locale={locale} section="palestine" /></section>
+  <section class="wrap section collection-section"><span class="eyebrow">{t('Books, rivers and exhibitions')}</span><WorkGallery locale={locale} section="publications" /></section>
+</Layout>

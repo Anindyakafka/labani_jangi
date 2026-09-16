@@ -1,0 +1,11 @@
+---
+import { featuredWork } from '../data/featured-work';
+import { translator, type Locale } from '../i18n';
+interface Props { locale: Locale; section?: 'rural' | 'palestine' | 'publications'; }
+const { locale, section } = Astro.props;
+const t = translator(locale);
+const works = section ? featuredWork.filter(work => work.section === section) : featuredWork;
+---
+<div class="gallery-grid">
+  {works.map(work => <figure class="gallery-card"><img src={work.image} alt={t(work.alt)} loading="lazy" /><figcaption><h3>{t(work.title)}</h3>{work.note && <p>{t(work.note)}</p>}</figcaption></figure>)}
+</div>

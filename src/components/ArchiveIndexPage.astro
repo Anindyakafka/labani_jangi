@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { publishedArchive } from '../lib/archive';
+import { sources } from '../data/site';
+import { translator, localPath, type Locale } from '../i18n';
+const { locale } = Astro.props as { locale: Locale };
+const t = translator(locale);
+const entries = await publishedArchive(locale);
+---
+<Layout locale={locale} title={t('Archive — Labani Jangi')} description={t('Profiles, interviews, writing and conversations around my practice.')}>
+  <section class="wrap page-hero"><span class="eyebrow">{t('Archive')}</span><h1>{t('Reading and conversations.')}</h1><p class="large-copy">{t('A record of published conversations, profiles and programme notes around my work.')}</p></section>
+  <section class="wrap section"><span class="eyebrow">{t('Publications')}</span><div class="source-list">{sources.map((source, i) => <a class="source-row" href={source.url} data-umami-event={'publication-' + source.publisher.toLowerCase().replaceAll(' ', '-')}><span class="row-number">{(i + 1).toLocaleString(locale, { minimumIntegerDigits: 2 })}</span><div><span class="eyebrow">{t(source.publisher)}</span><h3>{t(source.title)}</h3></div><span class="source-type">{t(source.type)}</span><span class="arrow" aria-hidden="true">↗</span></a>)}</div></section>
+  <section class="wrap section"><span class="eyebrow">{t('From my archive')}</span><div class="source-list">{entries.map(entry => <a class="source-row" href={localPath(`/archive/${entry.data.translationKey}/`, locale)}><span class="row-number">{t(entry.data.kind)}</span><div><h3>{entry.data.title}</h3><p>{entry.data.description}</p></div><span class="arrow" aria-hidden="true">→</span></a>)}</div></section>
+</Layout>

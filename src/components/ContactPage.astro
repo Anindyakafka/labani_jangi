@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { instagram } from '../data/site';
+import { translator, type Locale } from '../i18n';
+const { locale } = Astro.props as { locale: Locale };
+const t = translator(locale);
+---
+<Layout locale={locale} title={t('Contact — Labani Jangi')} description={t('Find Labani Jangi on Instagram.')}>
+  <section class="wrap page-hero contact-page"><span class="eyebrow">{t('Contact')}</span><h1>{t('Let’s continue the conversation.')}</h1><p class="large-copy">{t('For now, Instagram is the best way to find my updates and get in touch.')}</p><a class="contact-button" href={instagram} data-umami-event="instagram-click">{t('Find me on Instagram')} <span aria-hidden="true">↗</span></a></section>
+</Layout>

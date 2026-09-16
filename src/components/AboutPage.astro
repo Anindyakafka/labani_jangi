@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { sources } from '../data/site';
+import { translator, type Locale } from '../i18n';
+const { locale } = Astro.props as { locale: Locale };
+const t = translator(locale);
+---
+<Layout locale={locale} title={t('About me — Labani Jangi')} description={t('I am an artist, researcher and cultural practitioner from Nadia, West Bengal.')}>
+  <section class="wrap page-hero"><span class="eyebrow">{t('About me')}</span><h1>{t('An artist, a researcher, a cultural practitioner.')}</h1><p class="large-copy">{t('My roots are in Nadia, West Bengal.')}</p></section>
+  <section class="about section"><div class="wrap split"><div><span class="eyebrow">{t('My work')}</span><h2>{t('A practice shaped by')}<br/><em>{t('place and people.')}</em></h2></div><div class="about-copy"><p>{t('I am Labani Jangi. My work explores resistance and identity through the world around me, drawing from research, artistic practice and collective cultural work.')}</p><p>{t('My work and participation in Panjeri Artists’ Union, JINN and Khandera Art Space are documented in my MAP artist profile. I am also a recipient of the T. M. Krishna–PARI prize.')}</p><a class="text-link" href={sources[2].url}>{t('Read my artist profile at MAP')} ↗</a></div></div></section>
+</Layout>
