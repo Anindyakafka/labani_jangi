@@ -1,0 +1,9 @@
+{
+  "name": "Labani Jangi",
+  "short_name": "Labani Jangi",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#fafafa",
+  "theme_color": "#a31616",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

@@ -82,6 +82,18 @@ test('home, navigation and published archive work without layout overflow', asyn
 test('sitemap and missing page', async ({ page, request }) => {
   const sitemap = await request.get('/sitemap.xml');
   expect(await sitemap.text()).toContain('https://labanijangi.com/archive/a-language-for-resistance/');
+  expect(await sitemap.text()).toContain('https://labanijangi.com/bn/privacy/');
   await page.goto('/404.html');
   await expect(page.getByRole('link', {name:'Return to the home page'})).toBeVisible();
+});
+
+test('sharing and legal pages have complete localized metadata', async ({ page }) => {
+  await page.goto('/privacy/');
+  await expect(page).toHaveTitle('Privacy policy — Labani Jangi');
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://labanijangi.com/social-card.png');
+  await expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/site.webmanifest');
+  await expect(page.locator('main')).toContainText('Umami');
+  await page.goto('/bn/terms/');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'bn');
+  await expect(page.locator('main')).toContainText('ব্যবহারের শর্তাবলি');
 });

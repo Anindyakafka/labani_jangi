@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { translator, type Locale } from '../i18n';
+interface Props { locale: Locale; kind: 'privacy' | 'terms'; }
+const { locale, kind } = Astro.props;
+const t = translator(locale);
+const privacy = kind === 'privacy';
+const title = privacy ? t('Privacy policy — Labani Jangi') : t('Terms of use — Labani Jangi');
+const description = privacy ? t('How this website uses privacy-friendly analytics.') : t('Terms for using the Labani Jangi website.');
+---
+<Layout locale={locale} title={title} description={description}>
+  <article class="wrap article legal" lang={locale}>
+    <span class="eyebrow">{privacy ? t('Privacy') : t('Terms')}</span>
+    <h1>{privacy ? t('Privacy policy') : t('Terms of use')}</h1>
+    {privacy ? <div class="prose"><p>{t('This website uses Umami to understand which pages are useful. Umami is configured without cookies and with Do Not Track respected.')}</p><p>{t('The site does not use contact forms, newsletters, accounts or advertising trackers. Visiting an external link, including Instagram, is governed by that service’s own privacy policy.')}</p><p>{t('If this website later adds a form or a new type of data collection, this policy will be updated before that feature is published.')}</p></div> : <div class="prose"><p>{t('You may browse and share links to this website for personal, educational and non-commercial purposes.')}</p><p>{t('The artworks, writing and other materials on this website remain with their respective rights holders. Please ask before reproducing, adapting or using material beyond what the law permits.')}</p><p>{t('This website may link to independent publications and platforms. I am not responsible for their content, availability or policies.')}</p></div>}
+  </article>
+</Layout>

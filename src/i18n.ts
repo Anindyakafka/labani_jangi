@@ -36,6 +36,16 @@ export const translations = {
   'Watch the video': 'ভিডিওটি দেখুন', 'Source:': 'সূত্র:', 'Original publication': 'মূল প্রকাশনা',
   'Page not found — Labani Jangi': 'পাতাটি পাওয়া যায়নি — লাবণী জঙ্গী', '404 / Page not found': '৪০৪ / পাতাটি পাওয়া যায়নি',
   'Another': 'ফিরে যাওয়ার', 'way back.': 'অন্য পথ।', 'This page could not be found.': 'এই পাতাটি খুঁজে পাওয়া যায়নি।', 'Return to the home page': 'প্রথম পাতায় ফিরুন',
+  'Privacy': 'গোপনীয়তা', 'Terms': 'শর্তাবলি',
+  'Privacy policy — Labani Jangi': 'গোপনীয়তা নীতি — লাবণী জঙ্গী', 'Terms of use — Labani Jangi': 'ব্যবহারের শর্তাবলি — লাবণী জঙ্গী',
+  'How this website uses privacy-friendly analytics.': 'এই ওয়েবসাইট কীভাবে গোপনীয়তা-সম্মত বিশ্লেষণ ব্যবহার করে।', 'Terms for using the Labani Jangi website.': 'লাবণী জঙ্গীর ওয়েবসাইট ব্যবহারের শর্তাবলি।',
+  'Privacy policy': 'গোপনীয়তা নীতি', 'Terms of use': 'ব্যবহারের শর্তাবলি',
+  'This website uses Umami to understand which pages are useful. Umami is configured without cookies and with Do Not Track respected.': 'কোন পাতাগুলি উপযোগী তা বোঝার জন্য এই ওয়েবসাইটে Umami ব্যবহার করা হয়। এটি কুকি ছাড়া ব্যবহৃত হয় এবং Do Not Track অনুরোধকে সম্মান করে।',
+  'The site does not use contact forms, newsletters, accounts or advertising trackers. Visiting an external link, including Instagram, is governed by that service’s own privacy policy.': 'এই সাইটে যোগাযোগ ফর্ম, নিউজলেটার, অ্যাকাউন্ট বা বিজ্ঞাপনী ট্র্যাকার নেই। Instagram-সহ কোনও বাইরের লিঙ্কে গেলে সেই পরিষেবার নিজস্ব গোপনীয়তা নীতি প্রযোজ্য হবে।',
+  'If this website later adds a form or a new type of data collection, this policy will be updated before that feature is published.': 'পরে এই ওয়েবসাইটে কোনও ফর্ম বা নতুন ধরনের তথ্য সংগ্রহ যোগ হলে, তা প্রকাশের আগে এই নীতি হালনাগাদ করা হবে।',
+  'You may browse and share links to this website for personal, educational and non-commercial purposes.': 'ব্যক্তিগত, শিক্ষামূলক ও অবাণিজ্যিক উদ্দেশ্যে আপনি এই ওয়েবসাইট দেখতে এবং এর লিঙ্ক শেয়ার করতে পারেন।',
+  'The artworks, writing and other materials on this website remain with their respective rights holders. Please ask before reproducing, adapting or using material beyond what the law permits.': 'এই ওয়েবসাইটের শিল্পকর্ম, লেখা এবং অন্য উপকরণের অধিকার নিজ নিজ অধিকারীর কাছে থাকবে। আইনে অনুমোদিত সীমার বাইরে কোনও উপকরণ পুনরুৎপাদন, রূপান্তর বা ব্যবহারের আগে অনুমতি নিন।',
+  'This website may link to independent publications and platforms. I am not responsible for their content, availability or policies.': 'এই ওয়েবসাইটে স্বাধীন প্রকাশনা ও প্ল্যাটফর্মের লিঙ্ক থাকতে পারে। তাদের বিষয়বস্তু, প্রাপ্যতা বা নীতির জন্য আমি দায়ী নই।',
 } as const;
 export type TranslationKey = keyof typeof translations;
 export function translator(locale: Locale) {

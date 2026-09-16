@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Labani Jangi</title>
+  <desc id="desc">Labani Jangi — artist and cultural practitioner.</desc>
+  <rect width="1200" height="630" fill="#a31616"/>
+  <path d="M0 526C180 485 298 557 485 503S834 411 1200 474V630H0Z" fill="#8a1010" opacity=".52"/>
+  <circle cx="1020" cy="126" r="166" fill="#fafafa" opacity=".08"/>
+  <text x="80" y="128" fill="#fafafa" font-family="Georgia,serif" font-size="34" letter-spacing="7">ART · RESEARCH · RESISTANCE</text>
+  <text x="72" y="384" fill="#fafafa" font-family="Georgia,serif" font-size="168" letter-spacing="-12">Labani</text>
+  <text x="356" y="528" fill="#fafafa" font-family="Georgia,serif" font-size="168" letter-spacing="-12">Jangi.</text>
+</svg>

@@ -3,10 +3,11 @@ import { translator, localPath, type Locale } from '../i18n';
 import '../styles/global.css';
 import '@fontsource/noto-serif-bengali/bengali-400.css';
 import { instagram } from '../data/site';
-interface Props { locale?: Locale; title?: string; description?: string; }
+interface Props { locale?: Locale; title?: string; description?: string; ogImage?: string; }
 const { locale = 'en' } = Astro.props;
 const t = translator(locale);
-const { title = t('Labani Jangi — Artist & cultural practitioner'), description = t('I’m Labani Jangi, an artist, researcher and cultural practitioner from Nadia, West Bengal. Explore my work and practice.') } = Astro.props;
+const { title = t('Labani Jangi — Artist & cultural practitioner'), description = t('I’m Labani Jangi, an artist, researcher and cultural practitioner from Nadia, West Bengal. Explore my work and practice.'), ogImage = '/social-card.png' } = Astro.props;
+const socialImage = new URL(ogImage, Astro.site);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const is404 = Astro.url.pathname.includes('404');
 const basePath = is404 ? '/404.html' : Astro.url.pathname.replace(/^\/bn(?=\/|$)/, '') || '/';
@@ -19,8 +20,11 @@ const alternate = locale === 'en' ? banglaPath : basePath;
     <meta charset="utf-8" /><meta name="viewport" content="width=device-width" />
     <title>{title}</title><meta name="description" content={description} />
     <link rel="canonical" href={canonical} /><link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" /><link rel="apple-touch-icon" href="/favicon.svg" />
     <meta property="og:title" content={title} /><meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} /><meta property="og:type" content="website" />
+    <meta property="og:image" content={socialImage} /><meta property="og:image:alt" content={t('Labani Jangi — Artist & cultural practitioner')} />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={socialImage} />
     <link rel="alternate" hreflang="en" href={new URL(basePath, Astro.site)} />
     <link rel="alternate" hreflang="bn" href={new URL(banglaPath, Astro.site)} />
     <link rel="alternate" hreflang="x-default" href={new URL(basePath, Astro.site)} />
@@ -75,7 +79,7 @@ const alternate = locale === 'en' ? banglaPath : basePath;
       <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" hidden><span aria-hidden="true">◐</span> {t('Dark mode')}</button>
     </header>
     <main id="main"><slot /></main>
-    <footer class="wrap footer"><a href={localPath('/', locale)} class="footer-name">{t('Labani Jangi')}</a><span>{t('Nadia, West Bengal')}</span><a href={instagram} data-umami-event="instagram-click">{t('Instagram')} ↗</a><a href="#main">{t('Back to top')} ↑</a></footer>
+    <footer class="wrap footer"><a href={localPath('/', locale)} class="footer-name">{t('Labani Jangi')}</a><span>{t('Nadia, West Bengal')}</span><a href={instagram} data-umami-event="instagram-click">{t('Instagram')} ↗</a><a href={localPath('/privacy/', locale)}>{t('Privacy')}</a><a href={localPath('/terms/', locale)}>{t('Terms')}</a><a href="#main">{t('Back to top')} ↑</a></footer>
   <script>
       document.querySelector<HTMLAnchorElement>('[data-language-switch]')?.addEventListener('click', function () {
         const target = new URL(this.href);
