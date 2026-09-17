@@ -111,3 +111,11 @@ test('the political and Palestine collections publish every reviewed preview', a
   await expect(page.locator('html')).toHaveAttribute('lang', 'bn');
   await expect(page.locator('#palestine .archive-art-card')).toHaveCount(26);
 });
+
+test('the flag hero uses a static banner for reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await expect(page.locator('.flag-layer')).toHaveCSS('clip-path', 'none');
+  await expect(page.locator('.artwork-layer img')).toHaveCount(3);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});

@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import LandingStory from './LandingStory.astro';
 import WestBengalMap from './WestBengalMap.astro';
 import { translator, localPath, type Locale, type TranslationKey } from '../i18n';
 interface Props { locale: Locale; }
@@ -15,15 +14,66 @@ const routes = [
 ] as const satisfies ReadonlyArray<readonly [TranslationKey, string, TranslationKey]>;
 ---
 <Layout locale={locale}>
-  <section class="landing-title wrap" aria-labelledby="hero-title">
-    <div class="eyebrow hero-meta"><span>{t('Artist · Researcher · Cultural practitioner')}</span><span>{t('West Bengal, India')}</span></div>
-    <h1 id="hero-title">{t('Labani')}<br/><span>{t('Jangi')}<span class="period">.</span></span></h1>
-    <p>{t('My art, lived experience')}<br/>{t('and the language of resistance.')}</p>
+  <section class="flag-hero" data-flag-hero aria-labelledby="hero-title">
+    <div class="flag-hero-stage">
+      <div class="artwork-layer">
+        <img class="artwork-one" src="/media/img-0005.jpg" alt={t('An illustration of a woman in a red forest, made for a women’s health series.')} fetchpriority="high" />
+        <img src="/media/img-0007.jpg" alt={t('An illustration of Bilkis Bano with scales of justice.')} />
+        <img src="/media/img-0017.jpg" alt={t('An illustration of farmers, barricades and kites.')} />
+      </div>
+      <div class="flag-layer">
+        <svg class="flag-emblem" viewBox="0 0 300 180" aria-hidden="true">
+          <path d="M90 34l8 22 24 1-19 15 7 23-20-14-20 14 7-23-19-15 24-1z" />
+          <path d="M157 69l7 19 21 1-17 13 6 20-17-12-17 12 6-20-17-13 21-1z" />
+          <path d="M225 41l6 17 19 1-15 12 5 18-15-11-16 11 6-18-16-12 20-1z" />
+        </svg>
+        <div class="flag-copy wrap">
+          <div class="eyebrow hero-meta"><span>{t('Artist · Researcher · Cultural practitioner')}</span><span>{t('West Bengal, India')}</span></div>
+          <h1 id="hero-title">{t('Labani')}<br/><span>{t('Jangi')}<span class="period">.</span></span></h1>
+          <p>{t('My art, lived experience')}<br/>{t('and the language of resistance.')}</p>
+        </div>
+        <span class="flag-roll" aria-hidden="true"></span>
+      </div>
+    </div>
   </section>
-  <LandingStory locale={locale} />
   <WestBengalMap locale={locale} />
   <section class="wrap section landing-routes" aria-label={t('Explore the website')}>
     <span class="eyebrow">{t('Explore')}</span>
     <div class="route-list">{routes.map(([label, path, note], index) => <a href={localPath(path, locale)} class="route-card"><span>{String(index + 1).padStart(2, '0')}</span><div><h2>{t(label)}</h2><p>{t(note)}</p></div><b aria-hidden="true">→</b></a>)}</div>
   </section>
 </Layout>
+<script>
+  const hero = document.querySelector<HTMLElement>('[data-flag-hero]');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  if (hero && !reducedMotion.matches) {
+    if (CSS.supports('animation-timeline: view()')) {
+      hero.dataset.flagMotion = 'native';
+    } else {
+      hero.dataset.flagMotion = 'fallback';
+      let active = false;
+      let frame = 0;
+      let start = 0;
+      let range = 1;
+      const measure = () => {
+        start = hero.offsetTop;
+        range = Math.max(1, hero.offsetHeight - innerHeight);
+      };
+      const render = () => {
+        frame = 0;
+        if (!active) return;
+        const progress = Math.min(1, Math.max(0, (scrollY - start) / range));
+        hero.style.setProperty('--flag-unroll', String(progress));
+      };
+      const update = () => { if (!frame) frame = requestAnimationFrame(render); };
+      const observer = new IntersectionObserver(([entry]) => {
+        active = entry.isIntersecting;
+        if (active) { measure(); update(); }
+      }, { threshold: 0 });
+      observer.observe(hero);
+      addEventListener('resize', () => { measure(); update(); });
+      addEventListener('scroll', update, { passive: true });
+      measure();
+      update();
+    }
+  }
+</script>
