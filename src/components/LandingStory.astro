@@ -1,0 +1,50 @@
+---
+import { translator, type Locale } from '../i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = translator(locale);
+const scenes = [
+  { image: '/media/img-0005.jpg', eyebrow: 'From life.', title: 'I begin with what is close.', copy: 'Bodies, care and the small acts that keep us alive.' },
+  { image: '/media/img-0007.jpg', eyebrow: 'Towards justice.', title: 'I make images against forgetting.', copy: 'Memory is political when it refuses silence.' },
+  { image: '/media/img-0017.jpg', eyebrow: 'With people.', title: 'I follow the movement of resistance.', copy: 'Land, labour and collective imagination shape my practice.' },
+] as const;
+---
+<section class="landing-story" data-landing-story aria-label={t('A visual introduction to my practice')}>
+  <div class="landing-story-stage">
+    {scenes.map((scene, index) => <figure class="landing-scene" data-story-scene data-scene-index={index} aria-hidden={index !== 0}>
+      <img src={scene.image} alt="" fetchpriority={index === 0 ? 'high' : 'auto'} />
+      <div class="landing-scene-wash"></div>
+      <figcaption class="wrap landing-scene-copy"><span class="eyebrow">{t(scene.eyebrow)}</span><h2>{t(scene.title)}</h2><p>{t(scene.copy)}</p></figcaption>
+    </figure>)}
+    <div class="landing-story-mark wrap" aria-hidden="true"><span>01</span><i></i><span>03</span></div>
+  </div>
+  <div class="landing-story-steps" aria-hidden="true">{scenes.map((_, index) => <div data-story-step={index}></div>)}</div>
+</section>
+<script>
+  const story = document.querySelector<HTMLElement>('[data-landing-story]');
+  if (story) {
+    const scenes = Array.from(story.querySelectorAll<HTMLElement>('[data-story-scene]'));
+    const steps = Array.from(story.querySelectorAll<HTMLElement>('[data-story-step]'));
+    let frame = 0;
+    const clamp = (value: number) => Math.min(1, Math.max(0, value));
+    const render = () => {
+      frame = 0;
+      const bounds = story.getBoundingClientRect();
+      const range = Math.max(1, bounds.height - innerHeight);
+      const progress = clamp(-bounds.top / range) * (scenes.length - 1);
+      scenes.forEach((scene, index) => {
+        const distance = Math.abs(progress - index);
+        const opacity = clamp(1 - distance);
+        const shift = (progress - index) * -5;
+        scene.style.opacity = String(opacity);
+        scene.style.transform = `scale(${1 + distance * .07}) translateY(${shift}%)`;
+        scene.setAttribute('aria-hidden', String(opacity < .55));
+      });
+      steps.forEach((step, index) => step.classList.toggle('is-current', Math.round(progress) === index));
+    };
+    const update = () => { if (!frame) frame = requestAnimationFrame(render); };
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    render();
+  }
+</script>
