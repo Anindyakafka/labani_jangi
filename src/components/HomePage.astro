@@ -8,6 +8,7 @@ const t = translator(locale);
 const routes = [
   ['Practice', '/practice/', 'From life, towards resistance.'],
   ['Works', '/works/', 'Selected work'],
+  ['Artworks', '/artworks/', 'Political work and Palestine.'],
   ['Archive', '/archive/', 'Reading & conversations'],
   ['About', '/about/', 'About me'],
 ] as const satisfies ReadonlyArray<readonly [TranslationKey, string, TranslationKey]>;
@@ -17,6 +18,11 @@ const routes = [
     <div class="eyebrow hero-meta"><span>{t('Artist · Researcher · Cultural practitioner')}</span><span>{t('West Bengal, India')}</span></div>
     <h1 id="hero-title">{t('Labani')}<br/><span>{t('Jangi')}<span class="period">.</span></span></h1>
     <div class="hero-bottom"><p>{t('My art, lived experience')}<br/>{t('and the language of resistance.')}</p><a class="round-link" href="#routes" aria-label={t('Explore my practice')}>↓</a><span class="vertical-note" aria-hidden="true">{t('My space for art & thought')}</span></div>
+  </section>
+  <section class="wrap landing-art" aria-label={t('Featured artworks')}>
+    <img src="/media/img-0005.jpg" alt={t('An illustration of a woman in a red forest, made for a women’s health series.')} />
+    <img src="/media/img-0007.jpg" alt={t('An illustration of Bilkis Bano with scales of justice.')} />
+    <img src="/media/img-0017.jpg" alt={t('An illustration of farmers, barricades and kites.')} />
   </section>
   <WestBengalMap locale={locale} />
   <section id="routes" class="wrap section landing-routes" aria-label={t('Explore the website')}>

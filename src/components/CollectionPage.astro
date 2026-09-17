@@ -1,0 +1,20 @@
+---
+import catalogue from '../../media-library/catalogue.json';
+import Layout from '../layouts/Layout.astro';
+import { translator, type Locale } from '../i18n';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = translator(locale);
+const movedToPolitical = new Set(['img-0004', 'img-0010', 'img-0012', 'img-0020', 'img-0079', 'img-0081', 'img-0090', 'img-0091']);
+const works = catalogue.filter(work => work.category === 'political' || work.category === 'palestine' || movedToPolitical.has(work.id))
+  .map(work => ({ ...work, category: work.category === 'palestine' ? 'palestine' : 'political' }));
+const politicalWorks = works.filter(work => work.category === 'political');
+const palestineWorks = works.filter(work => work.category === 'palestine');
+const description = (work: typeof works[number]) => locale === 'bn' ? `${t('Artwork from my archive')} ${work.id.replace('img-', '')}` : work.observation;
+---
+<Layout locale={locale} title={t('Artworks — Labani Jangi')} description={t('A browsable selection of political and Palestine artworks from my archive.')}>
+  <section class="wrap page-hero"><span class="eyebrow">{t('Archive of images')}</span><h1>{t('Political work and Palestine.')}</h1><p class="large-copy">{t('A living visual archive of {count} reviewed images. Open any image to view it more closely.').replace('{count}', works.length.toLocaleString(locale))}</p></section>
+  <nav class="wrap collection-nav" aria-label={t('Artwork sections')}><a href="#political">{t('Political work')} <span>{politicalWorks.length.toLocaleString(locale)}</span></a><a href="#palestine">{t('Palestine')} <span>{palestineWorks.length.toLocaleString(locale)}</span></a></nav>
+  <section id="political" class="wrap section full-collection"><span class="eyebrow">{t('Political work')}</span><div class="archive-art-grid">{politicalWorks.map(work => <a href={`/artworks/${work.id}.jpg`} class="archive-art-card" target="_blank"><img src={`/artworks/${work.id}.jpg`} alt={description(work)} loading="lazy" /><span>{locale === 'bn' ? t('View artwork') : work.observation}</span></a>)}</div></section>
+  <section id="palestine" class="wrap section full-collection"><span class="eyebrow">{t('Palestine')}</span><div class="archive-art-grid">{palestineWorks.map(work => <a href={`/artworks/${work.id}.jpg`} class="archive-art-card" target="_blank"><img src={`/artworks/${work.id}.jpg`} alt={description(work)} loading="lazy" /><span>{locale === 'bn' ? t('View artwork') : work.observation}</span></a>)}</div></section>
+</Layout>

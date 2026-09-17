@@ -101,3 +101,13 @@ test('sharing and legal pages have complete localized metadata', async ({ page }
   await expect(page.locator('html')).toHaveAttribute('lang', 'bn');
   await expect(page.locator('main')).toContainText('ব্যবহারের শর্তাবলি');
 });
+
+test('the political and Palestine collections publish every reviewed preview', async ({ page }) => {
+  await page.goto('/artworks/');
+  await expect(page.locator('#political .archive-art-card')).toHaveCount(329);
+  await expect(page.locator('#palestine .archive-art-card')).toHaveCount(26);
+  await expect(page.locator('#political img').first()).toHaveAttribute('loading', 'lazy');
+  await page.goto('/bn/artworks/');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'bn');
+  await expect(page.locator('#palestine .archive-art-card')).toHaveCount(26);
+});
