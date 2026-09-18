@@ -6,7 +6,7 @@ import { instagram } from '../data/site';
 interface Props { locale?: Locale; title?: string; description?: string; ogImage?: string; }
 const { locale = 'en' } = Astro.props;
 const t = translator(locale);
-const { title = t('Labani Jangi — Artist & cultural practitioner'), description = t('I’m Labani Jangi, an artist, researcher and cultural practitioner from Nadia, West Bengal. Explore my work and practice.'), ogImage = '/social-card.png' } = Astro.props;
+const { title = t('Labani Jangi : Artist & cultural practitioner'), description = t('I’m Labani Jangi, an artist, researcher and cultural practitioner from Nadia, West Bengal. Explore my work and practice.'), ogImage = '/social-card.png' } = Astro.props;
 const socialImage = new URL(ogImage, Astro.site);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const is404 = Astro.url.pathname.includes('404');
@@ -23,7 +23,7 @@ const alternate = locale === 'en' ? banglaPath : basePath;
     <link rel="manifest" href="/site.webmanifest" /><link rel="apple-touch-icon" href="/favicon.svg" />
     <meta property="og:title" content={title} /><meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} /><meta property="og:type" content="website" />
-    <meta property="og:image" content={socialImage} /><meta property="og:image:alt" content={t('Labani Jangi — Artist & cultural practitioner')} />
+    <meta property="og:image" content={socialImage} /><meta property="og:image:alt" content={t('Labani Jangi : Artist & cultural practitioner')} />
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={socialImage} />
     <link rel="alternate" hreflang="en" href={new URL(basePath, Astro.site)} />
     <link rel="alternate" hreflang="bn" href={new URL(banglaPath, Astro.site)} />

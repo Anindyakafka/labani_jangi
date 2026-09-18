@@ -9,7 +9,7 @@ const t = translator(locale);
 const works = artworksFor(category);
 const labels = { political: t('Political work'), palestine: t('Palestine'), others: t('Other work') };
 ---
-<Layout locale={locale} title={`${labels[category]} — ${t('Labani Jangi')}`} description={t('A browsable selection of political and Palestine artworks from my archive.')}>
+<Layout locale={locale} title={`${labels[category]} : ${t('Labani Jangi')}`} description={t('A browsable selection of political and Palestine artworks from my archive.')}>
   <section class="wrap page-hero collection-page-hero"><a class="back-link" href={localPath('/artworks/', locale)}>← {t('All artworks')}</a><span class="eyebrow">{t('Archive of images')}</span><h1>{labels[category]}.</h1><p class="large-copy">{t('Open any image to view it more closely.')} {works.length.toLocaleString(locale)} {t('works')}.</p></section>
   <section class="wrap section full-collection"><ArchiveGallery locale={locale} works={works} /></section>
 </Layout>

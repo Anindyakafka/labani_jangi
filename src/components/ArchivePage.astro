@@ -8,7 +8,7 @@ const locale = entry.data.language;
 const t = translator(locale);
 const { Content } = await render(entry);
 ---
-<Layout locale={locale} title={`${entry.data.title} — ${t('Labani Jangi')}`} description={entry.data.description}>
+<Layout locale={locale} title={`${entry.data.title} : ${t('Labani Jangi')}`} description={entry.data.description}>
   <article class="wrap article" lang={locale}>
     <a class="text-link" href={localPath('/#archive', locale)}>← {t('Back to the archive')}</a>
     <div class="eyebrow article-meta">{t(entry.data.kind)} / <time datetime={entry.data.date.toISOString()}>{entry.data.date.toLocaleDateString(locale === 'bn' ? 'bn-IN' : 'en-GB', {day:'numeric',month:'long',year:'numeric',timeZone:'UTC'})}</time></div>

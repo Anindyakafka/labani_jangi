@@ -5,7 +5,7 @@ interface Props { locale: Locale; kind: 'privacy' | 'terms'; }
 const { locale, kind } = Astro.props;
 const t = translator(locale);
 const privacy = kind === 'privacy';
-const title = privacy ? t('Privacy policy — Labani Jangi') : t('Terms of use — Labani Jangi');
+const title = privacy ? t('Privacy policy : Labani Jangi') : t('Terms of use : Labani Jangi');
 const description = privacy ? t('How this website uses privacy-friendly analytics.') : t('Terms for using the Labani Jangi website.');
 ---
 <Layout locale={locale} title={title} description={description}>

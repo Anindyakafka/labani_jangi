@@ -11,7 +11,7 @@ const collections = [
   { slug: 'others', label: t('Other work'), works: artworksFor('others') },
 ];
 ---
-<Layout locale={locale} title={t('Artworks — Labani Jangi')} description={t('A browsable selection of political and Palestine artworks from my archive.')}>
+<Layout locale={locale} title={t('Artworks : Labani Jangi')} description={t('A browsable selection of political and Palestine artworks from my archive.')}>
   <section class="wrap page-hero"><span class="eyebrow">{t('Archive of images')}</span><h1>{t('Artwork archive.')}</h1><p class="large-copy">{t('A living visual archive of {count} reviewed images. Open any image to view it more closely.').replace('{count}', collections.reduce((total, collection) => total + collection.works.length, 0).toLocaleString(locale))}</p></section>
   <section class="wrap collection-index" aria-label={t('Artwork sections')}>
     {collections.map((collection) => <a class="collection-index-card" href={localPath(`/artworks/${collection.slug}/`, locale)}><div class="collection-index-images">{collection.works.slice(0, 3).map((work) => <img src={`/artworks/${work.id}.jpg`} alt="" loading="lazy" />)}</div><span class="eyebrow">{collection.works.length.toLocaleString(locale)} {t('works')}</span><h2>{collection.label}</h2><p>{t('Open collection')} <b aria-hidden="true">→</b></p></a>)}

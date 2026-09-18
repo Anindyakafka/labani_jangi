@@ -93,7 +93,7 @@ test('sitemap and missing page', async ({ page, request }) => {
 
 test('sharing and legal pages have complete localized metadata', async ({ page }) => {
   await page.goto('/privacy/');
-  await expect(page).toHaveTitle('Privacy policy — Labani Jangi');
+  await expect(page).toHaveTitle('Privacy policy : Labani Jangi');
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://labanijangi.com/social-card.png');
   await expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/site.webmanifest');
   await expect(page.locator('main')).toContainText('Umami');
