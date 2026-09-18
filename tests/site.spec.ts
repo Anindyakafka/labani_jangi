@@ -103,13 +103,17 @@ test('sharing and legal pages have complete localized metadata', async ({ page }
 });
 
 test('the political and Palestine collections publish every reviewed preview', async ({ page }) => {
-  await page.goto('/artworks/');
-  await expect(page.locator('#political .archive-art-card')).toHaveCount(329);
-  await expect(page.locator('#palestine .archive-art-card')).toHaveCount(26);
-  await expect(page.locator('#political img').first()).toHaveAttribute('loading', 'lazy');
-  await page.goto('/bn/artworks/');
+  await page.goto('/artworks/political/');
+  await expect(page.locator('.archive-art-card')).toHaveCount(329);
+  await expect(page.locator('.archive-art-card img').first()).toHaveAttribute('loading', 'lazy');
+  await page.locator('.archive-art-card').first().click();
+  await expect(page.locator('[data-artwork-dialog]')).toBeVisible();
+  await page.getByRole('button', {name:'Close artwork viewer'}).click();
+  await page.goto('/artworks/palestine/');
+  await expect(page.locator('.archive-art-card')).toHaveCount(26);
+  await page.goto('/bn/artworks/others/');
   await expect(page.locator('html')).toHaveAttribute('lang', 'bn');
-  await expect(page.locator('#palestine .archive-art-card')).toHaveCount(26);
+  await expect(page.locator('.archive-art-card')).toHaveCount(194);
 });
 
 test('the flag hero uses a static banner for reduced motion', async ({ page }) => {

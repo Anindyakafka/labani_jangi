@@ -1,0 +1,25 @@
+---
+import type { ArchiveArtwork } from '../data/artwork-archive';
+import { translator, type Locale } from '../i18n';
+interface Props { locale: Locale; works: ArchiveArtwork[]; }
+const { locale, works } = Astro.props;
+const t = translator(locale);
+const description = (work: ArchiveArtwork) => locale === 'bn' ? `${t('Artwork from my archive')} ${work.id.replace('img-', '')}` : work.observation;
+---
+<div class="archive-art-grid" data-artwork-gallery>
+  {works.map((work) => <button type="button" class="archive-art-card" data-artwork-trigger data-artwork-src={`/artworks/${work.id}.jpg`} data-artwork-alt={description(work)} data-artwork-caption={locale === 'bn' ? t('View artwork') : work.observation} aria-label={`${t('View artwork')}: ${description(work)}`}>
+    <img src={`/artworks/${work.id}.jpg`} alt={description(work)} loading="lazy" /><span>{locale === 'bn' ? t('View artwork') : work.observation}</span>
+  </button>)}
+</div>
+<dialog class="artwork-viewer" data-artwork-dialog aria-label={t('Artwork viewer')}><div class="artwork-viewer-panel"><button type="button" class="artwork-viewer-close" data-artwork-close aria-label={t('Close artwork viewer')}>×</button><img data-artwork-viewer-image src="" alt="" /><p data-artwork-viewer-caption></p></div></dialog>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-artwork-gallery]').forEach((gallery) => {
+    const dialog = gallery.parentElement?.querySelector<HTMLDialogElement>('[data-artwork-dialog]');
+    const image = dialog?.querySelector<HTMLImageElement>('[data-artwork-viewer-image]');
+    const caption = dialog?.querySelector<HTMLElement>('[data-artwork-viewer-caption]');
+    if (!dialog || !image || !caption) return;
+    gallery.addEventListener('click', (event) => { const trigger = (event.target as Element).closest<HTMLButtonElement>('[data-artwork-trigger]'); if (!trigger) return; image.src = trigger.dataset.artworkSrc ?? ''; image.alt = trigger.dataset.artworkAlt ?? ''; caption.textContent = trigger.dataset.artworkCaption ?? ''; dialog.showModal(); });
+    dialog.querySelector('[data-artwork-close]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  });
+</script>
