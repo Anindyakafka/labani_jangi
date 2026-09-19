@@ -73,7 +73,7 @@ const alternate = locale === 'en' ? banglaPath : basePath;
     <header class="site-header wrap">
       <a class="wordmark" href={localPath('/', locale)} aria-label={t('Labani Jangi, home')}>{locale === 'bn' ? 'লজ' : 'lj'}<span>.</span></a>
       <nav aria-label={t('Main navigation')}>
-        <a href={localPath('/practice/', locale)}>{t('Practice')}</a><a href={localPath('/works/', locale)}>{t('Works')}</a><a href={localPath('/archive/', locale)}>{t('Archive')}</a><a href={localPath('/about/', locale)}>{t('About')}</a><a href={localPath('/contact/', locale)}>{t('Contact')} <span aria-hidden="true">↗</span></a>
+        <a href={localPath('/practice/', locale)}>{t('Practice')}</a><a href={localPath('/works/', locale)}>{t('Works')}</a><a href={localPath('/artworks/', locale)}>{t('Artworks')}</a><a href={localPath('/archive/', locale)}>{t('Reading & conversations')}</a><a href={localPath('/about/', locale)}>{t('About')}</a><a href={localPath('/contact/', locale)}>{t('Contact')} <span aria-hidden="true">↗</span></a>
       </nav>
       <a class="language-toggle" href={alternate} lang={locale === 'en' ? 'bn' : 'en'} hreflang={locale === 'en' ? 'bn' : 'en'} aria-label={locale === 'en' ? 'বাংলায় পড়ুন' : 'Read in English'} data-language-switch>{locale === 'en' ? 'বাংলা' : 'English'}</a>
       <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" hidden><span aria-hidden="true">◐</span> {t('Dark mode')}</button>
