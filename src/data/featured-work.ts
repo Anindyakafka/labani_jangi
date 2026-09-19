@@ -20,5 +20,5 @@ export const featuredWork: Work[] = [
   { image: '/media/img-0089.jpg', section: 'palestine', title: 'Making Death and Life in Palestine', alt: 'The cover of Making Death and Life in Palestine: Social Reproduction in Settler Colonialism.', note: 'Cover art; publication credits remain with the book.' },
   { image: '/media/img-0090.jpg', section: 'publications', title: 'Sultana’s Sisters', alt: 'The cover of Sultana’s Sisters: Genre, Gender, and Genealogy in South Asian Muslim Women’s Fiction.', note: 'Cover art; publication credits remain with the book.' },
   { image: '/media/img-0120.jpg', section: 'publications', title: 'River valley', alt: 'A painted river valley under a crescent moon.' },
-  { image: '/media/img-0517.jpg', section: 'publications', title: 'Bibir Darga', alt: 'Documentation photograph from the Bibir Darga exhibition discussion.', note: 'Exhibition documentation; photographer credit to be confirmed.' },
+  { image: '/media/img-0517.jpg', section: 'publications', title: 'Bibir Darga', alt: 'Documentation photograph from the Bibir Darga exhibition discussion.', note: 'Exhibition documentation.' },
 ];
