@@ -3,7 +3,6 @@ import { translator, localPath, type Locale } from '../i18n';
 import '../styles/global.css';
 import '@fontsource/noto-serif-bengali/bengali-400.css';
 import { instagram } from '../data/site';
-import RiverSpine from '../components/RiverSpine.astro';
 interface Props { locale?: Locale; title?: string; description?: string; ogImage?: string; }
 const { locale = 'en' } = Astro.props;
 const t = translator(locale);
@@ -79,7 +78,7 @@ const alternate = locale === 'en' ? banglaPath : basePath;
       <a class="language-toggle" href={alternate} lang={locale === 'en' ? 'bn' : 'en'} hreflang={locale === 'en' ? 'bn' : 'en'} aria-label={locale === 'en' ? 'বাংলায় পড়ুন' : 'Read in English'} data-language-switch>{locale === 'en' ? 'বাংলা' : 'English'}</a>
       <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" hidden><span aria-hidden="true">◐</span> {t('Dark mode')}</button>
     </header>
-    <main id="main"><RiverSpine /><slot /></main>
+    <main id="main"><slot /></main>
     <footer class="wrap footer"><a href={localPath('/', locale)} class="footer-name">{t('Labani Jangi')}</a><span>{t('Nadia, West Bengal')}</span><a href={instagram} data-umami-event="instagram-click">{t('Instagram')} ↗</a><a href={localPath('/privacy/', locale)}>{t('Privacy')}</a><a href={localPath('/terms/', locale)}>{t('Terms')}</a><a href="#main">{t('Back to top')} ↑</a></footer>
   <script>
       document.querySelector<HTMLAnchorElement>('[data-language-switch]')?.addEventListener('click', function () {
