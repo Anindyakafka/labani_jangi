@@ -43,6 +43,7 @@ html:lang(bn) .prose{line-height:2}
 /* Dark mode keeps red accents and textured panels with readable light ink. */
 :root{color-scheme:light}
 :root[data-theme="dark"]{color-scheme:dark;--paper:#181515;--ink:#f5eded;--red:#ef8585;--muted:#dabbbb;--line:rgba(239,133,133,.3)}
+:root[data-theme="dark"] body{background-color:#121010;background-image:url('/dust.svg');background-blend-mode:screen}:root[data-theme="dark"] .site-header{background:#171010;border-color:#5b3636}:root[data-theme="dark"] .flag-hero{background:#3c080b}:root[data-theme="dark"] .flag-layer{background:#5d0d12}:root[data-theme="dark"] .flag-roll{background:#260609}:root[data-theme="dark"] .flag-copy,:root[data-theme="dark"] .flag-copy .hero-meta{color:#f1e6d4}:root[data-theme="dark"] .flag-emblem{fill:#d9c3a4;opacity:.82}:root[data-theme="dark"] .artwork-layer{background:#100708}:root[data-theme="dark"] .artwork-layer img{filter:saturate(.72) contrast(1.08) brightness(.64)}:root[data-theme="dark"] main::after{background:#d9c3a4;opacity:.16}
 :root[data-theme="dark"] .practice,:root[data-theme="dark"] .about{background:#651919;color:#fafafa}
 :root[data-theme="dark"] body::before{mix-blend-mode:soft-light;opacity:.12}
 :root[data-theme="dark"] .practice ::selection,:root[data-theme="dark"] .about ::selection{background:#fafafa;color:#651919}
