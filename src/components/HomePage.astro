@@ -13,19 +13,18 @@ const routes = [
   ['About', '/about/', 'About me'],
 ] as const satisfies ReadonlyArray<readonly [TranslationKey, string, TranslationKey]>;
 const chapters = [
-  { eyebrow: 'I begin with what is close.', title: 'Bodies, care and the small acts that keep us alive.', image: '/media/img-0005.jpg', districts: ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar', 'uttar-dinajpur'] },
-  { eyebrow: 'I make images against forgetting.', title: 'Memory is political when it refuses silence.', image: '/media/img-0007.jpg', districts: ['malda', 'dakshin-dinajpur', 'murshidabad', 'nadia', 'north-24-parganas', 'kolkata'] },
-  { eyebrow: 'I follow the movement of resistance.', title: 'Land, labour and collective imagination shape my practice.', image: '/media/img-0017.jpg', districts: ['birbhum', 'bankura', 'purulia', 'paschim-bardhaman', 'purba-bardhaman', 'hooghly', 'howrah', 'south-24-parganas', 'jhargram', 'paschim-medinipur', 'purba-medinipur'] },
-] as const satisfies ReadonlyArray<{ eyebrow: TranslationKey; title: TranslationKey; image: string; districts: readonly string[] }>;
+  { title: 'My roots are in Nadia, West Bengal.', copy: 'My life and practice are rooted here.', image: '/media/img-0005.jpg', districts: ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar'] },
+  { title: 'I begin with what is close.', copy: 'I bring drawing into conversation with reporting, poetry and the everyday knowledge of rural communities.', image: '/media/img-0017.jpg', districts: ['uttar-dinajpur', 'dakshin-dinajpur', 'malda', 'murshidabad'] },
+  { title: 'Bibir Darga', copy: 'In this exhibition, I followed the memory of a shrine, rivers, trees and the places remade by development.', image: '/media/img-0007.jpg', districts: ['nadia', 'north-24-parganas', 'kolkata', 'south-24-parganas'] },
+  { title: 'Publication work', copy: 'I make cover images that let a book’s questions meet a reader before its first page.', image: '/media/img-0066.jpg', districts: ['howrah', 'hooghly', 'purba-bardhaman', 'paschim-bardhaman', 'birbhum'] },
+  { title: 'Collective practice', copy: 'My work with JINN, Panjeri Artists’ Union and Khandera Art Space is made through shared labour and conversation.', image: '/media/img-0014.jpg', districts: ['bankura', 'purulia', 'jhargram', 'paschim-medinipur', 'purba-medinipur'] },
+] as const satisfies ReadonlyArray<{ title: TranslationKey; copy: TranslationKey; image: string; districts: readonly string[] }>;
 ---
 <Layout locale={locale}>
   <section class="map-journey" data-map-journey aria-labelledby="hero-title">
     <div class="map-journey-stage">
-      <div class="map-journey-art" aria-hidden="true">
-        {chapters.map((chapter, index) => <img src={chapter.image} alt="" data-journey-image={index} />)}
-      </div>
       <div class="map-journey-flag" aria-hidden="true"><svg viewBox="0 0 300 180"><path d="M90 34l8 22 24 1-19 15 7 23-20-14-20 14 7-23-19-15 24-1z" /><path d="M157 69l7 19 21 1-17 13 6 20-17-12-17 12 6-20-17-13 21-1z" /><path d="M225 41l6 17 19 1-15 12 5 18-15-11-16 11 6-18-16-12 20-1z" /></svg></div>
-      <div class="map-journey-opening wrap" data-journey-opening>
+      <div class="map-journey-opening wrap">
         <div class="map-journey-name" data-journey-name>
           <div class="eyebrow"><span>{t('Artist · Researcher · Cultural practitioner')}</span><span>{t('West Bengal, India')}</span></div>
           <h1 id="hero-title">{t('Labani')}<br/><span>{t('Jangi')}<span class="period">.</span></span></h1>
@@ -34,10 +33,9 @@ const chapters = [
         <div class="map-journey-map-wrap"><WestBengalMap locale={locale} /></div>
       </div>
       <div class="map-journey-chapters wrap" aria-live="polite">
-        {chapters.map((chapter, index) => <article class:list={['map-journey-chapter', { 'is-active': index === 0 }]} data-journey-chapter={index}>
-          <span class="eyebrow">{t(chapter.eyebrow)}</span>
-          <h2>{t(chapter.title)}</h2>
-          <span class="map-journey-plate">{String(index + 1).padStart(2, '0')} / 03</span>
+        {chapters.map((chapter, index) => <article class="map-journey-chapter" data-journey-chapter={index}>
+          <img src={chapter.image} alt="" aria-hidden="true" loading="lazy" />
+          <div class="map-journey-card-copy"><span class="map-journey-plate">{String(index + 1).padStart(2, '0')} / 05</span><h2>{t(chapter.title)}</h2><p>{t(chapter.copy)}</p></div>
         </article>)}
       </div>
       <div class="map-journey-progress" aria-hidden="true"><i></i></div>
@@ -50,7 +48,6 @@ const chapters = [
 </Layout>
 <script>
   import { animate, stagger } from 'animejs';
-
   const journey = document.querySelector<HTMLElement>('[data-map-journey]');
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
   if (journey && !reduceMotion.matches) {
@@ -58,13 +55,14 @@ const chapters = [
     const districts = Array.from(journey.querySelectorAll<SVGPathElement>('.journey-district'));
     const opening = journey.querySelector<HTMLElement>('[data-journey-name]');
     const flag = journey.querySelector<HTMLElement>('.map-journey-flag');
-    const images = Array.from(journey.querySelectorAll<HTMLImageElement>('[data-journey-image]'));
-    const chapters = Array.from(journey.querySelectorAll<HTMLElement>('[data-journey-chapter]'));
+    const cards = Array.from(journey.querySelectorAll<HTMLElement>('[data-journey-chapter]'));
     const progressLine = journey.querySelector<HTMLElement>('.map-journey-progress i');
     const chapterDistricts = [
-      ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar', 'uttar-dinajpur'],
-      ['malda', 'dakshin-dinajpur', 'murshidabad', 'nadia', 'north-24-parganas', 'kolkata'],
-      ['birbhum', 'bankura', 'purulia', 'paschim-bardhaman', 'purba-bardhaman', 'hooghly', 'howrah', 'south-24-parganas', 'jhargram', 'paschim-medinipur', 'purba-medinipur'],
+      ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar'],
+      ['uttar-dinajpur', 'dakshin-dinajpur', 'malda', 'murshidabad'],
+      ['nadia', 'north-24-parganas', 'kolkata', 'south-24-parganas'],
+      ['howrah', 'hooghly', 'purba-bardhaman', 'paschim-bardhaman', 'birbhum'],
+      ['bankura', 'purulia', 'jhargram', 'paschim-medinipur', 'purba-medinipur'],
     ];
     let frame = 0;
     let start = 0;
@@ -79,37 +77,35 @@ const chapters = [
       if (!map) return;
       vectors = districts.map((district, index) => {
         const box = district.getBoundingClientRect();
-        const originX = box.left + box.width / 2;
-        const originY = box.top + box.height / 2;
         const angle = (index / districts.length) * Math.PI * 2 - Math.PI / 2;
-        const targetX = innerWidth * .54 + Math.cos(angle) * innerWidth * .36;
-        const targetY = innerHeight * .51 + Math.sin(angle) * innerHeight * .37;
-        return { x: targetX - originX, y: targetY - originY, rotate: (index % 2 ? 1 : -1) * (16 + (index % 5) * 5) };
+        const targetX = innerWidth * .5 + Math.cos(angle) * innerWidth * .38;
+        const targetY = innerHeight * .5 + Math.sin(angle) * innerHeight * .39;
+        return { x: targetX - (box.left + box.width / 2), y: targetY - (box.top + box.height / 2), rotate: (index % 2 ? 1 : -1) * (10 + (index % 5) * 4) };
       });
     };
     const render = () => {
       frame = 0;
       const progress = clamp((scrollY - start) / range);
-      const scatter = ease(clamp((progress - .26) / .28));
-      const chapterProgress = clamp((progress - .58) / .42);
-      const chapterIndex = Math.min(2, Math.floor(chapterProgress * 3));
+      const scatter = ease(clamp((progress - .24) / .28));
+      const chapterProgress = clamp((progress - .55) / .45);
+      const chapterIndex = Math.min(4, Math.floor(chapterProgress * 5));
       districts.forEach((district, index) => {
         const vector = vectors[index];
         if (!vector) return;
         const active = chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '');
         const compact = innerWidth <= 760;
-        const pulse = active ? (compact ? .72 : 1.12) : (compact ? .56 : .78);
-        const scale = (1 - scatter * .18) * (scatter > .02 ? pulse : 1);
+        const pulse = active ? (compact ? .8 : 1.25) : (compact ? .64 : .96);
+        const scale = (1 - scatter * .06) * (scatter > .02 ? pulse : 1);
         district.style.transform = `translate(${vector.x * scatter}px, ${vector.y * scatter}px) rotate(${vector.rotate * scatter}deg) scale(${scale})`;
         district.classList.toggle('is-story-active', scatter > .25 && active);
       });
       if (opening) opening.style.opacity = String(1 - ease(clamp((progress - .14) / .16)));
       if (flag) flag.style.opacity = String(1 - ease(clamp((progress - .14) / .18)));
-      images.forEach((image, index) => image.classList.toggle('is-visible', index === chapterIndex && progress > .58));
-      chapters.forEach((chapter, index) => chapter.classList.toggle('is-active', index === chapterIndex && progress > .58));
-      if (chapterIndex !== previousChapter && progress > .58) {
+      cards.forEach((card, index) => card.classList.toggle('is-active', index === chapterIndex && progress > .55));
+      if (chapterIndex !== previousChapter && progress > .55) {
         previousChapter = chapterIndex;
-        animate(districts.filter((district) => chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '')), { filter: ['brightness(1.5)', 'brightness(1)'], duration: 720, delay: stagger(35), ease: 'out(4)' });
+        animate(cards[chapterIndex], { opacity: [0, 1], translateY: [36, 0], rotate: [-1.5, 0], duration: 620, ease: 'out(4)' });
+        animate(districts.filter((district) => chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '')), { filter: ['brightness(1.45)', 'brightness(1)'], duration: 720, delay: stagger(35), ease: 'out(4)' });
       }
       if (progressLine) progressLine.style.transform = `scaleY(${progress})`;
     };
