@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export interface StoryCard {
   title: string;
@@ -13,24 +13,66 @@ export interface StoryCard {
 interface Props { cards: StoryCard[]; }
 
 export default function MapStoryCards({ cards }: Props) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [story, setStory] = useState({ visible: false, index: 0 });
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const reduceMotion = useReducedMotion();
-  const active = cards[activeIndex] ?? cards[0];
+  const current = useRef(story);
+  const target = useRef(story);
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const active = cards[story.index] ?? cards[0];
 
   useEffect(() => {
-    const change = (event: Event) => {
-      const index = (event as CustomEvent<{ index: number }>).detail?.index;
-      if (Number.isInteger(index) && index >= 0 && index < cards.length) setActiveIndex(index);
+    const commit = (next: { visible: boolean; index: number }) => {
+      current.current = next;
+      setStory(next);
     };
+    const scheduleAdvance = () => {
+      if (timer.current) clearTimeout(timer.current);
+      timer.current = setTimeout(() => {
+        timer.current = null;
+        if (current.current.index !== target.current.index) advance();
+      }, 2600);
+    };
+    const advance = () => {
+      if (!target.current.visible) {
+        commit({ ...current.current, visible: false });
+        return;
+      }
+      if (!current.current.visible) {
+        commit({ visible: true, index: 0 });
+        scheduleAdvance();
+      } else if (current.current.index !== target.current.index) {
+        commit({ visible: true, index: current.current.index + Math.sign(target.current.index - current.current.index) });
+        scheduleAdvance();
+      }
+    };
+    const change = (event: Event) => {
+      const detail = (event as CustomEvent<{ index: number; visible: boolean }>).detail;
+      if (!detail || !Number.isInteger(detail.index) || detail.index < 0 || detail.index >= cards.length) return;
+      target.current = detail;
+      if (!detail.visible) {
+        if (timer.current) clearTimeout(timer.current);
+        timer.current = null;
+        advance();
+      } else if (!timer.current) advance();
+    };
+    if (reduceMotion) {
+      commit({ visible: true, index: 0 });
+      return;
+    }
     window.addEventListener('map-story-change', change);
-    return () => window.removeEventListener('map-story-change', change);
-  }, [cards.length]);
+    const journey = document.querySelector<HTMLElement>('[data-map-journey]');
+    if (journey?.dataset.storyIndex) change(new CustomEvent('map-story-change', { detail: { index: Number(journey.dataset.storyIndex), visible: journey.dataset.storyVisible === 'true' } }));
+    return () => {
+      window.removeEventListener('map-story-change', change);
+      if (timer.current) clearTimeout(timer.current);
+    };
+  }, [cards.length, reduceMotion]);
 
   if (!active) return null;
   return <div className="map-story-card-stage" aria-live="polite">
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.a
+    <AnimatePresence mode="sync" initial={false}>
+      {story.visible && <motion.a
         key={active.href}
         href={active.href}
         className="map-story-flip-card"
@@ -49,7 +91,7 @@ export default function MapStoryCards({ cards }: Props) {
           <img src={active.image} alt="" aria-hidden="true" />
           <div className="map-story-card-copy"><span>{active.number} / 03</span><h2>{active.title}</h2><p>{active.copy}</p><b>{active.label}</b></div>
         </motion.div>
-      </motion.a>
+      </motion.a>}
     </AnimatePresence>
   </div>;
 }

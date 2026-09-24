@@ -60,6 +60,7 @@ const storyCards = chapters.map((chapter, index) => ({ title: t(chapter.title), 
     let start = 0;
     let range = 1;
     let previousChapter = -1;
+    let previousCardVisible = false;
     let vectors: { x: number; y: number; rotate: number }[] = [];
     const clamp = (value: number) => Math.min(1, Math.max(0, value));
     const ease = (value: number) => value * value * (3 - 2 * value);
@@ -70,10 +71,11 @@ const storyCards = chapters.map((chapter, index) => ({ title: t(chapter.title), 
       vectors = districts.map((district, index) => {
         const box = district.getBoundingClientRect();
         const angle = (index / districts.length) * Math.PI * 2 - Math.PI / 2;
-        const desiredX = innerWidth * .5 + Math.cos(angle) * innerWidth * .34;
-        const desiredY = innerHeight * .5 + Math.sin(angle) * innerHeight * .2;
-        const safeX = box.width * .7 + 32;
-        const safeY = box.height * .7 + 38;
+        const compact = innerWidth <= 760;
+        const desiredX = innerWidth * (compact ? .5 : .53) + Math.cos(angle) * innerWidth * (compact ? .45 : .39);
+        const desiredY = innerHeight * (compact ? .52 : .61) + Math.sin(angle) * innerHeight * (compact ? .4 : .36);
+        const safeX = box.width * .56 + 28;
+        const safeY = box.height * .56 + 28;
         const targetX = Math.min(innerWidth - safeX, Math.max(safeX, desiredX));
         const targetY = Math.min(innerHeight - safeY, Math.max(safeY, desiredY));
         return { x: targetX - (box.left + box.width / 2), y: targetY - (box.top + box.height / 2), rotate: (index % 2 ? 1 : -1) * (10 + (index % 5) * 4) };
@@ -85,23 +87,30 @@ const storyCards = chapters.map((chapter, index) => ({ title: t(chapter.title), 
       const scatter = ease(clamp((progress - .24) / .28));
       const chapterProgress = clamp((progress - .55) / .45);
       const chapterIndex = Math.min(2, Math.floor(chapterProgress * 3));
+      const cardVisible = progress >= .55;
       districts.forEach((district, index) => {
         const vector = vectors[index];
         if (!vector) return;
         const active = chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '');
         const compact = innerWidth <= 760;
-        const pulse = active ? (compact ? .8 : 1.12) : (compact ? .64 : .9);
+        const pulse = active ? (compact ? .92 : 1.12) : (compact ? .76 : .9);
         const scale = (1 - scatter * .06) * (scatter > .02 ? pulse : 1);
         district.style.transform = `translate(${vector.x * scatter}px, ${vector.y * scatter}px) rotate(${vector.rotate * scatter}deg) scale(${scale})`;
         district.classList.toggle('is-story-active', scatter > .25 && active);
       });
       if (opening) opening.style.opacity = String(1 - ease(clamp((progress - .14) / .16)));
       if (flag) flag.style.opacity = String(1 - ease(clamp((progress - .14) / .18)));
-      if (chapterIndex !== previousChapter && progress > .55) {
-        previousChapter = chapterIndex;
-        window.dispatchEvent(new CustomEvent('map-story-change', { detail: { index: chapterIndex } }));
+      journey.dataset.storyIndex = String(chapterIndex);
+      journey.dataset.storyVisible = String(cardVisible);
+      const chapterChanged = chapterIndex !== previousChapter;
+      if (chapterChanged || cardVisible !== previousCardVisible) {
+        window.dispatchEvent(new CustomEvent('map-story-change', { detail: { index: chapterIndex, visible: cardVisible } }));
+        previousCardVisible = cardVisible;
+      }
+      if (chapterChanged && cardVisible) {
         animate(districts.filter((district) => chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '')), { filter: ['brightness(1.45)', 'brightness(1)'], duration: 720, delay: stagger(35), ease: 'out(4)' });
       }
+      previousChapter = chapterIndex;
       if (progressLine) progressLine.style.transform = `scaleY(${progress})`;
     };
     const update = () => { if (!frame) frame = requestAnimationFrame(render); };
