@@ -26,7 +26,7 @@ const chapters = [
       </div>
       <div class="map-journey-flag" aria-hidden="true"><svg viewBox="0 0 300 180"><path d="M90 34l8 22 24 1-19 15 7 23-20-14-20 14 7-23-19-15 24-1z" /><path d="M157 69l7 19 21 1-17 13 6 20-17-12-17 12 6-20-17-13 21-1z" /><path d="M225 41l6 17 19 1-15 12 5 18-15-11-16 11 6-18-16-12 20-1z" /></svg></div>
       <div class="map-journey-opening wrap" data-journey-opening>
-        <div class="map-journey-name">
+        <div class="map-journey-name" data-journey-name>
           <div class="eyebrow"><span>{t('Artist · Researcher · Cultural practitioner')}</span><span>{t('West Bengal, India')}</span></div>
           <h1 id="hero-title">{t('Labani')}<br/><span>{t('Jangi')}<span class="period">.</span></span></h1>
           <p>{t('My art, lived experience')}<br/>{t('and the language of resistance.')}</p>
@@ -56,7 +56,7 @@ const chapters = [
   if (journey && !reduceMotion.matches) {
     const map = journey.querySelector<SVGSVGElement>('[data-journey-map]');
     const districts = Array.from(journey.querySelectorAll<SVGPathElement>('.journey-district'));
-    const opening = journey.querySelector<HTMLElement>('[data-journey-opening]');
+    const opening = journey.querySelector<HTMLElement>('[data-journey-name]');
     const flag = journey.querySelector<HTMLElement>('.map-journey-flag');
     const images = Array.from(journey.querySelectorAll<HTMLImageElement>('[data-journey-image]'));
     const chapters = Array.from(journey.querySelectorAll<HTMLElement>('[data-journey-chapter]'));
@@ -69,6 +69,7 @@ const chapters = [
     let frame = 0;
     let start = 0;
     let range = 1;
+    let previousChapter = -1;
     let vectors: { x: number; y: number; rotate: number }[] = [];
     const clamp = (value: number) => Math.min(1, Math.max(0, value));
     const ease = (value: number) => value * value * (3 - 2 * value);
@@ -76,43 +77,44 @@ const chapters = [
       start = journey.offsetTop;
       range = Math.max(1, journey.offsetHeight - innerHeight);
       if (!map) return;
-      const mapBox = map.getBoundingClientRect();
       vectors = districts.map((district, index) => {
         const box = district.getBoundingClientRect();
-        const originX = box.left - mapBox.left + box.width / 2;
-        const originY = box.top - mapBox.top + box.height / 2;
+        const originX = box.left + box.width / 2;
+        const originY = box.top + box.height / 2;
         const angle = (index / districts.length) * Math.PI * 2 - Math.PI / 2;
-        const targetX = mapBox.width / 2 + Math.cos(angle) * mapBox.width * .42;
-        const targetY = mapBox.height / 2 + Math.sin(angle) * mapBox.height * .34;
+        const targetX = innerWidth * .54 + Math.cos(angle) * innerWidth * .36;
+        const targetY = innerHeight * .51 + Math.sin(angle) * innerHeight * .37;
         return { x: targetX - originX, y: targetY - originY, rotate: (index % 2 ? 1 : -1) * (16 + (index % 5) * 5) };
       });
     };
     const render = () => {
       frame = 0;
       const progress = clamp((scrollY - start) / range);
-      const arrive = ease(clamp(progress / .18));
-      const scatter = ease(clamp((progress - .18) / .28));
-      const chapterProgress = clamp((progress - .47) / .53);
+      const scatter = ease(clamp((progress - .26) / .28));
+      const chapterProgress = clamp((progress - .58) / .42);
       const chapterIndex = Math.min(2, Math.floor(chapterProgress * 3));
       districts.forEach((district, index) => {
         const vector = vectors[index];
         if (!vector) return;
         const active = chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '');
-        const pulse = active ? 1.12 : .78;
-        const scale = (0.7 + arrive * .3) * (1 - scatter * .18) * (scatter > .02 ? pulse : 1);
+        const compact = innerWidth <= 760;
+        const pulse = active ? (compact ? .72 : 1.12) : (compact ? .56 : .78);
+        const scale = (1 - scatter * .18) * (scatter > .02 ? pulse : 1);
         district.style.transform = `translate(${vector.x * scatter}px, ${vector.y * scatter}px) rotate(${vector.rotate * scatter}deg) scale(${scale})`;
         district.classList.toggle('is-story-active', scatter > .25 && active);
       });
-      if (opening) opening.style.opacity = String(1 - ease(clamp((progress - .06) / .16)));
-      if (flag) flag.style.opacity = String(1 - ease(clamp(progress / .2)));
-      if (map) map.style.transform = `translate(${scatter * -2}%, ${scatter * -3}%) scale(${1 + scatter * .14})`;
-      images.forEach((image, index) => image.classList.toggle('is-visible', index === chapterIndex && progress > .42));
-      chapters.forEach((chapter, index) => chapter.classList.toggle('is-active', index === chapterIndex && progress > .42));
+      if (opening) opening.style.opacity = String(1 - ease(clamp((progress - .14) / .16)));
+      if (flag) flag.style.opacity = String(1 - ease(clamp((progress - .14) / .18)));
+      images.forEach((image, index) => image.classList.toggle('is-visible', index === chapterIndex && progress > .58));
+      chapters.forEach((chapter, index) => chapter.classList.toggle('is-active', index === chapterIndex && progress > .58));
+      if (chapterIndex !== previousChapter && progress > .58) {
+        previousChapter = chapterIndex;
+        animate(districts.filter((district) => chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '')), { filter: ['brightness(1.5)', 'brightness(1)'], duration: 720, delay: stagger(35), ease: 'out(4)' });
+      }
       if (progressLine) progressLine.style.transform = `scaleY(${progress})`;
     };
     const update = () => { if (!frame) frame = requestAnimationFrame(render); };
     measure();
-    animate(districts, { opacity: [0, 1], duration: 700, delay: stagger(28, { from: 'center' }), ease: 'out(4)' });
     addEventListener('resize', () => { measure(); update(); });
     addEventListener('scroll', update, { passive: true });
     update();
