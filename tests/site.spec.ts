@@ -35,8 +35,8 @@ test('Bangla switch translates pages and preserves locale and section', async ({
   await page.goto('/bn/');
   await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path:testInfo.outputPath('bangla-home.png'), fullPage:true });
-  await expect(page.locator('#roots-title')).toHaveText('নদীআর নদিয়া।');
-  await expect(page.locator('.district-home title')).toHaveText('নদিয়া');
+  await expect(page.locator('.journey-map .journey-district')).toHaveCount(23);
+  await expect(page.locator('.journey-district-home title')).toHaveText('নদিয়া');
   await page.getByRole('navigation').getByRole('link',{name:'সংগ্রহশালা'}).click();
   await page.locator('a[href="/bn/archive/a-language-for-resistance/"]').click();
   await expect(page).toHaveURL('/bn/archive/a-language-for-resistance/');
@@ -70,8 +70,8 @@ test('home, navigation and published archive work without layout overflow', asyn
   await page.goto('/');
   await expect(page).toHaveTitle(/Labani Jangi/);
   await expect(page.locator('h1')).toContainText('Labani');
-  await expect(page.locator('.bengal-map .district')).toHaveCount(23);
-  await expect(page.locator('.bengal-map .district-home')).toHaveAttribute('data-district-id', 'nadia');
+  await expect(page.locator('.journey-map .journey-district')).toHaveCount(23);
+  await expect(page.locator('.journey-map .journey-district-home')).toHaveAttribute('data-district-id', 'nadia');
   await page.screenshot({ path: testInfo.outputPath('home.png'), fullPage: true });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.getByRole('navigation').getByRole('link', {name:'About'}).click();

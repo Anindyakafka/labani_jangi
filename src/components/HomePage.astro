@@ -12,67 +12,109 @@ const routes = [
   ['Archive', '/archive/', 'Reading & conversations'],
   ['About', '/about/', 'About me'],
 ] as const satisfies ReadonlyArray<readonly [TranslationKey, string, TranslationKey]>;
+const chapters = [
+  { eyebrow: 'I begin with what is close.', title: 'Bodies, care and the small acts that keep us alive.', image: '/media/img-0005.jpg', districts: ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar', 'uttar-dinajpur'] },
+  { eyebrow: 'I make images against forgetting.', title: 'Memory is political when it refuses silence.', image: '/media/img-0007.jpg', districts: ['malda', 'dakshin-dinajpur', 'murshidabad', 'nadia', 'north-24-parganas', 'kolkata'] },
+  { eyebrow: 'I follow the movement of resistance.', title: 'Land, labour and collective imagination shape my practice.', image: '/media/img-0017.jpg', districts: ['birbhum', 'bankura', 'purulia', 'paschim-bardhaman', 'purba-bardhaman', 'hooghly', 'howrah', 'south-24-parganas', 'jhargram', 'paschim-medinipur', 'purba-medinipur'] },
+] as const satisfies ReadonlyArray<{ eyebrow: TranslationKey; title: TranslationKey; image: string; districts: readonly string[] }>;
 ---
 <Layout locale={locale}>
-  <section class="flag-hero" data-flag-hero aria-labelledby="hero-title">
-    <div class="flag-hero-stage">
-      <div class="artwork-layer">
-        <img class="artwork-one" src="/media/img-0005.jpg" alt={t('An illustration of a woman in a red forest, made for a women’s health series.')} fetchpriority="high" />
-        <img src="/media/img-0007.jpg" alt={t('An illustration of Bilkis Bano with scales of justice.')} />
-        <img src="/media/img-0017.jpg" alt={t('An illustration of farmers, barricades and kites.')} />
+  <section class="map-journey" data-map-journey aria-labelledby="hero-title">
+    <div class="map-journey-stage">
+      <div class="map-journey-art" aria-hidden="true">
+        {chapters.map((chapter, index) => <img src={chapter.image} alt="" data-journey-image={index} />)}
       </div>
-      <div class="flag-layer">
-        <svg class="flag-emblem" viewBox="0 0 300 180" aria-hidden="true">
-          <path d="M90 34l8 22 24 1-19 15 7 23-20-14-20 14 7-23-19-15 24-1z" />
-          <path d="M157 69l7 19 21 1-17 13 6 20-17-12-17 12 6-20-17-13 21-1z" />
-          <path d="M225 41l6 17 19 1-15 12 5 18-15-11-16 11 6-18-16-12 20-1z" />
-        </svg>
-        <div class="flag-copy wrap">
-          <div class="eyebrow hero-meta"><span>{t('Artist · Researcher · Cultural practitioner')}</span><span>{t('West Bengal, India')}</span></div>
+      <div class="map-journey-flag" aria-hidden="true"><svg viewBox="0 0 300 180"><path d="M90 34l8 22 24 1-19 15 7 23-20-14-20 14 7-23-19-15 24-1z" /><path d="M157 69l7 19 21 1-17 13 6 20-17-12-17 12 6-20-17-13 21-1z" /><path d="M225 41l6 17 19 1-15 12 5 18-15-11-16 11 6-18-16-12 20-1z" /></svg></div>
+      <div class="map-journey-opening wrap" data-journey-opening>
+        <div class="map-journey-name">
+          <div class="eyebrow"><span>{t('Artist · Researcher · Cultural practitioner')}</span><span>{t('West Bengal, India')}</span></div>
           <h1 id="hero-title">{t('Labani')}<br/><span>{t('Jangi')}<span class="period">.</span></span></h1>
           <p>{t('My art, lived experience')}<br/>{t('and the language of resistance.')}</p>
         </div>
-        <span class="flag-roll" aria-hidden="true"></span>
+        <div class="map-journey-map-wrap"><WestBengalMap locale={locale} /></div>
       </div>
+      <div class="map-journey-chapters wrap" aria-live="polite">
+        {chapters.map((chapter, index) => <article class:list={['map-journey-chapter', { 'is-active': index === 0 }]} data-journey-chapter={index}>
+          <span class="eyebrow">{t(chapter.eyebrow)}</span>
+          <h2>{t(chapter.title)}</h2>
+          <span class="map-journey-plate">{String(index + 1).padStart(2, '0')} / 03</span>
+        </article>)}
+      </div>
+      <div class="map-journey-progress" aria-hidden="true"><i></i></div>
     </div>
   </section>
-  <WestBengalMap locale={locale} />
   <section class="wrap section landing-routes" aria-label={t('Explore the website')}>
     <span class="eyebrow">{t('Explore')}</span>
     <div class="route-list">{routes.map(([label, path, note], index) => <a href={localPath(path, locale)} class="route-card"><span>{String(index + 1).padStart(2, '0')}</span><div><h2>{t(label)}</h2><p>{t(note)}</p></div><b aria-hidden="true">→</b></a>)}</div>
   </section>
 </Layout>
 <script>
-  const hero = document.querySelector<HTMLElement>('[data-flag-hero]');
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  if (hero && !reducedMotion.matches) {
-    // Edge advertises scroll-timeline support but does not advance a named
-    // view timeline on this sticky composition. Use the measured fallback
-    // until that behaviour is reliable across the browsers we support.
-    hero.dataset.flagMotion = 'fallback';
-    let active = false;
+  import { animate, stagger } from 'animejs';
+
+  const journey = document.querySelector<HTMLElement>('[data-map-journey]');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  if (journey && !reduceMotion.matches) {
+    const map = journey.querySelector<SVGSVGElement>('[data-journey-map]');
+    const districts = Array.from(journey.querySelectorAll<SVGPathElement>('.journey-district'));
+    const opening = journey.querySelector<HTMLElement>('[data-journey-opening]');
+    const flag = journey.querySelector<HTMLElement>('.map-journey-flag');
+    const images = Array.from(journey.querySelectorAll<HTMLImageElement>('[data-journey-image]'));
+    const chapters = Array.from(journey.querySelectorAll<HTMLElement>('[data-journey-chapter]'));
+    const progressLine = journey.querySelector<HTMLElement>('.map-journey-progress i');
+    const chapterDistricts = [
+      ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar', 'uttar-dinajpur'],
+      ['malda', 'dakshin-dinajpur', 'murshidabad', 'nadia', 'north-24-parganas', 'kolkata'],
+      ['birbhum', 'bankura', 'purulia', 'paschim-bardhaman', 'purba-bardhaman', 'hooghly', 'howrah', 'south-24-parganas', 'jhargram', 'paschim-medinipur', 'purba-medinipur'],
+    ];
     let frame = 0;
     let start = 0;
     let range = 1;
+    let vectors: { x: number; y: number; rotate: number }[] = [];
+    const clamp = (value: number) => Math.min(1, Math.max(0, value));
+    const ease = (value: number) => value * value * (3 - 2 * value);
     const measure = () => {
-      start = hero.offsetTop;
-      range = Math.max(1, hero.offsetHeight - innerHeight);
+      start = journey.offsetTop;
+      range = Math.max(1, journey.offsetHeight - innerHeight);
+      if (!map) return;
+      const mapBox = map.getBoundingClientRect();
+      vectors = districts.map((district, index) => {
+        const box = district.getBoundingClientRect();
+        const originX = box.left - mapBox.left + box.width / 2;
+        const originY = box.top - mapBox.top + box.height / 2;
+        const angle = (index / districts.length) * Math.PI * 2 - Math.PI / 2;
+        const targetX = mapBox.width / 2 + Math.cos(angle) * mapBox.width * .42;
+        const targetY = mapBox.height / 2 + Math.sin(angle) * mapBox.height * .34;
+        return { x: targetX - originX, y: targetY - originY, rotate: (index % 2 ? 1 : -1) * (16 + (index % 5) * 5) };
+      });
     };
     const render = () => {
       frame = 0;
-      if (!active) return;
-      const progress = Math.min(1, Math.max(0, (scrollY - start) / range));
-      hero.style.setProperty('--flag-unroll', String(progress));
+      const progress = clamp((scrollY - start) / range);
+      const arrive = ease(clamp(progress / .18));
+      const scatter = ease(clamp((progress - .18) / .28));
+      const chapterProgress = clamp((progress - .47) / .53);
+      const chapterIndex = Math.min(2, Math.floor(chapterProgress * 3));
+      districts.forEach((district, index) => {
+        const vector = vectors[index];
+        if (!vector) return;
+        const active = chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '');
+        const pulse = active ? 1.12 : .78;
+        const scale = (0.7 + arrive * .3) * (1 - scatter * .18) * (scatter > .02 ? pulse : 1);
+        district.style.transform = `translate(${vector.x * scatter}px, ${vector.y * scatter}px) rotate(${vector.rotate * scatter}deg) scale(${scale})`;
+        district.classList.toggle('is-story-active', scatter > .25 && active);
+      });
+      if (opening) opening.style.opacity = String(1 - ease(clamp((progress - .06) / .16)));
+      if (flag) flag.style.opacity = String(1 - ease(clamp(progress / .2)));
+      if (map) map.style.transform = `translate(${scatter * -2}%, ${scatter * -3}%) scale(${1 + scatter * .14})`;
+      images.forEach((image, index) => image.classList.toggle('is-visible', index === chapterIndex && progress > .42));
+      chapters.forEach((chapter, index) => chapter.classList.toggle('is-active', index === chapterIndex && progress > .42));
+      if (progressLine) progressLine.style.transform = `scaleY(${progress})`;
     };
     const update = () => { if (!frame) frame = requestAnimationFrame(render); };
-    const observer = new IntersectionObserver(([entry]) => {
-      active = entry.isIntersecting;
-      if (active) { measure(); update(); }
-    }, { threshold: 0 });
-    observer.observe(hero);
+    measure();
+    animate(districts, { opacity: [0, 1], duration: 700, delay: stagger(28, { from: 'center' }), ease: 'out(4)' });
     addEventListener('resize', () => { measure(); update(); });
     addEventListener('scroll', update, { passive: true });
-    measure();
     update();
   }
 </script>
