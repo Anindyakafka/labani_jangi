@@ -34,8 +34,10 @@ const chapters = [
       </div>
       <div class="map-journey-chapters wrap" aria-live="polite">
         {chapters.map((chapter, index) => <article class="map-journey-chapter" data-journey-chapter={index}>
-          <img src={chapter.image} alt="" aria-hidden="true" loading="lazy" />
-          <div class="map-journey-card-copy"><span class="map-journey-plate">{String(index + 1).padStart(2, '0')} / 05</span><h2>{t(chapter.title)}</h2><p>{t(chapter.copy)}</p></div>
+          <div class="map-journey-card-face" data-card-face>
+            <img src={chapter.image} alt="" aria-hidden="true" loading="lazy" />
+            <div class="map-journey-card-copy"><span class="map-journey-plate">{String(index + 1).padStart(2, '0')} / 05</span><h2>{t(chapter.title)}</h2><p>{t(chapter.copy)}</p></div>
+          </div>
         </article>)}
       </div>
       <div class="map-journey-progress" aria-hidden="true"><i></i></div>
@@ -56,6 +58,7 @@ const chapters = [
     const opening = journey.querySelector<HTMLElement>('[data-journey-name]');
     const flag = journey.querySelector<HTMLElement>('.map-journey-flag');
     const cards = Array.from(journey.querySelectorAll<HTMLElement>('[data-journey-chapter]'));
+    const cardFaces = Array.from(journey.querySelectorAll<HTMLElement>('[data-card-face]'));
     const progressLine = journey.querySelector<HTMLElement>('.map-journey-progress i');
     const chapterDistricts = [
       ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar'],
@@ -104,7 +107,7 @@ const chapters = [
       cards.forEach((card, index) => card.classList.toggle('is-active', index === chapterIndex && progress > .55));
       if (chapterIndex !== previousChapter && progress > .55) {
         previousChapter = chapterIndex;
-        animate(cards[chapterIndex], { opacity: [0, 1], translateY: [36, 0], rotate: [-1.5, 0], duration: 620, ease: 'out(4)' });
+        animate(cards[chapterIndex], { opacity: [0, 1], rotateY: [-180, 0], duration: 1100, ease: 'inOut(3)' });
         animate(districts.filter((district) => chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '')), { filter: ['brightness(1.45)', 'brightness(1)'], duration: 720, delay: stagger(35), ease: 'out(4)' });
       }
       if (progressLine) progressLine.style.transform = `scaleY(${progress})`;
@@ -113,6 +116,16 @@ const chapters = [
     measure();
     addEventListener('resize', () => { measure(); update(); });
     addEventListener('scroll', update, { passive: true });
+    cardFaces.forEach((face) => {
+      face.addEventListener('pointermove', (event) => {
+        if (event.pointerType !== 'mouse') return;
+        const box = face.getBoundingClientRect();
+        const tiltX = ((event.clientY - box.top) / box.height - .5) * -10;
+        const tiltY = ((event.clientX - box.left) / box.width - .5) * 10;
+        face.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.015)`;
+      });
+      face.addEventListener('pointerleave', () => animate(face, { rotateX: 0, rotateY: 0, scale: 1, duration: 420, ease: 'out(3)' }));
+    });
     update();
   }
 </script>
