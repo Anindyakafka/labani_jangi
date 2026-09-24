@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import WestBengalMap from './WestBengalMap.astro';
+import MapStoryCards from './MapStoryCards';
 import { translator, localPath, type Locale, type TranslationKey } from '../i18n';
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
@@ -13,12 +14,11 @@ const routes = [
   ['About', '/about/', 'About me'],
 ] as const satisfies ReadonlyArray<readonly [TranslationKey, string, TranslationKey]>;
 const chapters = [
-  { title: 'My roots are in Nadia, West Bengal.', copy: 'My life and practice are rooted here.', image: '/media/img-0005.jpg', districts: ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar'] },
-  { title: 'I begin with what is close.', copy: 'I bring drawing into conversation with reporting, poetry and the everyday knowledge of rural communities.', image: '/media/img-0017.jpg', districts: ['uttar-dinajpur', 'dakshin-dinajpur', 'malda', 'murshidabad'] },
-  { title: 'Bibir Darga', copy: 'In this exhibition, I followed the memory of a shrine, rivers, trees and the places remade by development.', image: '/media/img-0007.jpg', districts: ['nadia', 'north-24-parganas', 'kolkata', 'south-24-parganas'] },
-  { title: 'Publication work', copy: 'I make cover images that let a book’s questions meet a reader before its first page.', image: '/media/img-0066.jpg', districts: ['howrah', 'hooghly', 'purba-bardhaman', 'paschim-bardhaman', 'birbhum'] },
-  { title: 'Collective practice', copy: 'My work with JINN, Panjeri Artists’ Union and Khandera Art Space is made through shared labour and conversation.', image: '/media/img-0014.jpg', districts: ['bankura', 'purulia', 'jhargram', 'paschim-medinipur', 'purba-medinipur'] },
-] as const satisfies ReadonlyArray<{ title: TranslationKey; copy: TranslationKey; image: string; districts: readonly string[] }>;
+  { title: 'About me', copy: 'I am an artist, researcher and cultural practitioner from Nadia, West Bengal.', image: '/media/img-0005.jpg', href: '/about/', districts: ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar', 'uttar-dinajpur', 'dakshin-dinajpur'] },
+  { title: 'My work', copy: 'I am Labani Jangi. My work explores resistance and identity through the world around me, drawing from research, artistic practice and collective cultural work.', image: '/media/img-0017.jpg', href: '/works/', districts: ['malda', 'murshidabad', 'nadia', 'north-24-parganas', 'kolkata', 'south-24-parganas', 'howrah', 'hooghly', 'birbhum'] },
+  { title: 'Publication work', copy: 'I make cover images that let a book’s questions meet a reader before its first page.', image: '/media/img-0066.jpg', href: '/practice/', districts: ['purba-bardhaman', 'paschim-bardhaman', 'bankura', 'purulia', 'jhargram', 'paschim-medinipur', 'purba-medinipur'] },
+] as const satisfies ReadonlyArray<{ title: TranslationKey; copy: TranslationKey; image: string; href: string; districts: readonly string[] }>;
+const storyCards = chapters.map((chapter, index) => ({ title: t(chapter.title), copy: t(chapter.copy), image: chapter.image, href: localPath(chapter.href, locale), label: t('Explore'), number: String(index + 1).padStart(2, '0') }));
 ---
 <Layout locale={locale}>
   <section class="map-journey" data-map-journey aria-labelledby="hero-title">
@@ -32,14 +32,7 @@ const chapters = [
         </div>
         <div class="map-journey-map-wrap"><WestBengalMap locale={locale} /></div>
       </div>
-      <div class="map-journey-chapters wrap" aria-live="polite">
-        {chapters.map((chapter, index) => <article class="map-journey-chapter" data-journey-chapter={index}>
-          <div class="map-journey-card-face" data-card-face>
-            <img src={chapter.image} alt="" aria-hidden="true" loading="lazy" />
-            <div class="map-journey-card-copy"><span class="map-journey-plate">{String(index + 1).padStart(2, '0')} / 05</span><h2>{t(chapter.title)}</h2><p>{t(chapter.copy)}</p></div>
-          </div>
-        </article>)}
-      </div>
+      <MapStoryCards cards={storyCards} client:load />
       <div class="map-journey-progress" aria-hidden="true"><i></i></div>
     </div>
   </section>
@@ -57,15 +50,11 @@ const chapters = [
     const districts = Array.from(journey.querySelectorAll<SVGPathElement>('.journey-district'));
     const opening = journey.querySelector<HTMLElement>('[data-journey-name]');
     const flag = journey.querySelector<HTMLElement>('.map-journey-flag');
-    const cards = Array.from(journey.querySelectorAll<HTMLElement>('[data-journey-chapter]'));
-    const cardFaces = Array.from(journey.querySelectorAll<HTMLElement>('[data-card-face]'));
     const progressLine = journey.querySelector<HTMLElement>('.map-journey-progress i');
     const chapterDistricts = [
-      ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar'],
-      ['uttar-dinajpur', 'dakshin-dinajpur', 'malda', 'murshidabad'],
-      ['nadia', 'north-24-parganas', 'kolkata', 'south-24-parganas'],
-      ['howrah', 'hooghly', 'purba-bardhaman', 'paschim-bardhaman', 'birbhum'],
-      ['bankura', 'purulia', 'jhargram', 'paschim-medinipur', 'purba-medinipur'],
+      ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar', 'uttar-dinajpur', 'dakshin-dinajpur'],
+      ['malda', 'murshidabad', 'nadia', 'north-24-parganas', 'kolkata', 'south-24-parganas', 'howrah', 'hooghly', 'birbhum'],
+      ['purba-bardhaman', 'paschim-bardhaman', 'bankura', 'purulia', 'jhargram', 'paschim-medinipur', 'purba-medinipur'],
     ];
     let frame = 0;
     let start = 0;
@@ -81,8 +70,12 @@ const chapters = [
       vectors = districts.map((district, index) => {
         const box = district.getBoundingClientRect();
         const angle = (index / districts.length) * Math.PI * 2 - Math.PI / 2;
-        const targetX = innerWidth * .5 + Math.cos(angle) * innerWidth * .38;
-        const targetY = innerHeight * .5 + Math.sin(angle) * innerHeight * .39;
+        const desiredX = innerWidth * .5 + Math.cos(angle) * innerWidth * .34;
+        const desiredY = innerHeight * .5 + Math.sin(angle) * innerHeight * .2;
+        const safeX = box.width * .7 + 32;
+        const safeY = box.height * .7 + 38;
+        const targetX = Math.min(innerWidth - safeX, Math.max(safeX, desiredX));
+        const targetY = Math.min(innerHeight - safeY, Math.max(safeY, desiredY));
         return { x: targetX - (box.left + box.width / 2), y: targetY - (box.top + box.height / 2), rotate: (index % 2 ? 1 : -1) * (10 + (index % 5) * 4) };
       });
     };
@@ -91,23 +84,22 @@ const chapters = [
       const progress = clamp((scrollY - start) / range);
       const scatter = ease(clamp((progress - .24) / .28));
       const chapterProgress = clamp((progress - .55) / .45);
-      const chapterIndex = Math.min(4, Math.floor(chapterProgress * 5));
+      const chapterIndex = Math.min(2, Math.floor(chapterProgress * 3));
       districts.forEach((district, index) => {
         const vector = vectors[index];
         if (!vector) return;
         const active = chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '');
         const compact = innerWidth <= 760;
-        const pulse = active ? (compact ? .8 : 1.25) : (compact ? .64 : .96);
+        const pulse = active ? (compact ? .8 : 1.12) : (compact ? .64 : .9);
         const scale = (1 - scatter * .06) * (scatter > .02 ? pulse : 1);
         district.style.transform = `translate(${vector.x * scatter}px, ${vector.y * scatter}px) rotate(${vector.rotate * scatter}deg) scale(${scale})`;
         district.classList.toggle('is-story-active', scatter > .25 && active);
       });
       if (opening) opening.style.opacity = String(1 - ease(clamp((progress - .14) / .16)));
       if (flag) flag.style.opacity = String(1 - ease(clamp((progress - .14) / .18)));
-      cards.forEach((card, index) => card.classList.toggle('is-active', index === chapterIndex && progress > .55));
       if (chapterIndex !== previousChapter && progress > .55) {
         previousChapter = chapterIndex;
-        animate(cards[chapterIndex], { opacity: [0, 1], rotateY: [-180, 0], duration: 1100, ease: 'inOut(3)' });
+        window.dispatchEvent(new CustomEvent('map-story-change', { detail: { index: chapterIndex } }));
         animate(districts.filter((district) => chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '')), { filter: ['brightness(1.45)', 'brightness(1)'], duration: 720, delay: stagger(35), ease: 'out(4)' });
       }
       if (progressLine) progressLine.style.transform = `scaleY(${progress})`;
@@ -116,16 +108,6 @@ const chapters = [
     measure();
     addEventListener('resize', () => { measure(); update(); });
     addEventListener('scroll', update, { passive: true });
-    cardFaces.forEach((face) => {
-      face.addEventListener('pointermove', (event) => {
-        if (event.pointerType !== 'mouse') return;
-        const box = face.getBoundingClientRect();
-        const tiltX = ((event.clientY - box.top) / box.height - .5) * -10;
-        const tiltY = ((event.clientX - box.left) / box.width - .5) * 10;
-        face.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.015)`;
-      });
-      face.addEventListener('pointerleave', () => animate(face, { rotateX: 0, rotateY: 0, scale: 1, duration: 420, ease: 'out(3)' }));
-    });
     update();
   }
 </script>
