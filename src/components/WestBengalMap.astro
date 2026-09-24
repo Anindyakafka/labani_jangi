@@ -8,7 +8,7 @@ for (const district of districts) {
   if (!districtNames[district.id]) throw new Error(`Missing Bangla district name: ${district.id}`);
 }
 ---
-<section class="roots-map wrap" aria-labelledby="roots-title">
+<section class="roots-map wrap" aria-labelledby="roots-title" data-map-locale={locale}>
   <div class="roots-copy">
     <span class="eyebrow">{t('My roots / West Bengal')}</span>
     <h2 id="roots-title">{t('Nadi')}<br/>{t('aar')} <em>{t('Nadia.')}</em></h2>
@@ -21,6 +21,7 @@ for (const district of districts) {
       <title id="bengal-title">{t('West Bengal, with Nadia highlighted')}</title>
       <desc id="bengal-description">{t('A map showing 23 district shapes from the geoBoundaries 2021 dataset. Nadia, my home district, is highlighted in red.')}</desc>
       {districts.map(district => <path d={district.path} data-district-id={district.id} data-source-id={district.sourceId} class:list={['district', {'district-home': district.id === 'nadia'}]} fill-rule="evenodd" tabindex="0" role="button" aria-label={locale === 'bn' ? districtNames[district.id] : district.name}><title>{locale === 'bn' ? districtNames[district.id] : district.name}</title></path>)}
+      <g class="map-mechanics" aria-hidden="true"><circle cx="220" cy="275" r="32"/><circle cx="220" cy="275" r="8"/><path d="M220 224v-22m0 146v22m-51-95h-22m146 0h-22"/><path class="map-scan" d="M108 78H332M108 472H332"/></g>
     </svg>
     <figcaption>{t('District boundaries · 2021 dataset')}<br/><a href="https://www.geoboundaries.org/">{t('geoBoundaries')}</a> / {t('Pathways Data')} · <a href="https://opendatacommons.org/licenses/odbl/1-0/">{t('ODbL 1.0')}</a> · <a href="/maps/west-bengal.geojson" download>{t('Map data')} ↓</a></figcaption>
   </figure>
@@ -30,21 +31,32 @@ for (const district of districts) {
   .roots-copy h2{margin-bottom:30px}.roots-copy>p:not(.large-copy){font-size:14px;line-height:1.8}
   .map-key{display:flex;align-items:center;gap:12px;margin-top:35px;font-size:11px;letter-spacing:.3px}.map-key span{width:12px;height:12px;background:var(--red)}
   .bengal-figure{margin:0;text-align:center}.bengal-map{width:100%;max-width:400px;height:auto;overflow:visible}
-  .district{fill:var(--paper);stroke:var(--red);stroke-width:.8;vector-effect:non-scaling-stroke;stroke-linejoin:round;cursor:pointer}.district:hover,.district:focus-visible,.district.is-selected{fill:#d65b43;outline:none}
+  .district{fill:var(--paper);stroke:var(--red);stroke-width:.8;vector-effect:non-scaling-stroke;stroke-linejoin:round;cursor:pointer;transform-box:fill-box;transform-origin:center}.district:hover,.district:focus-visible,.district.is-selected{fill:#d65b43;outline:none}.map-mechanics{fill:none;stroke:var(--red);stroke-width:1;opacity:.46;pointer-events:none}.map-mechanics circle:first-child{stroke-dasharray:3 4}.map-mechanics path{stroke-linecap:square}.map-scan{stroke-dasharray:4 7}
   .district-home{fill:var(--red)}
   figcaption{font-size:9px;line-height:1.9;color:var(--muted);margin-top:15px}figcaption a{text-decoration:underline;text-underline-offset:3px}
   @media(max-width:760px){.roots-map{grid-template-columns:1fr;gap:35px;padding-block:50px}.bengal-map{max-width:330px}.roots-copy h2{font-size:48px}}
 </style>
-<script define:vars={{ locale }}>
+<script>
+  import { animate, createTimeline, stagger } from 'animejs';
   const map = document.querySelector('.bengal-map');
   const status = document.querySelector('[data-map-status]');
-  const select = (district) => {
+  const locale = document.querySelector('[data-map-locale]')?.getAttribute('data-map-locale');
+  const select = (district: SVGPathElement) => {
     map?.querySelectorAll('.district').forEach((item) => item.classList.toggle('is-selected', item === district));
     const name = district.getAttribute('aria-label') ?? '';
     if (status) status.textContent = district.dataset.districtId === 'nadia' ? `${name}: ${locale === 'bn' ? 'আমার বাড়ির জেলার কাজ দেখতে শিল্পসংগ্রহে যান।' : 'my home district. Explore the artwork archive for related plates.'}` : name;
   };
-  map?.querySelectorAll('.district').forEach((district) => {
+  map?.querySelectorAll<SVGPathElement>('.district').forEach((district) => {
     district.addEventListener('click', () => select(district));
-    district.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(district); } });
+    district.addEventListener('keydown', (event: KeyboardEvent) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(district); } });
   });
+  if (map && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const districts = map.querySelectorAll('.district');
+    const mechanics = map.querySelectorAll('.map-mechanics > *');
+    createTimeline({ defaults: { ease: 'out(4)' } })
+      .add(districts, { opacity: [0, 1], scale: [.72, 1], duration: 560, delay: stagger(38, { from: 'center' }) })
+      .add(mechanics, { opacity: [0, .46], scale: [.5, 1], duration: 400, delay: stagger(65) }, '-=250');
+    const scan = map.querySelector('.map-scan');
+    if (scan) animate(scan, { translateX: [-18, 18], duration: 1700, ease: 'inOut(3)', alternate: true, loop: 1 });
+  }
 </script>
