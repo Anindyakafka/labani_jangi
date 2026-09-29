@@ -1,21 +1,226 @@
 ---
-import { districtNames, type Locale } from '../i18n';
+import { districtNames, localPath, translator, type Locale } from '../i18n';
 import districts from '../data/west-bengal.json';
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
+const t = translator(locale);
 for (const district of districts) {
   if (!districtNames[district.id]) throw new Error(`Missing Bangla district name: ${district.id}`);
 }
 ---
-<svg class="journey-map" viewBox="0 0 440 570" role="img" aria-labelledby="journey-map-title journey-map-description" data-journey-map>
-  <title id="journey-map-title">{locale === 'bn' ? 'পশ্চিমবঙ্গের মানচিত্র' : 'Map of West Bengal'}</title>
-  <desc id="journey-map-description">{locale === 'bn' ? 'পশ্চিমবঙ্গের তেইশটি জেলার একটি মানচিত্র।' : 'A map of the 23 districts of West Bengal.'}</desc>
-  {districts.map((district) => <path
-    d={district.path}
-    data-district-id={district.id}
-    class:list={['journey-district', { 'journey-district-home': district.id === 'nadia' }]}
-    fill-rule="evenodd"
-    aria-label={locale === 'bn' ? districtNames[district.id] : district.name}
-  ><title>{locale === 'bn' ? districtNames[district.id] : district.name}</title></path>)}
-</svg>
+<div class="ground-map-widget" data-ground-map>
+  <p class="ground-map-instructions" id="ground-map-instructions">{t('Use Tab to visit each district, then press Enter or Space to select it.')}</p>
+  <div class="ground-map-stage">
+    <svg
+      class="ground-map-svg"
+      viewBox="0 0 440 570"
+      preserveAspectRatio="xMidYMid meet"
+      role="group"
+      aria-label={t('Map of West Bengal')}
+      aria-describedby="ground-map-description ground-map-instructions"
+      data-ground-map-svg
+    >
+      <desc id="ground-map-description">{t('A map of 23 district boundaries in West Bengal.')}</desc>
+      <defs>
+        <linearGradient id="ground-land-wash" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="var(--ground-map-land-light)" />
+          <stop offset="1" stop-color="var(--ground-map-land)" />
+        </linearGradient>
+      </defs>
+      {districts.map((district) => {
+        const isHome = district.id === 'nadia';
+        const name = locale === 'bn' ? districtNames[district.id] : district.name;
+        return <path
+          d={district.path}
+          data-ground-district={district.id}
+          data-district-name={name}
+          data-tooltip-label={isHome ? `${name} · ${t('My home district')}` : name}
+          data-story-summary={isHome ? t('My roots are in Nadia, West Bengal.') : t('This is one of the 23 districts shown here.')}
+          data-story-href={isHome ? localPath('/about/', locale) : ''}
+          class:list={['ground-district', { 'ground-district-home': isHome }]}
+          fill-rule="evenodd"
+          role="button"
+          tabindex="0"
+          aria-label={name}
+          aria-describedby={isHome ? 'ground-map-instructions ground-map-tooltip ground-nadia-help' : 'ground-map-instructions ground-map-tooltip'}
+          aria-pressed="false"
+          aria-keyshortcuts="Enter Space"
+        />;
+      })}
+    </svg>
+    <div class="ground-map-tooltip" id="ground-map-tooltip" role="tooltip" aria-hidden="true" hidden data-ground-map-tooltip></div>
+  </div>
+
+  <p class="ground-map-prompt">{t('Select a district to see its name and any story connected to it.')}</p>
+  <aside class="ground-selection" role="region" aria-labelledby="ground-selection-name" aria-live="polite" aria-atomic="true" data-ground-selection>
+    <div class="ground-selection-copy">
+      <p class="eyebrow" data-ground-selection-label>{t('Selected district')}</p>
+      <h2 id="ground-selection-name" data-ground-selection-name>{t('Select a district')}</h2>
+      <p class="ground-selection-summary" data-ground-selection-summary>{t('Select a district to see its name and any story connected to it.')}</p>
+    </div>
+    <div class="ground-selection-actions">
+      <a class="ground-selection-link" data-ground-selection-link hidden>
+        {t('About me')} <span aria-hidden="true">↗</span>
+      </a>
+      <button class="ground-selection-close" type="button" data-ground-selection-close aria-label={t('Close district details')} hidden>
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  </aside>
+
+  <label class="ground-map-picker" for="ground-district-picker">
+    <span>{t('Choose a district')}</span>
+    <select id="ground-district-picker" data-ground-district-picker>
+      <option value="">{t('Choose a district')}</option>
+      {districts.map((district) => <option value={district.id}>
+        {locale === 'bn' ? districtNames[district.id] : district.name}
+      </option>)}
+    </select>
+  </label>
+  <p class="ground-sr-only" id="ground-nadia-help">{t('My home district')}</p>
+
+  <p class="ground-map-attribution">
+    <span>{t('District boundaries · 2021 dataset')}</span>
+    <span aria-hidden="true">·</span>
+    <span>{t('Map data')}:</span>
+    <a href="https://www.geoboundaries.org/" target="_blank" rel="noopener noreferrer">{t('geoBoundaries')}</a>
+    <span aria-hidden="true">·</span>
+    <span>{t('Pathways Data')}</span>
+    <span aria-hidden="true">·</span>
+    <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener noreferrer">{t('ODbL 1.0')}</a>
+  </p>
+</div>
+
+<script>
+  const pathFromTarget = (target: EventTarget | null): SVGPathElement | null => {
+    if (!(target instanceof Element)) return null;
+    return target.closest<SVGPathElement>('[data-ground-district]');
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-ground-map]').forEach((widget) => {
+    const svg = widget.querySelector<SVGSVGElement>('[data-ground-map-svg]');
+    const tooltip = widget.querySelector<HTMLElement>('[data-ground-map-tooltip]');
+    const panel = widget.querySelector<HTMLElement>('[data-ground-selection]');
+    const panelName = widget.querySelector<HTMLElement>('[data-ground-selection-name]');
+    const panelSummary = widget.querySelector<HTMLElement>('[data-ground-selection-summary]');
+    const storyLink = widget.querySelector<HTMLAnchorElement>('[data-ground-selection-link]');
+    const closeButton = widget.querySelector<HTMLButtonElement>('[data-ground-selection-close]');
+    const picker = widget.querySelector<HTMLSelectElement>('[data-ground-district-picker]');
+    if (!svg || !tooltip || !panel || !panelName || !panelSummary || !storyLink || !closeButton || !picker) return;
+
+    const districts = Array.from(svg.querySelectorAll<SVGPathElement>('[data-ground-district]'));
+    let selected: SVGPathElement | null = null;
+
+    const hideTooltip = () => {
+      tooltip.hidden = true;
+      tooltip.setAttribute('aria-hidden', 'true');
+    };
+
+    const showTooltip = (district: SVGPathElement, x: number, y: number) => {
+      tooltip.textContent = district.dataset.tooltipLabel ?? district.dataset.districtName ?? '';
+      tooltip.hidden = false;
+      tooltip.setAttribute('aria-hidden', 'false');
+      const bounds = tooltip.getBoundingClientRect();
+      const left = Math.max(8, Math.min(window.innerWidth - bounds.width - 8, x + 14));
+      const top = Math.max(8, Math.min(window.innerHeight - bounds.height - 8, y + 14));
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${top}px`;
+    };
+
+    const selectDistrict = (district: SVGPathElement) => {
+      selected = district;
+      for (const item of districts) {
+        const active = item === district;
+        item.setAttribute('aria-pressed', String(active));
+        item.classList.toggle('is-selected', active);
+      }
+      panelName.textContent = district.dataset.districtName ?? '';
+      panelSummary.textContent = district.dataset.storySummary ?? '';
+      const href = district.dataset.storyHref ?? '';
+      storyLink.hidden = !href;
+      closeButton.hidden = false;
+      if (href) storyLink.href = href;
+      picker.value = district.dataset.groundDistrict ?? '';
+    };
+
+    const clearSelection = (returnFocus: boolean) => {
+      const previous = selected;
+      selected = null;
+      for (const item of districts) {
+        item.setAttribute('aria-pressed', 'false');
+        item.classList.remove('is-selected');
+      }
+      panelName.textContent = widget.dataset.emptyHeading ?? panelName.textContent ?? '';
+      panelSummary.textContent = widget.dataset.emptySummary ?? panelSummary.textContent ?? '';
+      storyLink.hidden = true;
+      closeButton.hidden = true;
+      picker.value = '';
+      if (returnFocus) previous?.focus();
+    };
+
+    svg.addEventListener('pointerover', (event) => {
+      if (event.pointerType === 'touch') return;
+      const district = pathFromTarget(event.target);
+      if (district) showTooltip(district, event.clientX, event.clientY);
+    });
+
+    svg.addEventListener('pointermove', (event) => {
+      if (event.pointerType === 'touch') return;
+      const district = pathFromTarget(event.target);
+      if (district && !tooltip.hidden) showTooltip(district, event.clientX, event.clientY);
+    });
+
+    svg.addEventListener('pointerout', (event) => {
+      if (pathFromTarget(event.relatedTarget)) return;
+      if (svg.contains(document.activeElement) && pathFromTarget(document.activeElement)) return;
+      hideTooltip();
+    });
+
+    svg.addEventListener('focusin', (event) => {
+      const district = pathFromTarget(event.target);
+      if (!district) return;
+      const bounds = district.getBoundingClientRect();
+      showTooltip(district, bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
+    });
+
+    svg.addEventListener('focusout', (event) => {
+      if (pathFromTarget(event.relatedTarget)) return;
+      hideTooltip();
+    });
+
+    svg.addEventListener('click', (event) => {
+      const district = pathFromTarget(event.target);
+      if (district) selectDistrict(district);
+    });
+
+    svg.addEventListener('keydown', (event) => {
+      const district = pathFromTarget(event.target);
+      if (!district) return;
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        selectDistrict(district);
+      } else if (event.key === 'Escape' && selected) {
+        event.preventDefault();
+        clearSelection(true);
+      }
+    });
+
+    picker.addEventListener('change', () => {
+      if (!picker.value) return;
+      const district = districts.find((item) => item.dataset.groundDistrict === picker.value);
+      if (district) selectDistrict(district);
+    });
+
+    closeButton.addEventListener('click', () => clearSelection(true));
+    panel.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && selected) {
+        event.preventDefault();
+        clearSelection(true);
+      }
+    });
+
+    widget.dataset.emptyHeading = panelName.textContent ?? '';
+    widget.dataset.emptySummary = panelSummary.textContent ?? '';
+  });
+</script>
