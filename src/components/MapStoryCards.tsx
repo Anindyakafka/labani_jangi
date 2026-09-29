@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 export interface StoryCard {
@@ -14,7 +14,10 @@ interface Props { cards: StoryCard[]; }
 
 export default function MapStoryCards({ cards }: Props) {
   const [story, setStory] = useState({ visible: false, index: 0 });
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const springX = useSpring(tiltX, { stiffness: 240, damping: 26, mass: 0.7 });
+  const springY = useSpring(tiltY, { stiffness: 240, damping: 26, mass: 0.7 });
   const reduceMotion = useReducedMotion();
   const current = useRef(story);
   const target = useRef(story);
@@ -79,15 +82,16 @@ export default function MapStoryCards({ cards }: Props) {
         initial={reduceMotion ? { opacity: 0 } : { opacity: 0, rotateY: -180, scale: .94 }}
         animate={reduceMotion ? { opacity: 1 } : { opacity: 1, rotateY: 0, scale: 1 }}
         exit={reduceMotion ? { opacity: 0 } : { opacity: 0, rotateY: 180, scale: .94 }}
-        transition={{ duration: reduceMotion ? .15 : 1.15, ease: [0.65, 0, 0.35, 1] }}
+        transition={{ duration: reduceMotion ? .15 : .82, ease: [0.22, 1, 0.36, 1] }}
         onPointerMove={(event) => {
           if (event.pointerType !== 'mouse') return;
           const rect = event.currentTarget.getBoundingClientRect();
-          setTilt({ x: ((event.clientY - rect.top) / rect.height - .5) * -8, y: ((event.clientX - rect.left) / rect.width - .5) * 8 });
+          tiltX.set(((event.clientY - rect.top) / rect.height - .5) * -6);
+          tiltY.set(((event.clientX - rect.left) / rect.width - .5) * 6);
         }}
-        onPointerLeave={() => setTilt({ x: 0, y: 0 })}
+        onPointerLeave={() => { tiltX.set(0); tiltY.set(0); }}
       >
-        <motion.div className="map-story-flip-face" animate={reduceMotion ? undefined : { rotateX: tilt.x, rotateY: tilt.y, scale: tilt.x || tilt.y ? 1.015 : 1 }} transition={{ type: 'spring', stiffness: 260, damping: 23 }}>
+        <motion.div className="map-story-flip-face" style={reduceMotion ? undefined : { rotateX: springX, rotateY: springY }}>
           <img src={active.image} alt="" aria-hidden="true" />
           <div className="map-story-card-copy"><span>{active.number} / 03</span><h2>{active.title}</h2><p>{active.copy}</p><b>{active.label}</b></div>
         </motion.div>
