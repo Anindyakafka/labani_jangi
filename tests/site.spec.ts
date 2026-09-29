@@ -19,7 +19,7 @@ test('dark mode follows system then preserves explicit choice across languages',
   await expect(page.getByRole('button',{name:'ডার্ক মোড'})).toHaveAttribute('aria-pressed','true');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({path:testInfo.outputPath('dark-bangla.png'),fullPage:true});
-  await page.getByRole('navigation').getByRole('link',{name:'সংগ্রহশালা'}).click();
+  await page.locator('nav a[href="/bn/archive/"]').click();
   await page.locator('a[href="/bn/archive/a-language-for-resistance/"]').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
 });
@@ -37,7 +37,7 @@ test('Bangla switch translates pages and preserves locale and section', async ({
   await page.screenshot({ path:testInfo.outputPath('bangla-home.png'), fullPage:true });
   await expect(page.locator('.journey-map .journey-district')).toHaveCount(23);
   await expect(page.locator('.journey-district-home title')).toHaveText('নদিয়া');
-  await page.getByRole('navigation').getByRole('link',{name:'সংগ্রহশালা'}).click();
+  await page.locator('nav a[href="/bn/archive/"]').click();
   await page.locator('a[href="/bn/archive/a-language-for-resistance/"]').click();
   await expect(page).toHaveURL('/bn/archive/a-language-for-resistance/');
   await expect(page.locator('h1')).toHaveText('প্রতিরোধের ভাষা');
@@ -116,10 +116,38 @@ test('the political and Palestine collections publish every reviewed preview', a
   await expect(page.locator('.archive-art-card')).toHaveCount(194);
 });
 
-test('the flag hero uses a static banner for reduced motion', async ({ page }) => {
+test('the landing journey stays concise and reveals its story card smoothly', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/');
+  const measurements = await page.evaluate(() => {
+    const journey = document.querySelector<HTMLElement>('.map-journey');
+    const route = document.querySelector<HTMLElement>('.route-card');
+    return {
+      journeyScreens: (journey?.getBoundingClientRect().height ?? 0) / innerHeight,
+      viewportWidth: innerWidth,
+      routeTransition: getComputedStyle(route!).transitionDuration,
+      hasHorizontalOverflow: document.documentElement.scrollWidth > innerWidth,
+    };
+  });
+  expect(measurements.journeyScreens).toBeCloseTo(measurements.viewportWidth <= 760 ? 4.3 : 4.8, 1);
+  expect(measurements.routeTransition).not.toBe('0s');
+  expect(measurements.hasHorizontalOverflow).toBe(false);
+  await page.evaluate(() => {
+    const journey = document.querySelector<HTMLElement>('.map-journey')!;
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, journey.offsetTop + (journey.offsetHeight - innerHeight) * .58);
+  });
+  await expect(page.locator('.map-story-flip-card')).toBeVisible();
+  expect(await page.locator('.map-story-flip-card img').evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  expect(errors).toEqual([]);
+});
+
+test('the map journey stays readable and static for reduced-motion users', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
-  await expect(page.locator('.flag-layer')).toHaveCSS('clip-path', 'none');
-  await expect(page.locator('.artwork-layer img')).toHaveCount(3);
+  await expect(page.locator('.journey-map .journey-district')).toHaveCount(23);
+  await expect(page.locator('.map-story-flip-card')).toBeVisible();
+  expect(await page.locator('.map-journey').evaluate(element => element.getBoundingClientRect().height < innerHeight * 3)).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
