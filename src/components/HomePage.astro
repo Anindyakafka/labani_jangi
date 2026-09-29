@@ -1,8 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import WestBengalMap from './WestBengalMap.astro';
-import MapStoryCards from './MapStoryCards';
+import { featuredWork } from '../data/featured-work';
+import '../styles/ground-home.css';
 import { translator, localPath, type Locale, type TranslationKey } from '../i18n';
+
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = translator(locale);
@@ -10,113 +12,82 @@ const routes = [
   ['Practice', '/practice/', 'From life, towards resistance.'],
   ['Works', '/works/', 'Selected work'],
   ['Artworks', '/artworks/', 'Political work and Palestine.'],
-  ['Archive', '/archive/', 'Reading & conversations'],
+  ['Archive', '/archive/', 'Reading and conversations.'],
   ['About', '/about/', 'About me'],
 ] as const satisfies ReadonlyArray<readonly [TranslationKey, string, TranslationKey]>;
-const chapters = [
-  { title: 'About me', copy: 'I am an artist, researcher and cultural practitioner from Nadia, West Bengal.', image: '/media/img-0005.jpg', href: '/about/', districts: ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar', 'uttar-dinajpur', 'dakshin-dinajpur'] },
-  { title: 'My work', copy: 'I am Labani Jangi. My work explores resistance and identity through the world around me, drawing from research, artistic practice and collective cultural work.', image: '/media/img-0017.jpg', href: '/works/', districts: ['malda', 'murshidabad', 'nadia', 'north-24-parganas', 'kolkata', 'south-24-parganas', 'howrah', 'hooghly', 'birbhum'] },
-  { title: 'Publication work', copy: 'I make cover images that let a book’s questions meet a reader before its first page.', image: '/media/img-0066.jpg', href: '/practice/', districts: ['purba-bardhaman', 'paschim-bardhaman', 'bankura', 'purulia', 'jhargram', 'paschim-medinipur', 'purba-medinipur'] },
-] as const satisfies ReadonlyArray<{ title: TranslationKey; copy: TranslationKey; image: string; href: string; districts: readonly string[] }>;
-const storyCards = chapters.map((chapter, index) => ({ title: t(chapter.title), copy: t(chapter.copy), image: chapter.image, href: localPath(chapter.href, locale), label: t('Explore'), number: String(index + 1).padStart(2, '0') }));
+const introArtwork = featuredWork.find((work) => work.title === 'Rural healthcare');
+if (!introArtwork) throw new Error('The rural-healthcare homepage artwork is missing from featured-work.');
+const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en');
 ---
 <Layout locale={locale}>
-  <section class="map-journey" data-map-journey aria-labelledby="hero-title">
-    <div class="map-journey-stage">
-      <div class="map-journey-flag" aria-hidden="true"><svg viewBox="0 0 300 180"><path d="M90 34l8 22 24 1-19 15 7 23-20-14-20 14 7-23-19-15 24-1z" /><path d="M157 69l7 19 21 1-17 13 6 20-17-12-17 12 6-20-17-13 21-1z" /><path d="M225 41l6 17 19 1-15 12 5 18-15-11-16 11 6-18-16-12 20-1z" /></svg></div>
-      <div class="map-journey-opening wrap">
-        <div class="map-journey-name" data-journey-name>
-          <div class="eyebrow"><span>{t('Artist · Researcher · Cultural practitioner')}</span><span>{t('West Bengal, India')}</span></div>
-          <h1 id="hero-title">{t('Labani')}<br/><span>{t('Jangi')}<span class="period">.</span></span></h1>
-          <p>{t('My art, lived experience')}<br/>{t('and the language of resistance.')}</p>
-        </div>
-        <div class="map-journey-map-wrap"><WestBengalMap locale={locale} /></div>
+  <section class="ground-hero" aria-labelledby="home-title">
+    <div class="ground-hero-inner">
+      <div class="ground-hero-copy">
+        <p class="ground-hero-meta eyebrow">
+          <span>{t('Artist · Researcher · Cultural practitioner')}</span>
+          <span>{t('West Bengal, India')}</span>
+        </p>
+        <h1 id="home-title">
+          <span>{t('Labani')}</span>
+          <span class="ground-surname">{t('Jangi')}<span class="ground-period">.</span></span>
+        </h1>
+        <p class="ground-hero-voice">
+          <span>{t('My art, lived experience')}</span>
+          <span>{t('and the language of resistance.')}</span>
+        </p>
+        <p class="ground-home-note">{t('Nadia · My home district')}</p>
       </div>
-      <MapStoryCards cards={storyCards} client:load />
-      <div class="map-journey-progress" aria-hidden="true"><i></i></div>
+      <div class="ground-hero-map">
+        <WestBengalMap locale={locale} />
+      </div>
     </div>
   </section>
-  <section class="wrap section landing-routes" aria-label={t('Explore the website')}>
-    <span class="eyebrow">{t('Explore')}</span>
-    <div class="route-list">{routes.map(([label, path, note], index) => <a href={localPath(path, locale)} class="route-card"><span>{String(index + 1).padStart(2, '0')}</span><div><h2>{t(label)}</h2><p>{t(note)}</p></div><b aria-hidden="true">→</b></a>)}</div>
+
+  <section class="ground-introduction wrap" id="ground-introduction" aria-labelledby="ground-introduction-title">
+    <div class="ground-introduction-copy">
+      <p class="eyebrow">{t('About me')}</p>
+      <h2 id="ground-introduction-title">
+        <span>{t('A practice shaped by')}</span>
+        <span>{t('place and people.')}</span>
+      </h2>
+      <p class="ground-introduction-statement">{t('I understand art as a place of dialogue: a way to hold personal narratives alongside collective voices, and to keep space for lives that are too often made invisible.')}</p>
+      <p class="ground-introduction-roots">{t('My roots are in Nadia, West Bengal.')}</p>
+      <a class="ground-read-more" href={localPath('/about/', locale)}>
+        {t('Read more about my roots')} <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <figure class="ground-artwork">
+      <img
+        src={introArtwork.image}
+        alt={t(introArtwork.alt)}
+        width="1400"
+        height="908"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>
+        <span>{t(introArtwork.title)}</span>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="ground-paths wrap" aria-labelledby="ground-paths-title">
+    <div class="ground-paths-heading">
+      <p class="eyebrow">{t('Explore')}</p>
+      <h2 id="ground-paths-title">{t('Ways into my work')}</h2>
+    </div>
+    <nav class="ground-path-grid" aria-label={t('Explore the website')}>
+      {routes.map(([label, path, description], index) => <a
+        href={localPath(path, locale)}
+        class="ground-path-card"
+      >
+        <span class="ground-path-number" aria-hidden="true">{number.format(index + 1)}</span>
+        <span class="ground-path-copy">
+          <span class="ground-path-title">{t(label)}</span>
+          <span class="ground-path-description">{t(description)}</span>
+        </span>
+        <span class="ground-path-arrow" aria-hidden="true">↗</span>
+      </a>)}
+    </nav>
   </section>
 </Layout>
-<script>
-  import { animate, stagger } from 'animejs';
-  const journey = document.querySelector<HTMLElement>('[data-map-journey]');
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  if (journey && !reduceMotion.matches) {
-    const map = journey.querySelector<SVGSVGElement>('[data-journey-map]');
-    const districts = Array.from(journey.querySelectorAll<SVGPathElement>('.journey-district'));
-    const opening = journey.querySelector<HTMLElement>('[data-journey-name]');
-    const flag = journey.querySelector<HTMLElement>('.map-journey-flag');
-    const progressLine = journey.querySelector<HTMLElement>('.map-journey-progress i');
-    const chapterDistricts = [
-      ['darjeeling', 'kalimpong', 'jalpaiguri', 'alipurduar', 'cooch-behar', 'uttar-dinajpur', 'dakshin-dinajpur'],
-      ['malda', 'murshidabad', 'nadia', 'north-24-parganas', 'kolkata', 'south-24-parganas', 'howrah', 'hooghly', 'birbhum'],
-      ['purba-bardhaman', 'paschim-bardhaman', 'bankura', 'purulia', 'jhargram', 'paschim-medinipur', 'purba-medinipur'],
-    ];
-    let frame = 0;
-    let start = 0;
-    let range = 1;
-    let previousChapter = -1;
-    let previousCardVisible = false;
-    let vectors: { x: number; y: number; rotate: number }[] = [];
-    const clamp = (value: number) => Math.min(1, Math.max(0, value));
-    const ease = (value: number) => value * value * (3 - 2 * value);
-    const measure = () => {
-      start = journey.offsetTop;
-      range = Math.max(1, journey.offsetHeight - innerHeight);
-      if (!map) return;
-      vectors = districts.map((district, index) => {
-        const box = district.getBoundingClientRect();
-        const angle = (index / districts.length) * Math.PI * 2 - Math.PI / 2;
-        const compact = innerWidth <= 760;
-        const desiredX = innerWidth * (compact ? .5 : .53) + Math.cos(angle) * innerWidth * (compact ? .45 : .39);
-        const desiredY = innerHeight * (compact ? .52 : .61) + Math.sin(angle) * innerHeight * (compact ? .4 : .36);
-        const safeX = box.width * .56 + 28;
-        const safeY = box.height * .56 + 28;
-        const targetX = Math.min(innerWidth - safeX, Math.max(safeX, desiredX));
-        const targetY = Math.min(innerHeight - safeY, Math.max(safeY, desiredY));
-        return { x: targetX - (box.left + box.width / 2), y: targetY - (box.top + box.height / 2), rotate: (index % 2 ? 1 : -1) * (10 + (index % 5) * 4) };
-      });
-    };
-    const render = () => {
-      frame = 0;
-      const progress = clamp((scrollY - start) / range);
-      const scatter = ease(clamp((progress - .24) / .28));
-      const chapterProgress = clamp((progress - .55) / .45);
-      const chapterIndex = Math.min(2, Math.floor(chapterProgress * 3));
-      const cardVisible = progress >= .55;
-      districts.forEach((district, index) => {
-        const vector = vectors[index];
-        if (!vector) return;
-        const active = chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '');
-        const compact = innerWidth <= 760;
-        const pulse = active ? (compact ? .92 : 1.12) : (compact ? .76 : .9);
-        const scale = (1 - scatter * .06) * (scatter > .02 ? pulse : 1);
-        district.style.transform = `translate(${vector.x * scatter}px, ${vector.y * scatter}px) rotate(${vector.rotate * scatter}deg) scale(${scale})`;
-        district.classList.toggle('is-story-active', scatter > .25 && active);
-      });
-      if (opening) opening.style.opacity = String(1 - ease(clamp((progress - .14) / .16)));
-      if (flag) flag.style.opacity = String(1 - ease(clamp((progress - .14) / .18)));
-      journey.dataset.storyIndex = String(chapterIndex);
-      journey.dataset.storyVisible = String(cardVisible);
-      const chapterChanged = chapterIndex !== previousChapter;
-      if (chapterChanged || cardVisible !== previousCardVisible) {
-        window.dispatchEvent(new CustomEvent('map-story-change', { detail: { index: chapterIndex, visible: cardVisible } }));
-        previousCardVisible = cardVisible;
-      }
-      if (chapterChanged && cardVisible) {
-        animate(districts.filter((district) => chapterDistricts[chapterIndex].includes(district.dataset.districtId ?? '')), { filter: ['brightness(1.45)', 'brightness(1)'], duration: 720, delay: stagger(35), ease: 'out(4)' });
-      }
-      previousChapter = chapterIndex;
-      if (progressLine) progressLine.style.transform = `scaleY(${progress})`;
-    };
-    const update = () => { if (!frame) frame = requestAnimationFrame(render); };
-    measure();
-    addEventListener('resize', () => { measure(); update(); });
-    addEventListener('scroll', update, { passive: true });
-    update();
-  }
-</script>
