@@ -1,6 +1,7 @@
 ---
 import { districtNames, localPath, translator, type Locale } from '../i18n';
 import districts from '../data/west-bengal.json';
+import outline from '../data/west-bengal-outline.json';
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
@@ -9,7 +10,7 @@ for (const district of districts) {
   if (!districtNames[district.id]) throw new Error(`Missing Bangla district name: ${district.id}`);
 }
 ---
-<div class="ground-map-widget" data-ground-map>
+<div class="ground-map-widget" data-ground-map data-state-centroid-x={outline.centroid[0]} data-state-centroid-y={outline.centroid[1]}>
   <p class="ground-map-instructions" id="ground-map-instructions">{t('Use Tab to visit each district, then press Enter or Space to select it.')}</p>
   <div class="ground-map-stage">
     <svg
@@ -28,12 +29,40 @@ for (const district of districts) {
           <stop offset="1" stop-color="var(--ground-map-land)" />
         </linearGradient>
       </defs>
+      <path
+        class="ground-map-outline"
+        data-ground-state-outline
+        aria-hidden="true"
+        d={outline.path}
+        fill="url(#ground-land-wash)"
+        fill-rule="evenodd"
+        stroke="var(--ground-map-boundary)"
+        stroke-width="1.15"
+        stroke-linejoin="round"
+        vector-effect="non-scaling-stroke"
+      />
+      <g class="ground-map-fragments" data-ground-map-fragments aria-hidden="true">
+        {districts.map((district) => {
+          const isHome = district.id === 'nadia';
+          return <path
+            d={district.path}
+            data-ground-map-fragment={district.id}
+            data-centroid-x={district.centroid[0]}
+            data-centroid-y={district.centroid[1]}
+            class:list={['ground-map-fragment', { 'ground-map-fragment-home': isHome }]}
+            fill-rule="evenodd"
+          />;
+        })}
+      </g>
+      <g class="ground-map-controls" data-ground-map-controls>
       {districts.map((district) => {
         const isHome = district.id === 'nadia';
         const name = locale === 'bn' ? districtNames[district.id] : district.name;
         return <path
           d={district.path}
           data-ground-district={district.id}
+          data-centroid-x={district.centroid[0]}
+          data-centroid-y={district.centroid[1]}
           data-district-name={name}
           data-tooltip-label={isHome ? `${name} · ${t('My home district')}` : name}
           data-story-summary={isHome ? t('My roots are in Nadia, West Bengal.') : t('This is one of the 23 districts shown here.')}
@@ -48,6 +77,7 @@ for (const district of districts) {
           aria-keyshortcuts="Enter Space"
         />;
       })}
+      </g>
     </svg>
     <div class="ground-map-tooltip" id="ground-map-tooltip" role="tooltip" aria-hidden="true" hidden data-ground-map-tooltip></div>
   </div>
@@ -110,7 +140,33 @@ for (const district of districts) {
     if (!svg || !tooltip || !panel || !panelName || !panelSummary || !storyLink || !closeButton || !picker) return;
 
     const districts = Array.from(svg.querySelectorAll<SVGPathElement>('[data-ground-district]'));
+    const fragments = new Map(Array.from(svg.querySelectorAll<SVGPathElement>('[data-ground-map-fragment]'))
+      .map((fragment) => [fragment.dataset.groundMapFragment ?? '', fragment]));
     let selected: SVGPathElement | null = null;
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let motionRequested = false;
+    const requestMotion = () => {
+      if (motionRequested) return;
+      motionRequested = true;
+      void import('../scripts/site-motion')
+        .then(({ initDistrictMapMotion }) => initDistrictMapMotion(widget))
+        .catch(() => {
+          widget.dataset.mapMotion = 'static';
+          document.documentElement.removeAttribute('data-map-motion-pending');
+        });
+    };
+    if (motionPreference.matches) widget.dataset.mapMotion = 'static';
+    else {
+      window.addEventListener('scroll', requestMotion, { once: true, passive: true });
+      widget.addEventListener('pointerenter', requestMotion, { once: true });
+      widget.addEventListener('pointerdown', requestMotion, { once: true, passive: true });
+      widget.addEventListener('focusin', requestMotion, { once: true });
+    }
+    motionPreference.addEventListener('change', (event) => {
+      if (event.matches) {
+        if (!motionRequested) widget.dataset.mapMotion = 'static';
+      } else requestMotion();
+    });
 
     const hideTooltip = () => {
       tooltip.hidden = true;
@@ -134,6 +190,7 @@ for (const district of districts) {
         const active = item === district;
         item.setAttribute('aria-pressed', String(active));
         item.classList.toggle('is-selected', active);
+        fragments.get(item.dataset.groundDistrict ?? '')?.classList.toggle('is-selected', active);
       }
       panelName.textContent = district.dataset.districtName ?? '';
       panelSummary.textContent = district.dataset.storySummary ?? '';
@@ -150,6 +207,7 @@ for (const district of districts) {
       for (const item of districts) {
         item.setAttribute('aria-pressed', 'false');
         item.classList.remove('is-selected');
+        fragments.get(item.dataset.groundDistrict ?? '')?.classList.remove('is-selected');
       }
       panelName.textContent = widget.dataset.emptyHeading ?? panelName.textContent ?? '';
       panelSummary.textContent = widget.dataset.emptySummary ?? panelSummary.textContent ?? '';
@@ -162,7 +220,10 @@ for (const district of districts) {
     svg.addEventListener('pointerover', (event) => {
       if (event.pointerType === 'touch') return;
       const district = pathFromTarget(event.target);
-      if (district) showTooltip(district, event.clientX, event.clientY);
+      if (district) {
+        fragments.get(district.dataset.groundDistrict ?? '')?.classList.add('is-hovered');
+        showTooltip(district, event.clientX, event.clientY);
+      }
     });
 
     svg.addEventListener('pointermove', (event) => {
@@ -172,6 +233,8 @@ for (const district of districts) {
     });
 
     svg.addEventListener('pointerout', (event) => {
+      const district = pathFromTarget(event.target);
+      if (district) fragments.get(district.dataset.groundDistrict ?? '')?.classList.remove('is-hovered');
       if (pathFromTarget(event.relatedTarget)) return;
       if (svg.contains(document.activeElement) && pathFromTarget(document.activeElement)) return;
       hideTooltip();
@@ -180,11 +243,14 @@ for (const district of districts) {
     svg.addEventListener('focusin', (event) => {
       const district = pathFromTarget(event.target);
       if (!district) return;
+      fragments.get(district.dataset.groundDistrict ?? '')?.classList.add('is-focused');
       const bounds = district.getBoundingClientRect();
       showTooltip(district, bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
     });
 
     svg.addEventListener('focusout', (event) => {
+      const district = pathFromTarget(event.target);
+      if (district) fragments.get(district.dataset.groundDistrict ?? '')?.classList.remove('is-focused');
       if (pathFromTarget(event.relatedTarget)) return;
       hideTooltip();
     });

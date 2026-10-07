@@ -29,36 +29,42 @@ const alternate = locale === 'en' ? banglaPath : basePath;
     <link rel="alternate" hreflang="bn" href={new URL(banglaPath, Astro.site)} />
     <link rel="alternate" hreflang="x-default" href={new URL(basePath, Astro.site)} />
     <meta property="og:locale" content={locale === 'bn' ? 'bn_IN' : 'en_IN'} />
-    <meta name="theme-color" content="#fafafa" />
+    <meta name="theme-color" content="#ede3cf" data-theme-light="#ede3cf" data-theme-dark="#121010" />
     <script is:inline>
       (() => {
+        const root = document.documentElement;
         const system = window.matchMedia('(prefers-color-scheme: dark)');
+        const themeColor = document.querySelector('meta[name="theme-color"]');
         let preference;
         try { preference = localStorage.getItem('labani-theme'); } catch {}
+        const usesDark = () => preference === 'dark' || (preference !== 'light' && system.matches);
         const apply = (dark) => {
-          document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#181515' : '#fafafa');
+          root.dataset.theme = dark ? 'dark' : 'light';
+          themeColor?.setAttribute('content', (dark ? themeColor.dataset.themeDark : themeColor.dataset.themeLight) || (dark ? '#121010' : '#ede3cf'));
           document.querySelector('[data-theme-toggle]')?.setAttribute('aria-pressed', String(dark));
         };
-        apply(preference === 'dark' || (preference !== 'light' && system.matches));
+        apply(usesDark());
+        if ((location.pathname === '/' || location.pathname === '/bn/') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.dataset.mapMotionPending = 'true';
+        }
         document.addEventListener('DOMContentLoaded', () => {
           const button = document.querySelector('[data-theme-toggle]');
           if (!button) return;
           button.hidden = false;
-          apply(document.documentElement.dataset.theme === 'dark');
+          apply(usesDark());
           button.addEventListener('click', () => {
-            preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+            preference = root.dataset.theme === 'dark' ? 'light' : 'dark';
             try { localStorage.setItem('labani-theme', preference); } catch {}
             apply(preference === 'dark');
           });
         });
         system.addEventListener('change', () => {
-          if (preference !== 'light' && preference !== 'dark') apply(system.matches);
+          if (preference !== 'light' && preference !== 'dark') apply(usesDark());
         });
         window.addEventListener('storage', (event) => {
           if (event.key === 'labani-theme' || event.key === null) {
             preference = event.newValue;
-            apply(preference === 'dark' || (preference !== 'light' && system.matches));
+            apply(usesDark());
           }
         });
       })();
