@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import WestBengalMap from './WestBengalMap.astro';
+import ScrollReveals from './ScrollReveals.astro';
 import { featuredWork } from '../data/featured-work';
 import '../styles/ground-home.css';
 import { translator, localPath, type Locale, type TranslationKey } from '../i18n';
@@ -43,8 +44,8 @@ const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en');
     </div>
   </section>
 
-  <section class="ground-introduction wrap" id="ground-introduction" aria-labelledby="ground-introduction-title">
-    <div class="ground-introduction-copy">
+  <section class="ground-introduction wrap" id="ground-introduction" aria-labelledby="ground-introduction-title" data-scroll-reveal data-reveal-items=".ground-introduction-copy, .ground-artwork">
+    <div class="ground-introduction-copy" data-reveal-item>
       <p class="eyebrow">{t('About me')}</p>
       <h2 id="ground-introduction-title">
         <span>{t('A practice shaped by')}</span>
@@ -56,7 +57,7 @@ const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en');
         {t('Read more about my roots')} <span aria-hidden="true">↗</span>
       </a>
     </div>
-    <figure class="ground-artwork">
+    <figure class="ground-artwork" data-reveal-item data-reveal-fade-only>
       <img
         src={introArtwork.image}
         alt={t(introArtwork.alt)}
@@ -71,8 +72,8 @@ const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en');
     </figure>
   </section>
 
-  <section class="ground-paths wrap" aria-labelledby="ground-paths-title">
-    <div class="ground-paths-heading">
+  <section class="ground-paths wrap" aria-labelledby="ground-paths-title" data-scroll-reveal data-reveal-items=".ground-paths-heading, .ground-path-card">
+    <div class="ground-paths-heading" data-reveal-item>
       <p class="eyebrow">{t('Explore')}</p>
       <h2 id="ground-paths-title">{t('Ways into my work')}</h2>
     </div>
@@ -80,6 +81,7 @@ const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en');
       {routes.map(([label, path, description], index) => <a
         href={localPath(path, locale)}
         class="ground-path-card"
+        data-reveal-item
       >
         <span class="ground-path-number" aria-hidden="true">{number.format(index + 1)}</span>
         <span class="ground-path-copy">
@@ -90,4 +92,5 @@ const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en');
       </a>)}
     </nav>
   </section>
+  <ScrollReveals />
 </Layout>

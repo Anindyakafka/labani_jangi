@@ -376,10 +376,10 @@
 }
 
 :root[data-theme="dark"] .ground-map-widget {
-  --ground-map-land-light: #a99576;
-  --ground-map-land: #806c52;
-  --ground-map-boundary: #34231e;
-  --ground-map-home: #dc7773;
+  --ground-map-land-light: #796852;
+  --ground-map-land: #534638;
+  --ground-map-boundary: #e2cfb3;
+  --ground-map-home: #f38c86;
 }
 :root[data-theme="dark"] .ground-map-stage {
   background: radial-gradient(ellipse at 50% 48%, color-mix(in srgb, var(--ground-map-land) 35%, var(--paper)) 0, var(--paper) 72%, transparent 100%);
@@ -484,3 +484,73 @@
 }
 
 .ground-map-widget [hidden] { display: none !important; }
+
+
+/* The outline and duplicate visual fragments are progressive enhancements; the
+   original district controls remain the accessible, accurately hittable layer. */
+.ground-map-outline,
+.ground-map-fragments { display: none; pointer-events: none; }
+.ground-map-fragment {
+  fill: url(#ground-land-wash);
+  stroke: var(--ground-map-boundary);
+  stroke-width: .82;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  pointer-events: none;
+}
+.ground-map-fragment-home { fill: var(--ground-map-home); }
+.ground-map-fragment.is-hovered,
+.ground-map-fragment.is-focused { stroke: var(--ink); stroke-width: 1.5; }
+.ground-map-fragment.is-selected { stroke: var(--ink); stroke-width: 2.2; }
+.ground-map-fragment-home.is-selected { fill: var(--ground-map-home); }
+
+html[data-map-motion-pending] .ground-map-outline,
+html[data-map-motion-pending] .ground-map-fragments,
+[data-ground-map][data-map-motion="scrubbed"] .ground-map-outline,
+[data-ground-map][data-map-motion="scrubbed"] .ground-map-fragments { display: inline; }
+html[data-map-motion-pending] .ground-map-controls .ground-district,
+[data-ground-map][data-map-motion="scrubbed"] .ground-map-controls .ground-district {
+  opacity: 0 !important;
+  fill: transparent !important;
+  stroke: transparent !important;
+  filter: none !important;
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  pointer-events: all;
+}
+html[data-map-motion-pending] .ground-map-controls .ground-district:hover,
+[data-ground-map][data-map-motion="scrubbed"] .ground-map-controls .ground-district:hover {
+  opacity: 1 !important;
+  fill: color-mix(in srgb, var(--ground-map-land-light) 58%, var(--ground-map-home)) !important;
+  stroke: var(--ground-map-boundary) !important;
+  stroke-width: 1.35 !important;
+}
+html[data-map-motion-pending] .ground-map-controls .ground-district:focus-visible,
+html[data-map-motion-pending] .ground-map-controls .ground-district.is-selected,
+[data-ground-map][data-map-motion="scrubbed"] .ground-map-controls .ground-district:focus-visible,
+[data-ground-map][data-map-motion="scrubbed"] .ground-map-controls .ground-district.is-selected {
+  opacity: 1 !important;
+  fill: var(--ground-map-land-light) !important;
+  stroke: var(--ink) !important;
+  stroke-width: 2.2 !important;
+}
+html[data-map-motion-pending] .ground-map-controls .ground-district-home.is-selected,
+[data-ground-map][data-map-motion="scrubbed"] .ground-map-controls .ground-district-home.is-selected {
+  fill: var(--ground-map-home) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-map-motion-pending] .ground-map-outline,
+  html[data-map-motion-pending] .ground-map-fragments { display: none; }
+  html[data-map-motion-pending] .ground-map-controls .ground-district {
+    opacity: 1 !important;
+    fill: url(#ground-land-wash) !important;
+    stroke: var(--ground-map-boundary) !important;
+  }
+  html[data-map-motion-pending] .ground-map-controls .ground-district-home {
+    fill: var(--ground-map-home) !important;
+  }
+}

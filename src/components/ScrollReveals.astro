@@ -1,0 +1,24 @@
+<script>
+  const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-scroll-reveal]'));
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let motionRequested = false;
+  const requestMotion = () => {
+    if (motionRequested) return;
+    motionRequested = true;
+    void import('../scripts/site-motion')
+      .then(({ initScrollReveals }) => initScrollReveals())
+      .catch(() => groups.forEach((group) => { group.dataset.revealState = 'static'; }));
+  };
+
+  if (motionPreference.matches) groups.forEach((group) => { group.dataset.revealState = 'static'; });
+  else {
+    window.addEventListener('scroll', requestMotion, { once: true, passive: true });
+    window.addEventListener('pointerdown', requestMotion, { once: true, passive: true });
+    window.addEventListener('keydown', requestMotion, { once: true });
+  }
+  motionPreference.addEventListener('change', (event) => {
+    if (event.matches) {
+      if (!motionRequested) groups.forEach((group) => { group.dataset.revealState = 'static'; });
+    } else requestMotion();
+  });
+</script>
